@@ -1,6 +1,7 @@
 from config_menu import menus
+from hesap_makinesi import HesapMakinesi
 
-class Menu:
+class Menu(HesapMakinesi):
     def __init__(self):
         pass
 
@@ -32,9 +33,21 @@ class Menu:
                     print("Çıkış yapılıyor...")
                     break
             elif menu_name == "hesap_makinesi":
+                if secim != "8":
+                    v1 = input("1. Sayıyı Giriniz: ")
+                    if v1.lower() == "q":
+                        print("Çıkış yapılıyor...")
+                        break
+                    v2 = input("2. Sayıyı Giriniz: ")
+                    if v2.lower() == "q":
+                        print("Çıkış yapılıyor...")
+                        break
+                    print("İşlem Sonucunuz: " + HesapMakinesi().hesap_islemi(int(v1),int(v2),int(secim)) +  "\n")
                 if secim == "8":
                     print("Ana menüye dönülüyor...\n")
                     break
+
+
             elif menu_name == "oyunlar":
                 if secim == "4":
                     print("Ana menüye dönülüyor...\n")
