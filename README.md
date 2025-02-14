@@ -1,5 +1,5 @@
 <div align="center" id="title">
-    <h1>Vektörel Bilişim - Python98 - Çok Fonksiyonlu Konsol Uygulaması Projesi<h1>
+    <h1>Vektörel Bilişim - Python98 - Çok Fonksiyonlu Konsol Uygulaması Projesi</h1>
 </div>
 <br>
 <br>
@@ -8,4 +8,4 @@
 </div>
 <br>
 <br>
-<p align="right"><h3>Developing bt Kemal Burak YILDIRIM</h3></p>
+<p align="right">Developing by Kemal Burak YILDIRIM</p>
