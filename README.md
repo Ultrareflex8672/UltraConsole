@@ -5,6 +5,7 @@
 <br>
 <div align="left" id="workflow">
     <li>14.02.2025 - Menuler Oluşturulmaya Başlandı</li>
+    <li>14.02.2025 - Hesap Makinesi Fonksiyonu Eklendi Başlandı</li>
 </div>
 <br>
 <br>
