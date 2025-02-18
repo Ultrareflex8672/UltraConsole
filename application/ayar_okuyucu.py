@@ -10,9 +10,12 @@ class ConfigHandler(FL):
             "menu_root": 0,
             "module_path": "modules",
             "min_screen_width": 75,
-            "title_color": "31",
-            "content_color": "33",
-            "frame_color": "32",
+            "menu_title_color": "31",
+            "menu_content_color": "33",
+            "menu_frame_color": "32",
+            "info_title_color": "31",
+            "info_content_color": "33",
+            "info_frame_color": "32",
         }
         
         if os.path.exists(file_path):
