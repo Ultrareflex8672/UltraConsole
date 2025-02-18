@@ -5,10 +5,10 @@ class ConfigHandler(FL):
     
     @staticmethod
     def read_config(file_path="config/config.cfg"):
-        """ Dosyayı okur ve anahtar-değer çiftlerini bir dictionary'ye döker. Eksik değerler için varsayılanları atar. """
         config = {
-            "menu_path": "config/menu.cfg",
+            "menu_file": "config/menu.cfg",
             "menu_root": 0,
+            "module_path": "modules",
         }
         
         if os.path.exists(file_path):
