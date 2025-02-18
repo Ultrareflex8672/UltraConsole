@@ -9,6 +9,10 @@ class ConfigHandler(FL):
             "menu_file": "config/menu.cfg",
             "menu_root": 0,
             "module_path": "modules",
+            "min_screen_width": 75,
+            "title_color": "31",
+            "content_color": "33",
+            "frame_color": "32",
         }
         
         if os.path.exists(file_path):
@@ -25,7 +29,7 @@ class ConfigHandler(FL):
                     if key in config:
                         config[key] = value
                     else:
-                        print(f"Uygulama: Bilinmeyen anahtar '{key}' bulundu.")
+                        print(f"Uygulama: Özelleştirilmiş ayarlarda bilinmeyen anahtar '{key}' bulundu.")
         else:
             print(f"Dosya bulunamadı: {file_path}")
             print("Varsayılan ayarlarla yeni dosya oluşturuluyor...")

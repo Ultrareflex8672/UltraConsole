@@ -17,6 +17,7 @@
     <li>"menu.cfg" dosyasındaki seçenekler ile otomatik olarak iilgili nesnenin çağırılması üzerinde çalışılıyor</li>
     <li>Yeni tasarıma göre otomatik çerçeveli konsol ekranı sağlandı</li>
     <li>Geri dön ve Çıkış eylemlerine sıra numarası yerine sabit olarak "0" seçeneği atandı</li>
+    <li>Menü görselliği ayarlar dosyasına bağlandı ve renklendirme için yeni fonksiyonlar eklendi. Sadeleştirildi</li>
     </ul>
 </div>
 <br>
