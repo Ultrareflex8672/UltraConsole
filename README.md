@@ -22,7 +22,7 @@
     <li>İlk version için yazdığım hesap makinesi bu versiyona uyarlanıp ilk modül olarak entegre edildi (Geliştirme Devam Ediyor)</li>
     </ul>
 
-    <hr>
+<hr>
     <h2>Yeni Modül Nasıl Eklenir</h2>
 <br>
 Pratik bir şekilde menü ve yeni modül ekleme klavuzu burada olacak
