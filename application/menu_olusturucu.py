@@ -52,9 +52,13 @@ class MenuSystem(ModuleLoader,SV):
                         self.path.append(selected_key)
                     else:  # Alt menü yoksa, ilgili fonksiyonu modül klasöründen çağır
                         print(f"{selected_key} fonksiyonu çağırılıyor...")
-                        # ModuleLoader.call_function(current_menu[selected_key], choice)
-                        print(ModuleLoader.call_function(current_menu[selected_key], choice))
-                        input()
+                        run_module = ModuleLoader.call_function(current_menu[selected_key], choice)
+                        if run_module == None:
+                            SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
+                        else:
+                            SV.create_frame("Modül: "+selected_key,run_module)
+                        # print(ModuleLoader.call_function(current_menu[selected_key], choice))
+                        # input()
             except (ValueError, IndexError):
                 print("Geçersiz seçim, tekrar deneyin.")
     

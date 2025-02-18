@@ -16,8 +16,7 @@ class ModuleLoader(ConfigHandler):
         spec.loader.exec_module(module)
 
         if hasattr(module, func_name):
-            # Fonksiyonu al ve parametrelerle çağır
             func = getattr(module, func_name)
-            return func(selection)  # Parametreleri göndererek fonksiyonu çağır
+            return func(selection)
         else:
             print(f"{func_name} fonksiyonu {func_name}.py içinde tanımlı değil.")
