@@ -18,6 +18,8 @@
     <li>Yeni tasarıma göre otomatik çerçeveli konsol ekranı sağlandı</li>
     <li>Geri dön ve Çıkış eylemlerine sıra numarası yerine sabit olarak "0" seçeneği atandı</li>
     <li>Menü görselliği ayarlar dosyasına bağlandı ve renklendirme için yeni fonksiyonlar eklendi. Sadeleştirildi</li>
+    <li>Ayrıca Gerektiğinde input alabilen menü harici Genel Maksatlı Çerçeve Oluşturma Ekranı Tasarlandı</li>
+    <li>İlk version için yazdığım hesap makinesi bu versiyona uyarlanıp ilk modül olarak entegre edildi (Geliştirme Devam Ediyor)</li>
     </ul>
 </div>
 <br>
