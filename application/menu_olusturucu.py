@@ -1,7 +1,8 @@
 import os
 from application.modul_olusturucu import ModuleLoader
+from application.ekran_olustur import ScreenView as SV
 
-class MenuSystem(ModuleLoader):
+class MenuSystem(ModuleLoader,SV):
     def __init__(self, menu_data):
         self.menu_data = menu_data
         self.path = []  # Kullanıcının bulunduğu menü yolu
@@ -16,29 +17,33 @@ class MenuSystem(ModuleLoader):
 
             # Menü başlığını göster
             menu_title = " > ".join(self.path) if self.path else title
-            print(f"\n=== {menu_title} ===")
+            # print(f"\n=== {menu_title} ===")
 
             # Seçenekleri listele
             options = list(current_menu.keys())
 
-            for i, key in enumerate(options, 1):
-                print(f"{i}. {key}")
+            # for i, key in enumerate(options, 1):
+            #     print(f"{i}. {key}")
 
             if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
-                print(f"{len(options) + 1}. Geri Dön")
+                # print(f"{len(options) + 1}. Geri Dön")
+                options.append("Geri Dön")
             else:  # Ana menüdeysek "Ayarlar" ve "Çıkış" seçenekleri ekle
-                print(f"{len(options) + 1}. Ayarlar")
-                print(f"{len(options) + 2}. Çıkış")
+                options.append("Ayarlar")
+                options.append("Çıkış")
+                # print(f"{len(options) + 1}. Ayarlar")
+                # print(f"{len(options) + 2}. Çıkış")
 
-            choice = input("Seçiminizi yapın: ")
+            # choice = input("Seçiminizi yapın: ")
+            choice = SV.create_frame(menu_title, options, "menu")
 
             try:
                 choice = int(choice)
-                if self.path and choice == len(options) + 1:  # "Geri Dön" seçildi
+                if self.path and choice == len(options) - len(options):  # "Geri Dön" seçildi
                     self.path.pop()
                 elif not self.path and choice == len(options) + 1:  # "Ayarlar" seçildi
                     print("Ayarlar açılıyor...")
-                elif not self.path and choice == len(options) + 2:  # "Çıkış" seçildi
+                elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
                     print("Çıkış yapılıyor...")
                     exit()
                 else:
