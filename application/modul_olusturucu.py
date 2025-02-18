@@ -3,9 +3,11 @@ import importlib.util
 from application.ayar_okuyucu import ConfigHandler
 
 class ModuleLoader(ConfigHandler):
+    
     @staticmethod
     def call_function(func_name, selection=None):
-        module_path = os.path.join("modules", f"{func_name}.py")
+        module_path_config = ConfigHandler.read_config()["module_path"]
+        module_path = os.path.join(module_path_config, f"{func_name}.py")
 
         if not os.path.exists(module_path):
             message = f"Modül dosyası bulunamadı: {func_name}.py"
