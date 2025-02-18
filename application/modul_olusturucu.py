@@ -4,8 +4,8 @@ from application.ayar_okuyucu import ConfigHandler
 
 class ModuleLoader(ConfigHandler):
     @staticmethod
-    def call_function(func_name):
-        module_path = os.path.join("modul", f"{func_name}.py")
+    def call_function(func_name, selection=None):
+        module_path = os.path.join("modules", f"{func_name}.py")
 
         if not os.path.exists(module_path):
             print(f"Fonksiyon bulunamadı: {func_name}.py")
@@ -16,6 +16,8 @@ class ModuleLoader(ConfigHandler):
         spec.loader.exec_module(module)
 
         if hasattr(module, func_name):
-            getattr(module, func_name)()
+            # Fonksiyonu al ve parametrelerle çağır
+            func = getattr(module, func_name)
+            return func(selection)  # Parametreleri göndererek fonksiyonu çağır
         else:
             print(f"{func_name} fonksiyonu {func_name}.py içinde tanımlı değil.")

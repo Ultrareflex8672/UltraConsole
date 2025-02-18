@@ -39,12 +39,6 @@ class ScreenView(CH):
 
                 return "\n".join(formatted_lines)
 
-            # content_and_title = [title, content]
-            # max_width = max(len(line) for line in content_and_title) + 4
-            # if max_width > min_width:
-            #     width = max_width
-            # else:
-            #     width = min_width
             width = int(min_width)
             horizontal_border = "─" * width
 
@@ -71,7 +65,7 @@ class ScreenView(CH):
                 print("Devam etmek için Enter'a basın...")
                 while True:
                     char = msvcrt.getch()  # Tek karakter oku
-                    if ord(char) == 13:  # Enter tuşu ASCII 13'tür (CR - Carriage Return)
+                    if ord(char) == 13:
                         break
             else: 
                 while True:
