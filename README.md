@@ -24,6 +24,7 @@
     <li>Modülden return varsa genel maksatlı çerçeveye alındı. Modül kendi içinde çalışıp bitmişse modül sonu uyarısı verildi</li>
     <li>Eğer menü tanımlanmış ancak modül yok ise uyarı mesajı verildi</li>
     <li>Eğer modül tanımlanmış ancak fonksiyon adı uyuşmuyor ise uyarı mesajı verildi (Modül Kurulum Klavuzunda Detaylı Anlatacağım)</li>
+    <li>Bir taş,kağıt,makas oyunu tam uyumlu modül örneği olacak şekilde yazılarak modül olarak eklendi</li>
     </ul>
 
 <hr>
