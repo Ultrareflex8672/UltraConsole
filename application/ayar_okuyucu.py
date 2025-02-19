@@ -9,13 +9,16 @@ class ConfigHandler(FL):
             "menu_file": "config/menu.cfg",
             "menu_root": 0,
             "module_path": "modules",
-            "min_screen_width": 75,
+            "menu_min_screen_width": 0, # Menü ekranının minimum genişliği (0 girilirse otomatik hesaplanır)
+            "menu_max_screen_width": 75,
             "menu_title_color": "31",
             "menu_content_color": "33",
             "menu_frame_color": "32",
             "info_title_color": "31",
             "info_content_color": "33",
             "info_frame_color": "32",
+            "info_min_screen_width": 50, # Info ekranının minimum genişliği (En düşük 50. 50 nin altındaki değerlerde 50 olarak alınır)
+            "info_max_screen_width": 100,
         }
         
         if os.path.exists(file_path):
@@ -60,7 +63,7 @@ class ConfigHandler(FL):
 
 
     @staticmethod
-    def save_config(file_path, config):
+    def save_config(config,file_path="config/config.cfg"):
         with open(file_path, "w", encoding="utf-8") as file:
             for key, value in config.items():
                 file.write(f"{key} = {value}\n")

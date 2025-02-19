@@ -1,6 +1,7 @@
 import os
 from application.modul_olusturucu import ModuleLoader
 from application.ekran_olustur import ScreenView as SV
+import importlib.util
 
 class MenuSystem(ModuleLoader,SV):
     def __init__(self, menu_data):
@@ -25,6 +26,7 @@ class MenuSystem(ModuleLoader,SV):
             # for i, key in enumerate(options, 1):
             #     print(f"{i}. {key}")
 
+            
             if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
                 # print(f"{len(options) + 1}. Geri Dön")
                 options.append("Geri Dön")
@@ -41,8 +43,14 @@ class MenuSystem(ModuleLoader,SV):
                 choice = int(choice)
                 if self.path and choice == len(options) - len(options):  # "Geri Dön" seçildi
                     self.path.pop()
-                elif not self.path and choice == len(options) + 1:  # "Ayarlar" seçildi
+                elif self.path == [] and choice == len(options) - 1:  # "Ayarlar" seçildi
                     print("Ayarlar açılıyor...")
+                    spec = importlib.util.spec_from_file_location("main", "application/settings.py")
+                    module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(module)
+                    func = getattr(module, "main")
+                    func()
+
                 elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
                     print("Çıkış yapılıyor...")
                     exit()
