@@ -31,6 +31,11 @@
         <ul>
             <li>Menü ve Info ekranları için max, min ve auto genişlikler düzenlendi</li>
             <li>Program içinden ayarların değiştirilmesi entegrasyonu yapıldı geliştiriliyor.</li>
+            <li>Program içinden ayarların değiştirilmesi entegrasyonu tamamlandı</li>
+            <li>Modüllere gönderilen argümanlarda geliştirme yapıldı (Kullanma Klavuzu Videosunda Açıklanacak)</li>
+            <li>Hesap Makinesi Modülünde Geliştirmeler Yapıldı</li>
+            <li>Adam Asmaca Modülünde Geliştirmeler Yapıldı</li>
+            <li>Taş Kağıt Makas Modülündeki büyük-küçük harf duyarlılığı hatası düzeltildi</li>
         </ul>
     </ul>
 
