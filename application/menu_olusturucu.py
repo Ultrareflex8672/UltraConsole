@@ -1,6 +1,7 @@
 import os
 from application.modul_olusturucu import ModuleLoader
 from application.ekran_olustur import ScreenView as SV
+from application.settings import SettingsMenu as SM
 import importlib.util
 
 class MenuSystem(ModuleLoader,SV):
@@ -18,23 +19,15 @@ class MenuSystem(ModuleLoader,SV):
 
             # Menü başlığını göster
             menu_title = " > ".join(self.path) if self.path else title
-            # print(f"\n=== {menu_title} ===")
 
             # Seçenekleri listele
             options = list(current_menu.keys())
-
-            # for i, key in enumerate(options, 1):
-            #     print(f"{i}. {key}")
-
             
             if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
-                # print(f"{len(options) + 1}. Geri Dön")
                 options.append("Geri Dön")
             else:  # Ana menüdeysek "Ayarlar" ve "Çıkış" seçenekleri ekle
                 options.append("Ayarlar")
                 options.append("Çıkış")
-                # print(f"{len(options) + 1}. Ayarlar")
-                # print(f"{len(options) + 2}. Çıkış")
 
             # choice = input("Seçiminizi yapın: ")
             choice = SV.create_frame(menu_title, options, "menu")
@@ -45,11 +38,7 @@ class MenuSystem(ModuleLoader,SV):
                     self.path.pop()
                 elif self.path == [] and choice == len(options) - 1:  # "Ayarlar" seçildi
                     print("Ayarlar açılıyor...")
-                    spec = importlib.util.spec_from_file_location("main", "application/settings.py")
-                    module = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(module)
-                    func = getattr(module, "main")
-                    func()
+                    SM.menu_goster(0)
 
                 elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
                     print("Çıkış yapılıyor...")
@@ -60,13 +49,11 @@ class MenuSystem(ModuleLoader,SV):
                         self.path.append(selected_key)
                     else:  # Alt menü yoksa, ilgili fonksiyonu modül klasöründen çağır
                         print(f"{selected_key} fonksiyonu çağırılıyor...")
-                        run_module = ModuleLoader.call_function(current_menu[selected_key], choice)
+                        run_module = ModuleLoader.call_function(current_menu[selected_key], selected_key=choice, selected_name=selected_key)
                         if run_module == None:
                             SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
                         else:
                             SV.create_frame("Modül: "+selected_key,run_module)
-                        # print(ModuleLoader.call_function(current_menu[selected_key], choice))
-                        # input()
             except (ValueError, IndexError):
                 print("Geçersiz seçim, tekrar deneyin.")
     

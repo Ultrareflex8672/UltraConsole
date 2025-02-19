@@ -5,7 +5,7 @@ from application.ayar_okuyucu import ConfigHandler
 class ModuleLoader(ConfigHandler):
     
     @staticmethod
-    def call_function(func_name, selection=None):
+    def call_function(func_name, **kwargs):
         module_path_config = ConfigHandler.read_config()["module_path"]
         module_path = os.path.join(module_path_config, f"{func_name}.py")
 
@@ -20,7 +20,7 @@ class ModuleLoader(ConfigHandler):
 
         if hasattr(module, func_name):
             func = getattr(module, func_name)
-            return func(selection)
+            return func(**kwargs)
         else:
             message = f"{func_name} fonksiyonu {func_name}.py modülü içinde tanımlı değil."
             print(message)

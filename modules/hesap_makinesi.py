@@ -1,21 +1,24 @@
-def hesap_makinesi(islem):
+from application.ekran_olustur import ScreenView as SV
+
+def hesap_makinesi(**kwargs):
+    islem = kwargs.get("selected_key", 0)
     soru1 = ""
     soru2 = ""
     if islem == 2:
-        soru1 = int(input("1. Sayıyı Giriniz: "))
-        soru2 = int(input("Çıkarılacak Sayıyı Giriniz: "))
+        soru1 = int(SV.create_frame("Çıkarma İşlemi","1. Sayıyı Giriniz: ",""))
+        soru2 = int(SV.create_frame("Çıkarma İşlemi","Çıkarılacak Sayıyı Giriniz: ",""))
     elif islem == 6 or islem == 7:
-        soru1 = int(input("1. Kenar Uzunluğunu Giriniz: "))
-        soru2 = int(input("2. Kenar Uzunluğunu Giriniz: "))
+        soru1 = int(SV.create_frame("Kare Alanı Hesabı","1. Kenar Uzunluğunu Giriniz: ",""))
+        soru2 = int(SV.create_frame("Kare Alanı Hesabı","2. Kenar Uzunluğunu Giriniz: ",""))
     elif islem == 5:
-        soru1 = int(input("Tabanı Giriniz: "))
-        soru2 = int(input("Üssü Giriniz: "))
+        soru1 = int(SV.create_frame("Üs Alma İşlemi","Tabanı Giriniz: ",""))
+        soru2 = int(SV.create_frame("Üs Alma İşlemi","Üssü Giriniz: ",""))
     elif islem == 4:
-        soru1 = int(input("Bölüneni Giriniz: "))
-        soru2 = int(input("Böleni Giriniz: "))
+        soru1 = int(SV.create_frame("Bölme İşlemi","Bölüneni Giriniz: ",""))
+        soru2 = int(SV.create_frame("Bölme İşlemi","Böleni Giriniz: ",""))
     else:
-        soru1 = int(input("1. Sayıyı Giriniz: "))
-        soru2 = int(input("2. Sayıyı Giriniz: "))
+        soru1 = int(SV.create_frame("Hesap Makinesi","1. Sayıyı Giriniz: ",""))
+        soru2 = int(SV.create_frame("Hesap Makinesi","2. Sayıyı Giriniz: ",""))
     
     v1 = soru1
     v2 = soru2
@@ -26,28 +29,28 @@ def hesap_makinesi(islem):
             sonuc = v1 + v2
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: {v1} + {v2} = {sonuc}"
     
     elif islem == 2:  # Çıkarma
         if isinstance(v1, int) and isinstance(v2, int):
             sonuc = v1 - v2
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: {v1} - {v2} = {sonuc}"
     
     elif islem == 3:  # Çarpma
         if isinstance(v1, int) and isinstance(v2, int):
             sonuc = v1 * v2
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: {v1} * {v2} = {sonuc}"
     
     elif islem == 4:  # Bölme
         if isinstance(v1, int) and isinstance(v2, int):
             sonuc = v1 / v2
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: {v1} / {v2} = {sonuc}"
     
     elif islem == 5:  # Üs Alma
         if isinstance(v1, int) and isinstance(v2, int):
@@ -57,21 +60,21 @@ def hesap_makinesi(islem):
                 sonuc += i
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: {v1} ^ {v2} = {sonuc}"
     
     elif islem == 6:  # Kare Alanı
         if isinstance(v1, int) and isinstance(v2, int):
             sonuc = v1 * v2
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: {v1} * {v2} = {sonuc}"
     
     elif islem == 7:  # Karenin Çevresi
         if isinstance(v1, int) and isinstance(v2, int):
             sonuc = (v1 + v2) * 2
         else:
             sonuc = "Sadece Sayı Girişi Yapılmalıdır."
-        return str(sonuc)
+        return f"İşlem Sonucu: ({v1} + {v2}) * 2 = {sonuc}"
     
     else:
         return "Geçersiz İşlem"
