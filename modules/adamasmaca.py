@@ -1,6 +1,6 @@
 import json
 import os
-from application.ekran_olustur import ScreenView as SV
+from application.ultraconsole import UltraConsole as UC
  
 try:
     from termcolor import cprint
@@ -26,16 +26,21 @@ def harf_al():
     while devam:
         harf = input("Bir harf giriniz: ")
         if harf.lower() == "quit":
-            cprint("Gidiyor gönlümün efendisi...", color="red", on_color="on_blue")
-            exit()
+            # cprint("Gidiyor gönlümün efendisi...", color="red", on_color="on_blue")
+            # exit()
+            ana_menu()
         elif len(harf) == 1 and harf.isalpha() and harf not in gorunen_kelime:
             devam = False
         else:
-            cprint("Hatalı Giriş", color="red", on_color="on_grey")
+            # cprint("Hatalı Giriş", color="red", on_color="on_grey")
+            UC.create_frame("Hatalı Giriş", "Lütfen tek harf giriniz ve daha önce girilmemiş bir harf giriniz.", "info")
  
     # noinspection PyUnboundLocalVariable
     return harf.lower()
- 
+
+def ana_menu():
+        UC.create_frame("Oyun Bitti", "Hoşçakalın...", "info")      # Kapatma işlemi öncesinde mesaj yazdır
+        UC.go_main_menu()                                           # Ana menüye dön
  
 def oyun_dongusu():
     """Oyunun ana döngüsü, harf alır, tutarsa görünen karakterler listesi güncellenir,
@@ -44,7 +49,7 @@ def oyun_dongusu():
     while can > 0 and secilen_kelime != "".join(gorunen_kelime):
         # cprint("kelime: " + "".join(gorunen_kelime), color="cyan", attrs=["bold"])
         # cprint("can   : <" + "❤" * can + " " * (5 - can) + ">", color="cyan", attrs=["bold"])
-        SV.create_frame("Adam Asmaca", "Kelime: " + "".join(gorunen_kelime) + "          Can: " + "❤" * can)
+        UC.create_frame("Adam Asmaca", "Kelime: " + "".join(gorunen_kelime) + "          Can: " + "❤" * can)
  
         girilen_harf = harf_al()
         pozisyonlar = harf_kontrol(girilen_harf)
@@ -76,7 +81,7 @@ def skor_tablosunu_goster():
     for skor, kullanici in veri["skorlar"]:
         skor_tablosu.append(kullanici+": "+str(skor))
     skor_tablosu = skor_tablosu + ["Devam etmek istiyormusunuz? (e/h)"]
-    tekrar = SV.create_frame("Skor Tablosu", skor_tablosu, "menu")
+    tekrar = UC.create_frame("Skor Tablosu", skor_tablosu, "menu")
     return tekrar
  
  
@@ -92,10 +97,10 @@ def skor_tablosunu_guncelle():
 def oyun_sonucu():
     """Oyun bittiğinde kazanıp kazanamadığımızı ekrana yazar."""
     if can > 0:
-        SV.create_frame("Kazandınız","Kelime: "+secilen_kelime)
+        UC.create_frame("Kazandınız","Kelime: "+secilen_kelime)
         skor_tablosunu_guncelle()
     else:
-        SV.create_frame("Kaybettiniz","Kelime: "+secilen_kelime)
+        UC.create_frame("Kaybettiniz","Kelime: "+secilen_kelime)
     tekrar = skor_tablosunu_goster()
     return tekrar
  
@@ -133,16 +138,16 @@ def ayar_yaz(veri):
 def kullanici_adini_guncelle():
     """Kullanıcıdan isim alıp ayarlara yazdırmaya gönderir"""
     veri = ayar_oku()
-    veri["son_kullanan"] = str(SV.create_frame("Kullanıcı Adı Güncelleme", "Lütfen bir kullanıcı adı giriniz", "\n"))
+    veri["son_kullanan"] = str(UC.create_frame("Kullanıcı Adı Güncelleme", "Lütfen bir kullanıcı adı giriniz", "\n"))
     while not veri["son_kullanan"] or len(veri["son_kullanan"]) > 9:
-        veri["son_kullanan"] = str(SV.create_frame("Kullanıcı Adı Güncelleme", "Kullanıcı adı 9 karakterden uzun olamaz. Lütfen bir kullanıcı adı giriniz.", "\n"))
+        veri["son_kullanan"] = str(UC.create_frame("Kullanıcı Adı Güncelleme", "Kullanıcı adı 9 karakterden uzun olamaz. Lütfen bir kullanıcı adı giriniz.", "\n"))
     ayar_yaz(veri)
  
  
 def kullanici_kontrol():
     """Bir önce giriş yapan kullanıcı ismini gösterip kullanıcıya bu siz misiniz diye sorar"""
     veri = ayar_oku()
-    user_input = SV.create_frame("Kullanıcı Kontrol", "Son giriş yapan: " + veri["son_kullanan"], "Bu siz misiniz? (e/h)\n")
+    user_input = UC.create_frame("Kullanıcı Kontrol", "Son giriş yapan: " + veri["son_kullanan"], "Bu siz misiniz? (e/h)\n")
     if not veri["son_kullanan"]:
         kullanici_adini_guncelle()
     elif user_input.lower() == "h":
@@ -153,8 +158,8 @@ def adamasmaca(**kwargs):
     """Programın ana döngüsü, oyunun çalışmasından yükümlü"""
     tekrar_edecek_mi = True
     dosyay_kontrol_et_yoksa_olustur()
-    SV.create_frame("Adam Asmaca", "Merhaba, Adam Asmacaya hoşgeldiniz.")
-    SV.create_frame("Yardım", "Oyun sırasında quit diyerek çıkabilirsiniz")
+    UC.create_frame("Adam Asmaca", "Merhaba, Adam Asmacaya hoşgeldiniz.")
+    UC.create_frame("Yardım", "Oyun sırasında quit diyerek çıkabilirsiniz")
     # skor_tablosunu_goster()
     kullanici_kontrol()
     while tekrar_edecek_mi:

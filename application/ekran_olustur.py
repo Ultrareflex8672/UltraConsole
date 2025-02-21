@@ -52,6 +52,11 @@ class ScreenView(CH):
             else:
                 width = int(info_min_width)
 
+            # Bu biraz eğreti oldu daha sonra daha iyi bir çözüm bulunabilir (Takvim ekranı için)
+            if title == "Takvim":
+                width = 21
+
+
             horizontal_border = "─" * width
 
             horizontal_border = ScreenView.colored_text("─" * width, info_frame_color)

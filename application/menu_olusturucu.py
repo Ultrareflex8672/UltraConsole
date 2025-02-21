@@ -1,15 +1,24 @@
 import os
 from application.modul_olusturucu import ModuleLoader
 from application.ekran_olustur import ScreenView as SV
-from application.settings import SettingsMenu as SM
-import importlib.util
+from application.default_menu import DefaultMenu
 
-class MenuSystem(ModuleLoader,SV):
-    def __init__(self, menu_data):
+class MenuSystem(ModuleLoader,SV,DefaultMenu):
+    def __init__(self, menu_data, type=0, module_path=[], module_name=None, class_name=None, init_data=None, func_name=None, **kwargs):
         self.menu_data = menu_data
+        self.type = type
+        self.module_path = module_path
+        self.module_name = module_name
+        self.class_name = class_name
+        self.init_data = init_data
+        self.func_name = func_name
+        self.kwargs = {}
+        self.kwargs.update(kwargs)
         self.path = []  # Kullanıcının bulunduğu menü yolu
 
-    def show_menu(self, title="Başlıksız Menü"):
+    def show_menu(self, title="Başlıksız Menü", **kwargs):
+        if kwargs:
+            title = kwargs.get("root", 0)
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
 
@@ -23,37 +32,104 @@ class MenuSystem(ModuleLoader,SV):
             # Seçenekleri listele
             options = list(current_menu.keys())
             
-            if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
+            if self.type == 1:  # Eğer modül çağrısı yapıldıysa geri dön seçeneği ekle
                 options.append("Geri Dön")
-            else:  # Ana menüdeysek "Ayarlar" ve "Çıkış" seçenekleri ekle
-                options.append("Ayarlar")
-                options.append("Çıkış")
+            else:  # Modül çağrısı yapılmadıysa
+                if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
+                    options.append("Geri Dön")
+                else:  # Ana menüdeysek "Ayarlar" ve "Çıkış" seçenekleri ekle
+                    options.append("Ayarlar")
+                    options.append("Çıkış")
 
             # choice = input("Seçiminizi yapın: ")
             choice = SV.create_frame(menu_title, options, "menu")
 
             try:
                 choice = int(choice)
-                if self.path and choice == len(options) - len(options):  # "Geri Dön" seçildi
-                    self.path.pop()
-                elif self.path == [] and choice == len(options) - 1:  # "Ayarlar" seçildi
-                    print("Ayarlar açılıyor...")
-                    SM.menu_goster(0)
+                if self.type != 1:
+                    if self.path and choice == len(options) - len(options):  # "Geri Dön" seçildi
+                        self.path.pop()
+                    elif self.path == [] and choice == len(options) - 1:  
+                        # "Ayarlar" seçildi
+                        print("Ayarlar açılıyor...")
+                        module_path = "application"
+                        module_name = "settings"
+                        class_name = "SettingsMenu"
+                        func_name = "menu_goster"
+                        self.kwargs.update({"selected_key": choice})
 
-                elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
-                    print("Çıkış yapılıyor...")
-                    exit()
+                        # call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
+                        run_module = ModuleLoader.call_function(module_path, module_name, class_name, None, func_name, **self.kwargs)
+                        self.module_name = None #############################
+                        self.func_name = None #############################
+
+                    elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
+                        print("Çıkış yapılıyor...")
+                        exit()
+                    else:
+                        selected_key = options[choice - 1]
+                        if isinstance(current_menu[selected_key], dict):  # Alt menü varsa
+                            self.path.append(selected_key)
+                        else:  
+                            # Alt menü yoksa, ilgili fonksiyonu modül klasöründen çağır
+                            print(f"{selected_key} fonksiyonu çağırılıyor...")
+                            if self.module_name == None:
+                                self.module_name = current_menu[selected_key]
+                            if self.func_name == None:
+                                self.func_name = current_menu[selected_key]
+                            self.kwargs["selected_key"] = choice
+                            self.kwargs["selected_name"] = selected_key
+
+                            #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
+                            run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
+                            self.module_name = None #############################
+                            self.func_name = None #############################
+
+                            if run_module == None:
+                                SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
+                            else:
+                                SV.create_frame("Modül: "+selected_key,run_module)
                 else:
-                    selected_key = options[choice - 1]
-                    if isinstance(current_menu[selected_key], dict):  # Alt menü varsa
-                        self.path.append(selected_key)
-                    else:  # Alt menü yoksa, ilgili fonksiyonu modül klasöründen çağır
-                        print(f"{selected_key} fonksiyonu çağırılıyor...")
-                        run_module = ModuleLoader.call_function(current_menu[selected_key], selected_key=choice, selected_name=selected_key)
-                        if run_module == None:
-                            SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
-                        else:
-                            SV.create_frame("Modül: "+selected_key,run_module)
+                    if self.path and choice == len(options) - len(options):  
+                        # "Geri Dön" seçildi
+                        self.path.pop()
+                    elif not self.path and choice == len(options) - len(options):  
+                        # "Çıkış" seçildi
+                        config = ModuleLoader.read_config()                                     # Ayarları oku
+                        menu_data = SV.load_json(config["menu_file"])                           # Menü verilerini yükle
+                        root = list(menu_data.keys())[int(config.get("menu_root"))]
+                        module_path = "application"
+                        module_name = "menu_olusturucu"
+
+                        #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
+                        ModuleLoader.call_function(module_path, module_name, "MenuSystem", menu_data[root], "show_menu", root=root)
+                        self.module_name = None #############################
+                        self.func_name = None #############################
+
+                    else:
+                        selected_key = options[choice - 1]
+                        if isinstance(current_menu[selected_key], dict):  # Alt menü varsa
+                            self.path.append(selected_key)
+                        else:  
+                            # Alt menü yoksa, ilgili fonksiyonu modül klasöründen çağır
+                            print(f"{selected_key} fonksiyonu çağırılıyor...")
+                            if self.module_name == None:
+                                self.module_name = current_menu[selected_key]
+                            if self.func_name == None:
+                                self.func_name = current_menu[selected_key]
+                            self.kwargs["selected_key"] = choice
+                            self.kwargs["selected_name"] = selected_key
+
+                            #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
+                            run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
+                            self.module_name = None #############################
+                            self.func_name = None #############################
+
+                            if run_module == None:
+                                SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
+                            else:
+                                SV.create_frame("Modül: "+selected_key,run_module)
             except (ValueError, IndexError):
-                print("Geçersiz seçim, tekrar deneyin.")
+                    print("Geçersiz seçim, tekrar deneyin.")
+                    
     

@@ -37,6 +37,25 @@
             <li>Adam Asmaca Modülünde Geliştirmeler Yapıldı</li>
             <li>Taş Kağıt Makas Modülündeki büyük-küçük harf duyarlılığı hatası düzeltildi</li>
         </ul>
+        <li>20.02.2025 - Ayarlar Yapısı Son Halini Aldı</li>
+        <ul>
+            <li>Menü sistemi ve fonksiyon çağırıma motorları her türlü veri ve argümanı paylaşabilecek şekilde yeniden yazıldı</li>
+            <li>Ayarlar menüsü de JSON dan okunmak üzere yeniden yazıldı. Ayar menüsü ayıklanması için yeni config anahtarı eklendi</li>
+            <li>Takvim Modülü</li>
+            <li>Min genişliği 50 karakter olan bilgi ekranı için Takvim istisnası eklendi</li>
+            <li>Bayrak Çizme Modülü Eklendi (Hazır Alındı - Uyarlandı)</li>
+            <li>Pong Oyunu Eklendi (Hazır Alındı - Uyarlandı)</li>
+            <li>Sayı Tahmin Oyunu Eklendi (Hazır Alındı - Uyarlandı)</li>
+            <li>Ritmik Sayma Modülü Eklendi</li>
+            <li>Adam Asmaca Oyunu Hataları Düzeltildi</li>
+            <li>Eğer menu dosyası yoksa/silinmişse varsayılan ayarlarla menu dosyası oluşturma özelliği eklendi</li>
+            <li>Program başlatıcı ve modüllerde kütüphane olarak kullanılacak tüm sınıfların misrasçısı bir modül oluşturuldu</li>
+            <li>Not Hesaplama Modülü Eklendi</li>
+            <li>Çarpım Tablosu Eklendi</li>
+            <li>BMI Hesaplama Modülü Eklendi</li>
+            <li>Sıcaklık Birim Çevirici Modülü Eklendi</li>
+            <li>API Bağlantısı ile anlık veri alan döviz hesaplama modülü eklendi</li>
+        </ul>
     </ul>
 
 <hr>

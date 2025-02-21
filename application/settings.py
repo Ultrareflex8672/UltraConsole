@@ -1,68 +1,24 @@
-from application.ayar_okuyucu import ConfigHandler as CH
-from application.ekran_olustur import ScreenView as MS
+from application.menu_olusturucu import MenuSystem as MS
 import os
 
 class SettingsMenu():
-    def ayar_oku():
-        config_dict = CH.read_config()
-        return config_dict
-    
-    def settings_menu_item(level):
-        main_settings_menu_items = ["Kullanıcı Ayarları", "Program Ayarları", "Çıkış"]
-        general_settings_menu_items = ["Ayarları Görüntüle", "Ayarları Değiştir", "Geri Dön"]
-        user_settings_menu_items = ["Kullanıcı Adı Değiştir", "Şifre Değiştir", "Geri Dön"]
-
-        if level == 0:
-            return main_settings_menu_items
-        elif level == 2:
-            return general_settings_menu_items
-        elif level == 1:
-            return user_settings_menu_items
+  
+    def menu_goster(self, **kwargs):
+        config = MS.read_config()                                   # Ayarları oku
+        menu_data = MS.load_json(config["menu_file"])               # Menü verilerini yükle
+        root = list(menu_data.keys())[int(config.get("settings_menu_root"))]
+        settings_menu = MS(menu_data[root], 1, "application", "settings", "SettingsMenu", None, "secim_algila", **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
+        settings_menu.show_menu(root)
         
-    def menu_goster(level):
-        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
-        menu_items = SettingsMenu.settings_menu_item(level)
+    def secim_algila(self, **kwargs):
+        if kwargs.get("selected_key") == 1:
+            SettingsMenu.ayarlari_goster(MS.read_config())
+        elif kwargs.get("selected_key") == 2:
+            SettingsMenu.ayar_degistir(MS.read_config())
 
-        if level == 0:
-            title = "Ayarlar"
-        elif level == 1:
-            title = "Kullanıcı Ayarları"
-        elif level == 2:
-            title = "Program Ayarları"
-
-        secim = MS.create_frame(title, menu_items, "menu")
-
-        if level == 0:
-            if int(secim) == 1:
-                pass
-            elif level == 0 and int(secim) == 2:
-                SettingsMenu.menu_goster(int(secim))
-            elif level == 0 and int(secim) == 0:
-                os.system("python main.py")
-                
-        if level == 1:
-            if int(secim) == 1:
-                pass
-            elif int(secim) == 2:
-                pass
-            elif int(secim) == 0:
-                SettingsMenu.menu_goster(level-1)
-        if level == 2:
-            if int(secim) == 1:
-                SettingsMenu.ayarlari_goster()
-            elif int(secim) == 2:
-                SettingsMenu.ayar_degistir(SettingsMenu.ayar_oku())
-            elif int(secim) == 0:
-                SettingsMenu.menu_goster(level-1)
-        return secim
-
-    def ayarlari_goster():
-        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
-        ayarlar = SettingsMenu.ayar_oku()
+    def ayarlari_goster(ayarlar):
         ayar_dokumu = "            ".join(f"{key}: {value}" for key, value in ayarlar.items())
         MS.create_frame("Mevcut Ayarlar", ayar_dokumu)
-        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
-        SettingsMenu.menu_goster(2)
     
     def ayar_degistir(ayarlar):
         while True:
@@ -72,7 +28,7 @@ class SettingsMenu():
             
             if secim.lower() == "0":
                 os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
-                SettingsMenu.menu_goster(2)
+                break
             
             if secim.isdigit() and 1 <= int(secim) <= len(ayarlar):
                 secim_index = int(secim) - 1
@@ -88,6 +44,6 @@ class SettingsMenu():
 
     
     def ayarlari_kaydet(ayarlar):
-        CH.save_config(ayarlar)
+        MS.save_config(ayarlar)
         MS.create_frame("Ayarlar Kaydedildi", "Ayarlar başarıyla kaydedildi.")
 
