@@ -122,8 +122,8 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
 
                             #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
                             run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
-                            self.module_name = None #############################
-                            self.func_name = None #############################
+                            # self.module_name = None #############################
+                            # self.func_name = None #############################
 
                             if run_module == None:
                                 SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")

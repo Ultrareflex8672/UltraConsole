@@ -56,6 +56,7 @@
             <li>Sıcaklık Birim Çevirici Modülü Eklendi</li>
             <li>API Bağlantısı ile anlık veri alan döviz hesaplama modülü eklendi</li>
             <li>UltraConsole V1.0 Adı Verdiğim Sürüm Pyinstaller ile build edildi ancak henüz exe versiyonda sorunlar var</li>
+            <li>Ayarlar Menüsünde Geri Gelindiğinde func_name argümanının boş dönmesi sorunu giderildi</li>
         </ul>
     </ul>
 
