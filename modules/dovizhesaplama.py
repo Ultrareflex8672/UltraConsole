@@ -82,7 +82,7 @@ def dovizhesaplama(**kwargs):
                 
                 selected_currency = tcmb_data[currency_type-1]['ForexSelling']
                 convertion = base_money / selected_currency
-                UC.create_frame("Döviz Hesaplayıcı", f"{base_money} ₺ = {convertion} {short_}                          {name_} = {selected_currency}")
+                UC.create_frame("Döviz Hesaplayıcı", f"{base_money} ₺ = {convertion} {short_}                          1 {name_} = {selected_currency} ₺")
             elif type_ == 2:
                 while True:
                     try:
@@ -93,7 +93,7 @@ def dovizhesaplama(**kwargs):
 
                 selected_currency = tcmb_data[currency_type-1]['ForexSelling']
                 convertion = base_money * selected_currency
-                UC.create_frame("Döviz Hesaplayıcı", f"{base_money} {short_} = {convertion} ₺                          {name_} = {selected_currency}")
+                UC.create_frame("Döviz Hesaplayıcı", f"{base_money} {short_} = {convertion} ₺                          1 {name_} = {selected_currency} ₺")
         else:
             dovizhesaplama(**kwargs)
     else:
