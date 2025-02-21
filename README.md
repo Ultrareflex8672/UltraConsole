@@ -64,7 +64,7 @@
 <br>
 Pratik bir şekilde menü ve yeni modül ekleme klavuzu burada olacak
 <br>
-
+<h2><a href="http://hizmetimiz.com/files/github/ultraconsole">Uygulama Tanıtım Videosu için Tıklayın</a></h2>
 </div>
 <br>
 <br>
