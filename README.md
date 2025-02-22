@@ -64,6 +64,7 @@
             <li>Tek parametre ile menü döndürme kolaylığı sağlandı</li>
             <li>Basit, Orta ve İleri Seviyeye uygun modlar oluşturuldu</li>
             <li>Kullanıcılara klavuzluk etmesi için açıklamalı örnek modül oluşturuldu</li>
+            <li>Konsol temizleme işlemi fonksiyon haline getirildi</li>
         </ul>
     </ul>
 
