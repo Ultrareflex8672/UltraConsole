@@ -58,6 +58,13 @@
             <li>UltraConsole V1.0 Adı Verdiğim Sürüm Pyinstaller ile build edildi ancak henüz exe versiyonda sorunlar var</li>
             <li>Ayarlar Menüsünde Geri Gelindiğinde func_name argümanının boş dönmesi sorunu giderildi</li>
         </ul>
+        <li>22.02.2025 - Menü Çağırma Fonksiyonunda Köklü İyileştirme</li>
+        <ul>
+            <li>Parametre döngüleri stabil hake getirildi</li>
+            <li>Tek parametre ile menü döndürme kolaylığı sağlandı</li>
+            <li>Basit, Orta ve İleri Seviyeye uygun modlar oluşturuldu</li>
+            <li>Kullanıcılara klavuzluk etmesi için açıklamalı örnek modül oluşturuldu</li>
+        </ul>
     </ul>
 
 <hr>
