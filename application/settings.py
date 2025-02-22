@@ -7,10 +7,10 @@ class SettingsMenu():
         config = MS.read_config()                                   # Ayarları oku
         menu_data = MS.load_json(config["menu_file"])               # Menü verilerini yükle
         root = list(menu_data.keys())[int(config.get("settings_menu_root"))]
-        settings_menu = MS(menu_data[root], 1, "application", "settings", "SettingsMenu", None, "secim_algila", **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
+        settings_menu = MS(menu_data[root], 1, "application", "settings", "SettingsMenu", None, "settings", **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
         settings_menu.show_menu(root)
         
-    def secim_algila(self, **kwargs):
+    def settings(self, **kwargs):
         if kwargs.get("selected_key") == 1:
             SettingsMenu.ayarlari_goster(MS.read_config())
         elif kwargs.get("selected_key") == 2:

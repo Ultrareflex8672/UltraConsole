@@ -4,14 +4,14 @@ from application.ekran_olustur import ScreenView as SV
 from application.default_menu import DefaultMenu
 
 class MenuSystem(ModuleLoader,SV,DefaultMenu):
-    def __init__(self, menu_data, type=0, module_path=[], module_name=None, class_name=None, init_data=None, func_name=None, **kwargs):
-        self.menu_data = menu_data
-        self.type = type
-        self.module_path = module_path
-        self.module_name = module_name
-        self.class_name = class_name
-        self.init_data = init_data
-        self.func_name = func_name
+    def __init__(self, menu_data_, type_=0, module_path_=[], module_name_=None, class_name_=None, init_data_=None, func_name_=None, **kwargs):
+        self.menu_data = menu_data_
+        self.type = type_
+        self.module_path = module_path_
+        self.module_name = module_name_
+        self.class_name = class_name_
+        self.init_data = init_data_
+        self.func_name = func_name_
         self.kwargs = {}
         self.kwargs.update(kwargs)
         self.path = []  # Kullanıcının bulunduğu menü yolu
@@ -79,6 +79,7 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                                 self.func_name = current_menu[selected_key]
                             self.kwargs["selected_key"] = choice
                             self.kwargs["selected_name"] = selected_key
+                            self.kwargs["menu_type"] = self.type
 
                             #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
                             run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
@@ -119,11 +120,13 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                                 self.func_name = current_menu[selected_key]
                             self.kwargs["selected_key"] = choice
                             self.kwargs["selected_name"] = selected_key
+                            self.kwargs["menu_type"] = self.type
 
                             #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
                             run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
-                            # self.module_name = None #############################
-                            # self.func_name = None #############################
+                            self.module_name = None #############################
+                            self.func_name = None #############################
+                            
 
                             if run_module == None:
                                 SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
