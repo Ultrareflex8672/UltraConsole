@@ -13,8 +13,8 @@
 # 8. Aşağıdaki menu_data verisi formatında hazırlanmış menü verisini config/menu.cfg dosyasının root düzeyinde en sonuna ekleyin ve rootta kaçıncı sırada olduğuna bakın
 # 9. Eğer tek seviyeden oluşan bir menünüz var ise herbir seçeneği 6. maddedeki gibi ekleyebilirsiniz. Seçeneklerin hepsi tekbir dosyada farklı fonksiyonlar çalıştıracaksa kwargs.get("selected_key") kullanarak seçimleri yakalayabilirsiniz
 # 10. Genel kullanım örneği aşağıda verilmiştir.
-from application.ultraconsole import UltraConsole as UC                                                                 # UltraConsole kütüphanesini yükle.
-import os
+
+from application.ultraconsole import UltraConsole as UC
 
 
 def ornek_modul(**kwargs):                                                                                              # ornek_modul.py modülü, ornek_modul fonksiyonu.
@@ -39,14 +39,14 @@ def ornek_modul(**kwargs):                                                      
         # Daha ileri seviye parametreleri de gönderebileceğiniz örnek aşağıdaki gibidir.
         # go_custom_menu(menu_root, menu_data=None, module_name=None, func_name=None, module_path=None, class_name=None, init_data=None, **kwargs)
 
-        # UC.go_custom_menu(0, menu_data=menu_data_)                                                                      # Modül içinden menü elemanı gönderimi örneği.
-        UC.go_custom_menu(2)                                                                                          # menu.cfg içindeki menü elemanlarını çağırma örneği.
+        # UC.go_custom_menu(0, menu_data=menu_data_)                                                                    # Modül içinden menü elemanı gönderimi örneği.
+        UC.go_custom_menu(2)                                                                                            # menu.cfg içindeki menü elemanlarını çağırma örneği.
 
     if UC.selected_key(1, **kwargs) == True:                                                                            # Eğer menüden seçilen anahtar 1 ise True döner.
         UC.create_frame("ornek_modul.py Dosyası", "'ornek_modul' fonksiyonu çalıştı ve 'Seçenek 1' seçildi", "info")    # Bir bilgi ekrarnı basar Params: (Başlık, Bilgi, "info")
     
     if UC.selected_key(2, **kwargs) == True:                                                                            # Eğer menüden seçilen anahtar 2 ise True döner.
-        os.system('cls' if os.name == 'nt' else 'clear')                                                                # Konsolu temizlenmek istenirse (import os gerekli)
+        UC.cls() # os.system('cls' if os.name == 'nt' else 'clear')                                                     # Konsol temizlenmek istenirse.
         options = ["ornek_modul.py Dosyası", "'ornek_modul' fonksiyonu çalıştı ve", "'Seçenek 2' seçildi"]+["Geri Dön"] # Fonksiyona gönderilecek List verisi.
         sel = UC.create_frame("Başlık", options, "menu")                                                                # List içindeki verilerle kullanıcıdan seçmeli veri alır.
         input(sel+" . Seçeneği seçtiniz")

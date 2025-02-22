@@ -1,4 +1,5 @@
 from application.menu_olusturucu import MenuSystem as MS
+import os
 
 class UltraConsole(MS):
 
@@ -75,4 +76,7 @@ class UltraConsole(MS):
             return True
         else:
             return False
+        
+    def cls():
+        os.system('cls' if os.name == 'nt' else 'clear') 
 
