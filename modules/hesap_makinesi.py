@@ -1,24 +1,24 @@
-from application.ekran_olustur import ScreenView as SV
+from application.ultraconsole import UltraConsole as UC
 
 def hesap_makinesi(**kwargs):
-    islem = kwargs.get("selected_key", 0)
+    islem = UC.selected_key(**kwargs)
     soru1 = ""
     soru2 = ""
     if islem == 2:
-        soru1 = int(SV.create_frame("Çıkarma İşlemi","1. Sayıyı Giriniz: ",""))
-        soru2 = int(SV.create_frame("Çıkarma İşlemi","Çıkarılacak Sayıyı Giriniz: ",""))
+        soru1 = int(UC.create_frame("Çıkarma İşlemi","1. Sayıyı Giriniz: ",""))
+        soru2 = int(UC.create_frame("Çıkarma İşlemi","Çıkarılacak Sayıyı Giriniz: ",""))
     elif islem == 6 or islem == 7:
-        soru1 = int(SV.create_frame("Kare Alanı Hesabı","1. Kenar Uzunluğunu Giriniz: ",""))
-        soru2 = int(SV.create_frame("Kare Alanı Hesabı","2. Kenar Uzunluğunu Giriniz: ",""))
+        soru1 = int(UC.create_frame("Kare Alanı Hesabı","1. Kenar Uzunluğunu Giriniz: ",""))
+        soru2 = int(UC.create_frame("Kare Alanı Hesabı","2. Kenar Uzunluğunu Giriniz: ",""))
     elif islem == 5:
-        soru1 = int(SV.create_frame("Üs Alma İşlemi","Tabanı Giriniz: ",""))
-        soru2 = int(SV.create_frame("Üs Alma İşlemi","Üssü Giriniz: ",""))
+        soru1 = int(UC.create_frame("Üs Alma İşlemi","Tabanı Giriniz: ",""))
+        soru2 = int(UC.create_frame("Üs Alma İşlemi","Üssü Giriniz: ",""))
     elif islem == 4:
-        soru1 = int(SV.create_frame("Bölme İşlemi","Bölüneni Giriniz: ",""))
-        soru2 = int(SV.create_frame("Bölme İşlemi","Böleni Giriniz: ",""))
+        soru1 = int(UC.create_frame("Bölme İşlemi","Bölüneni Giriniz: ",""))
+        soru2 = int(UC.create_frame("Bölme İşlemi","Böleni Giriniz: ",""))
     else:
-        soru1 = int(SV.create_frame("Hesap Makinesi","1. Sayıyı Giriniz: ",""))
-        soru2 = int(SV.create_frame("Hesap Makinesi","2. Sayıyı Giriniz: ",""))
+        soru1 = int(UC.create_frame("Hesap Makinesi","1. Sayıyı Giriniz: ",""))
+        soru2 = int(UC.create_frame("Hesap Makinesi","2. Sayıyı Giriniz: ",""))
     
     v1 = soru1
     v2 = soru2

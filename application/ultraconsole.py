@@ -65,11 +65,16 @@ class UltraConsole(MS):
         ms = MS(menu_data[root], 1, module_path, module_name, class_name, init_data, func_name, **kwargs)
         ms.show_menu(root)
     
-    def selected_key(key, **kwargs):
-        if kwargs.get("selected_key") == key:
-            return True
+    def selected_key(key=None, **kwargs):
+        key_ = kwargs.get("selected_key")
+        if key:
+            if key_  == key:
+                return True
+            else:
+                return False
         else:
-            return False
+            return key_
+
     
     def from_main_menu(**kwargs):
         if int(kwargs.get("menu_type")) == 0:

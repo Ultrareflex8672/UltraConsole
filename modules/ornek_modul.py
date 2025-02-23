@@ -11,7 +11,7 @@
 # 6. config klasörü içindeki menu.cfg dosyasında ana menü altına key= modül adı, value= fonksiyon adı şeklinde ekleyin. Örn: Benim Modülüm: my_modul
 # 7. Eğer modülünüz kendi içinde menü gerektiriyor ise modülünüz içine aşağıdaki menu_data örneğindeki gibi bir menü datası hazırlayın yada madde 8 i uygulayın
 # 8. Aşağıdaki menu_data verisi formatında hazırlanmış menü verisini config/menu.cfg dosyasının root düzeyinde en sonuna ekleyin ve rootta kaçıncı sırada olduğuna bakın
-# 9. Eğer tek seviyeden oluşan bir menünüz var ise herbir seçeneği 6. maddedeki gibi ekleyebilirsiniz. Seçeneklerin hepsi tekbir dosyada farklı fonksiyonlar çalıştıracaksa kwargs.get("selected_key") kullanarak seçimleri yakalayabilirsiniz
+# 9. Eğer tek seviyeden oluşan bir menünüz var ise herbir seçeneği 6. maddedeki gibi ekleyebilirsiniz. Seçeneklerin hepsi tekbir dosyada farklı fonksiyonlar çalıştıracaksa UC.selected_key(**kwargs) kullanarak seçimleri yakalayabilirsiniz
 # 10. Genel kullanım örneği aşağıda verilmiştir.
 
 from application.ultraconsole import UltraConsole as UC
