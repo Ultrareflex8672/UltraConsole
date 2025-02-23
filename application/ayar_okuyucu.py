@@ -46,13 +46,13 @@ class ConfigHandler(FL):
                 if key in config:
                     config[key] = value
                 else:
-                    print(f"Uygulama: Özelleştirilmiş ayarlarda bilinmeyen anahtar '{key}' bulundu.")
+                    print(f"UltraConsole: Özelleştirilmiş ayarlarda bilinmeyen anahtar '{key}' bulundu. Anahtarı UltraConsole 'a sabitlemek için 'application/ayar_okuyucu.py' içine de ekleyiniz.")
 
         if special_config:
             if special_config in config.keys():
                 return config[special_config]
             else:
-                print(f"Uygulama: Özelleştirilmiş ayarlarda bilinmeyen anahtar: '{special_config}'")
+                print(f"UltraConsole: Özelleştirilmiş ayarlarda bilinmeyen anahtar: '{special_config}'")
                 return None
         return config
 
