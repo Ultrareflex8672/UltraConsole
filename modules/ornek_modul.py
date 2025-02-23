@@ -31,8 +31,7 @@ def ornek_modul(**kwargs):                                                      
         }
     } 
 
-    if UC.from_main_menu(**kwargs) == True:                                                                             # İstek ana meüden geliyorsa True gelmiyorsa False.
-
+    if UC.from_main_menu(**kwargs):                                                                             # İstek ana meüden geliyorsa True gelmiyorsa False.
         # go_custom_menu() Fonksiyonu parametre şeması aşağıdaki açıklama satırında verilmiştir.
         # Eğer menü elemanları menu.cfg dosyasında ise tek paremetre olarak menünün root sırasını girebilirsiniz.
         # Eğer menü elemanlarını modül dosyasından gönderecekseniz 2. parametre dict olmalıdır.
@@ -42,20 +41,20 @@ def ornek_modul(**kwargs):                                                      
         # UC.go_custom_menu(0, menu_data=menu_data_)                                                                    # Modül içinden menü elemanı gönderimi örneği.
         UC.go_custom_menu(2)                                                                                            # menu.cfg içindeki menü elemanlarını çağırma örneği.
 
-    if UC.selected_key(1, **kwargs) == True:                                                                            # Eğer menüden seçilen anahtar 1 ise True döner.
+    if UC.selected_key(1, **kwargs):                                                                                    # Eğer menüden seçilen anahtar 1 ise True döner.
         UC.create_frame("ornek_modul.py Dosyası", "'ornek_modul' fonksiyonu çalıştı ve 'Seçenek 1' seçildi", "info")    # Bir bilgi ekrarnı basar Params: (Başlık, Bilgi, "info")
     
-    if UC.selected_key(2, **kwargs) == True:                                                                            # Eğer menüden seçilen anahtar 2 ise True döner.
+    if UC.selected_key(2, **kwargs):                                                                                    # Eğer menüden seçilen anahtar 2 ise True döner.
         UC.cls() # os.system('cls' if os.name == 'nt' else 'clear')                                                     # Konsol temizlenmek istenirse.
         options = ["ornek_modul.py Dosyası", "'ornek_modul' fonksiyonu çalıştı ve", "'Seçenek 2' seçildi"]+["Geri Dön"] # Fonksiyona gönderilecek List verisi.
         sel = UC.create_frame("Başlık", options, "menu")                                                                # List içindeki verilerle kullanıcıdan seçmeli veri alır.
         input(sel+" . Seçeneği seçtiniz")
     
-    if UC.selected_key(3, **kwargs) == True:                                                                            # Eğer menüden seçilen anahtar 3 ise True döner.
+    if UC.selected_key(3, **kwargs):                                                                                    # Eğer menüden seçilen anahtar 3 ise True döner.
         name = UC.create_frame("ornek_modul.py Dosyası", "'ornek_modul' fonk. 'Seçenek 3'", "Adnızı Girin: ")           # Bilgi vererek input alır Params:(Başlık, Bilgi, Soru)
-        input("Merhaba "+name)
+        UC.create_frame("Sonuca Göre Tekrar Pencere", "Merhaba "+name, "info")
 
-    if UC.selected_key(4, **kwargs) == True:                                                                            # Eğer menüden seçilen anahtar 4 ise True döner.
+    if UC.selected_key(4, **kwargs):                                                                                    # Eğer menüden seçilen anahtar 4 ise True döner.
         input("Ana Menüye Dönmek için 'Enter'...")
         UC.go_main_menu()                                                                                               # UltraConsole ana menüsüne gider.
     

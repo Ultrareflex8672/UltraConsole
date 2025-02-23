@@ -3,15 +3,43 @@ import os
 
 class UltraConsole(MS):
 
+    def module_configs(menu_root_key = None, menu_file_key = None, module_path_key = None):
+        configs = MS.read_config()
+        if menu_file_key:
+            menu_file = configs.get(menu_file_key)
+        else:
+            menu_file = configs.get("menu_file")
+
+        if menu_root_key:
+            menu_root = configs.get(menu_root_key)
+        else:
+            menu_root = configs.get("menu_root")
+
+        if module_path_key:
+            module_path = configs.get(module_path_key)
+        else:
+            module_path = configs.get("module_path")
+
+        menu_data = MS.load_json(menu_file)
+        root = list(menu_data.keys())[int(menu_root)]
+
+        return root, menu_data, module_path
+    
     def go_main_menu():
-        all_config = MS.read_config()                               # Tüm ayarları oku (Şuanda burada bir işlevi yok ancak ileride kullanılabilir)
-        modules_path = all_config.get("module_path")                # Modül yolu al (Şuanda burada bir işlevi yok ancak ileride kullanılabilir)
-        menu_root_config = MS.read_config("menu_root")              # Menü kökünü al
+        root, menu_data, module_path = UltraConsole.module_configs()
         MS.check_and_create_config(MS.read_config("menu_file"))     # Menü dosyasını kontrol et ve oluştur
-        menu_data = MS.load_json(MS.read_config("menu_file"))       # Menü verilerini yükle
-        root = list(menu_data.keys())[int(menu_root_config)]        # İlk menüyü al (menu.cfg Dosyasındaki JSon da 1. Seviyede Birden Fazla Menü varsa İlk Menüyü Alır)                          # Menü başlığını al
         ms = MS(menu_data[root])                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
         ms.show_menu(root)                                          # Menüyü göster
+
+    # def go_main_menu():
+    #     all_config = MS.read_config()                               # Tüm ayarları oku (Şuanda burada bir işlevi yok ancak ileride kullanılabilir)
+    #     modules_path = all_config.get("module_path")                # Modül yolu al (Şuanda burada bir işlevi yok ancak ileride kullanılabilir)
+    #     menu_root_config = MS.read_config("menu_root")              # Menü kökünü al
+    #     MS.check_and_create_config(MS.read_config("menu_file"))     # Menü dosyasını kontrol et ve oluştur
+    #     menu_data = MS.load_json(MS.read_config("menu_file"))       # Menü verilerini yükle
+    #     root = list(menu_data.keys())[int(menu_root_config)]        # İlk menüyü al (menu.cfg Dosyasındaki JSon da 1. Seviyede Birden Fazla Menü varsa İlk Menüyü Alır)                          # Menü başlığını al
+    #     ms = MS(menu_data[root])                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
+    #     ms.show_menu(root)                                          # Menüyü göster
 
     def go_custom_menu(menu_root, **kwargs):
         if kwargs.get("menu_data"):
@@ -71,7 +99,7 @@ class UltraConsole(MS):
             if key_  == key:
                 return True
             else:
-                return False
+                return None
         else:
             return key_
 
@@ -80,7 +108,7 @@ class UltraConsole(MS):
         if int(kwargs.get("menu_type")) == 0:
             return True
         else:
-            return False
+            return None
         
     def cls():
         os.system('cls' if os.name == 'nt' else 'clear') 
