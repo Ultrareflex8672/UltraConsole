@@ -54,7 +54,7 @@ class ScreenView(CH):
 
             # Bu biraz eğreti oldu daha sonra daha iyi bir çözüm bulunabilir (Takvim ekranı için)
             if title == "Takvim":
-                width = 21
+                width = 22
 
 
             horizontal_border = "─" * width
