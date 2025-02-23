@@ -20,6 +20,9 @@ class ConfigHandler(FL):
             "info_frame_color": "33",
             "info_min_screen_width": 50,  # Info ekranının minimum genişliği (En düşük 50. 50 nin altındaki değerlerde 50 olarak alınır)
             "info_max_screen_width": 100,
+            "games_menu_file": "oyunlar/menu.cfg",
+            "games_menu_root": 0,
+            "games_module_path": "oyunlar",
         }
 
         # **config klasörünü oluştur (Yeni Eklendi)**
@@ -46,6 +49,7 @@ class ConfigHandler(FL):
                 if key in config:
                     config[key] = value
                 else:
+                    config[key] = value
                     print(f"UltraConsole: Özelleştirilmiş ayarlarda bilinmeyen anahtar '{key}' bulundu. Anahtarı UltraConsole 'a sabitlemek için 'application/ayar_okuyucu.py' içine de ekleyiniz.")
 
         if special_config:

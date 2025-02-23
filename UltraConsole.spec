@@ -1,11 +1,15 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import copy_metadata
+
+datas = [('./*', '.')]
+
 
 
 a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('application', 'application'), ('modules', 'modules')],
+    datas=datas,
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
