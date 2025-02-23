@@ -66,6 +66,12 @@
             <li>Kullanıcılara klavuzluk etmesi için açıklamalı örnek modül oluşturuldu</li>
             <li>Konsol temizleme işlemi fonksiyon haline getirildi</li>
         </ul>
+        <li>23.02.2025 - Menü işleyişinde köklü değişiklikler</li>
+        <ul>
+            <li>Parametreli modül çağırma iyileştirildi</li>
+            <li>Örnek Modülün yanısıra Hesap Makinesi ve Oyunlar da farklı modül ekleme örnekleri olarak değiştirildi</li>
+            <li>Uygulama içerisinden modül ekle/sil/düzelt fonksiyonu eklendi</li>
+        </ul>
     </ul>
 
 <hr>
