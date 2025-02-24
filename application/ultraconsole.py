@@ -1,4 +1,5 @@
 from application.menu_olusturucu import MenuSystem as MS
+import getpass
 import os
 
 class UltraConsole(MS):
@@ -25,10 +26,10 @@ class UltraConsole(MS):
 
         return root_key, int(menu_root), menu_data, module_path
     
-    def go_main_menu():
+    def go_main_menu(**kwargs):
         root, root_index, menu_data, module_path = UltraConsole.module_configs()
         MS.check_and_create_config(MS.read_config("menu_file"))     # Menü dosyasını kontrol et ve oluştur
-        ms = MS(menu_data[root])                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
+        ms = MS(menu_data[root], **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
         ms.show_menu(root)                                          # Menüyü göster
 
     # def go_main_menu():
@@ -112,4 +113,11 @@ class UltraConsole(MS):
         
     def cls():
         os.system('cls' if os.name == 'nt' else 'clear') 
+
+    def get_pass(i):
+        if i == 1:
+            return getpass.getpass("Şifrenizi girin: ")
+        if i == 2:
+            return getpass.getpass("Şifrenizi tekar girin: ")
+
 

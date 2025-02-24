@@ -6,6 +6,8 @@ class ConfigHandler(FL):
     @staticmethod
     def read_config(special_config=None, file_path="config/config.cfg"):
         config = {
+            "database_path": "database",
+            "users_db_file": "users_db.db",
             "menu_file": "config/menu.cfg",
             "menu_root": 0,
             "settings_menu_root": 1,
