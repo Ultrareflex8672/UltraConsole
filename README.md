@@ -82,6 +82,12 @@
             <li>Veri tabanında saklanan kullanıcı şifresi kriptolandı</li>
             <li>Kullanıcı datalarının modüllere aktarımı sağlandı</li>
         </ul>
+        <li>25.02.2025 - Kullanıcının Profil Düzenlemesi Eklendi</li>
+        <ul>
+            <li>İsim değişikliği imkanı eklendi</li>
+            <li>Soyisim değişikliği imkanı eklendi</li>
+            <li>Kullanıcı adı değişikliği imkanı eklendi</li>
+        </ul>
     </ul>
 
 <hr>
