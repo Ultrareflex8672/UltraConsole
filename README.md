@@ -72,7 +72,7 @@
             <li>Örnek Modülün yanısıra Hesap Makinesi ve Oyunlar da farklı modül ekleme örnekleri olarak değiştirildi</li>
             <li>Uygulama içerisinden modül ekle/sil/düzelt fonksiyonu eklendi</li>
         </ul>
-        <li>23.02.2025 - Kullanıcı Girişi Tsarlanmaya Başlandı</li>
+        <li>24.02.2025 - Kullanıcı Girişi Tsarlanmaya Başlandı</li>
         <ul>
             <li>SQL lite için fonsiyonlar oluşturuldu</li>
             <li>Kullanı işlemlerini kontrol edeccek sınıf oluşturuldu</li>
@@ -80,6 +80,7 @@
             <li>Eğer database yok yada hasarlı ise ilk kurulum ve kullanıcı oluşturma fonksiyonları oluşturuldu</li>
             <li>Şifre girilirken konsolda görünmesi engellendi</li>
             <li>Veri tabanında saklanan kullanıcı şifresi kriptolandı</li>
+            <li>Kullanıcı datalarının modüllere aktarımı sağlandı</li>
         </ul>
     </ul>
 
