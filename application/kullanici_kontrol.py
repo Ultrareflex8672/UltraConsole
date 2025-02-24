@@ -203,4 +203,3 @@ class User(UC, SQL):
         md5_hash = hashlib.md5(password.encode()).hexdigest()
         return md5_hash
             
-            

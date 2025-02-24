@@ -69,5 +69,27 @@ class SqlProcess():
         
 ##################################################################################################################
         
+    def sql_update_user(self, user_id, username, password, role, name, surname, email, tel):
+        try:
+            self.cursor.execute("""
+                UPDATE users SET 
+                    username = ?,
+                    password = ?,
+                    role = ?,
+                    name = ?,
+                    surname = ?,
+                    email = ?,
+                    tel = ?
+                WHERE id = ?
+            """, (username, password, role, name, surname, email, tel, user_id))
+
+            self.conn.commit()  # Değişiklikleri kaydet
+            print(f"Kullanıcı eklendi veya zaten var: {username}")
+        
+        except sqlite3.Error as e:
+            print(f"Hata oluştu: {e}")
+        
+##################################################################################################################
+        
     def conncls(self):
         self.conn.close()  # Bağlantıyı kapat

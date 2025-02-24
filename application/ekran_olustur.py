@@ -98,7 +98,7 @@ class ScreenView(CH):
         elif type == "menu":
             num_list = []
             for i, key in enumerate(content, 1):
-                if key == "Geri Dön" or key == "Çıkış":
+                if key == "Geri Dön" or key == "Çıkış" or key == "Ana Menü":
                     num_list.append("0. "+str(key))
                 else:
                     num_list.append(str(i)+". "+str(key))
