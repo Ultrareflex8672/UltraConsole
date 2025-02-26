@@ -2,6 +2,10 @@ from application.menu_olusturucu import MenuSystem as MS
 from application.sql_islem import SqlProcess as SQL
 import os
 import json
+import re
+import hashlib
+import getpass
+import sqlite3
 
 class SettingsMenu():
     # def __init__(self, **kwargs):
@@ -20,6 +24,8 @@ class SettingsMenu():
         settings_menu.show_menu(root)
         
     def settings(self, **kwargs):
+        # input(kwargs)
+        my_profil_data = list(kwargs.get("user_data"))
         if kwargs.get("selected_key") == 1:
             SettingsMenu.ayarlari_goster(MS.read_config())
         elif kwargs.get("selected_key") == 2:
@@ -28,6 +34,11 @@ class SettingsMenu():
             SettingsMenu.menu_islem()
         elif kwargs.get("selected_key") == 4:
             SettingsMenu.profil(**kwargs)
+        elif kwargs.get("selected_key") == 5:
+            if my_profil_data[3] == 0:
+                SettingsMenu.users(**kwargs)
+            else:
+                MS.create_frame("Erişim Yetkisi Hatasu", "Bu menüye erişiminiz reddedildi. Yönetici yetkisi gerekli.")
 
     def ayarlari_goster(ayarlar):
         ayar_dokumu = "            ".join(f"{key}: {value}" for key, value in ayarlar.items())
@@ -185,7 +196,7 @@ class SettingsMenu():
             ms.show_menu(root)
 
         if selection == 1:
-            new_name = MS.create_frame("İsim Değiştirme", my_profil_data[5]+" ile değiştirilecek yeni isim giriniz.", "")
+            new_name = MS.create_frame("İsim Değiştirme", my_profil_data[4]+" ile değiştirilecek yeni isim giriniz.", "")
             if new_name:
                 my_profil_data[4] = new_name
             are_u_sure=MS.create_frame("Kaydet", "Değişikliği Kaydetmek İstediğinize Emin misiniz?", "(E/H)\n")
@@ -200,7 +211,7 @@ class SettingsMenu():
                 MS.create_frame("İptal", "Değişiklik İşlemi İptal Edildi", "info")
 
         if selection == 2:
-            new_name = MS.create_frame("Soysim Değiştirme", my_profil_data[4]+" ile değiştirilecek yeni soyisim giriniz.", "")
+            new_name = MS.create_frame("Soysim Değiştirme", my_profil_data[5]+" ile değiştirilecek yeni soyisim giriniz.", "")
             if new_name:
                 my_profil_data[5] = new_name
             are_u_sure=MS.create_frame("Kaydet", "Değişikliği Kaydetmek İstediğinize Emin misiniz?", "(E/H)\n")
@@ -229,13 +240,265 @@ class SettingsMenu():
                         kwargs["user_data"] = tuple(my_profil_data)
                         ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
                         ms.show_menu(root)
+                        break
                     else:
                         MS.create_frame("İptal", "Değişiklik İşlemi İptal Edildi", "info")
                     break
                 else:
                     MS.create_frame("Kullanımda", new_name+" kullanıcı adı kullanılabilir değil. Lütfen farklı bir kullanıcı adı girin.", "info")
 
+        if selection == 4:
+            while True:
+                print("Mevcut")
+                cur_pass = SettingsMenu.get_pass(1)
+                if SettingsMenu.hash_password_md5(cur_pass) == my_profil_data[2]:
+                    print("Yeni")
+                    new_pass = SettingsMenu.get_pass(1)
+                    new_pass_valid, message = SettingsMenu.is_valid_password(new_pass)
+                    if new_pass_valid == True:
+                        new_pass2 = SettingsMenu.get_pass(2)
+                        new_pass2_valid, message = SettingsMenu.is_valid_password(new_pass, new_pass2)
+                        if new_pass2_valid == True:
+                            are_u_sure=MS.create_frame("Kaydet", "Değişikliği Kaydetmek İstediğinize Emin misiniz?", "(E/H)\n")
+                            if are_u_sure.lower() == "e":
+                                my_profil_data[2] = SettingsMenu.hash_password_md5(new_pass)
+                                SQL_ = SQL(database_path)
+                                SQL_.sql_update_user(my_profil_data[0], my_profil_data[1], my_profil_data[2], my_profil_data[3], my_profil_data[4], my_profil_data[5], my_profil_data[6], my_profil_data[7])
+                                MS.create_frame("Başarılı", "Değişiklik İşlemi Başarı ile Yapıldı", "info")
+                                kwargs["user_data"] = tuple(my_profil_data)
+                                ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
+                                ms.show_menu(root)
+                                break
+                            else:
+                                MS.create_frame("İptal", "Değişiklik İşlemi İptal Edildi", "info")
+                            break
+                        else:
+                            MS.create_frame("Şifre Hatası", message, "info")
+                    else:
+                        MS.create_frame("Geçersiz Şifre", message, "info")
+                else:
+                    MS.create_frame("Hatalı Şifre", "Mevcut Şifreniz Hatalı. Lütfen Tekrar Deneyiniz.", "info")
 
+        if selection == 5:
+            while True:
+                new_mail = MS.create_frame("E-posta Değiştirme", my_profil_data[6]+" ile değiştirilecek yeni e-postanızı giriniz.", "")
+                mail_valid, message = SettingsMenu.is_valid_email(new_mail)
+                if mail_valid == True:
+                    if new_mail:
+                        my_profil_data[6] = new_mail
+                    are_u_sure=MS.create_frame("Kaydet", "Değişikliği Kaydetmek İstediğinize Emin misiniz?", "(E/H)\n")
+                    if are_u_sure.lower() == "e":
+                        SQL_ = SQL(database_path)
+                        SQL_.sql_update_user(my_profil_data[0], my_profil_data[1], my_profil_data[2], my_profil_data[3], my_profil_data[4], my_profil_data[5], my_profil_data[6], my_profil_data[7])
+                        MS.create_frame("Başarılı", "Değişiklik İşlemi Başarı ile Yapıldı", "info")
+                        kwargs["user_data"] = tuple(my_profil_data)
+                        ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
+                        ms.show_menu(root)
+                        break
+                    else:
+                        MS.create_frame("İptal", "Değişiklik İşlemi İptal Edildi", "info")
+                    break
+                else:
+                    MS.create_frame("Geçersiz E-Posta", message, "info")
+
+        if selection == 6:
+            while True:
+                new_tel = MS.create_frame("Telefon Değiştirme", my_profil_data[7]+" ile değiştirilecek yeni telefon numaranızı giriniz.", "")
+                tel_valid, message = SettingsMenu.is_valid_phone_number(new_tel)
+                if tel_valid == True:
+                    if new_tel:
+                        my_profil_data[7] = new_tel
+                    are_u_sure=MS.create_frame("Kaydet", "Değişikliği Kaydetmek İstediğinize Emin misiniz?", "(E/H)\n")
+                    if are_u_sure.lower() == "e":
+                        SQL_ = SQL(database_path)
+                        SQL_.sql_update_user(my_profil_data[0], my_profil_data[1], my_profil_data[2], my_profil_data[3], my_profil_data[4], my_profil_data[5], my_profil_data[6], my_profil_data[7])
+                        MS.create_frame("Başarılı", "Değişiklik İşlemi Başarı ile Yapıldı", "info")
+                        kwargs["user_data"] = tuple(my_profil_data)
+                        ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
+                        ms.show_menu(root)
+                        break
+                    else:
+                        MS.create_frame("İptal", "Değişiklik İşlemi İptal Edildi", "info")
+                    break
+                else:
+                    MS.create_frame("Geçersiz Telefon", message, "info")
+                    
+
+    def is_valid_password(password, password2=None):
+        # Şifre en az 8 karakter olmalı
+        if len(password) < 8:
+            return False, "Şifre en az 8 karakter olmalıdır."
+
+        # Şifre en az bir büyük harf, bir küçük harf ve bir rakam içermeli
+        if not re.search(r"[A-Za-z]", password):
+            return False, "Şifre en az bir harf içermelidir."
+        if not re.search(r"[0-9]", password):
+            return False, "Şifre en az bir rakam içermelidir."
+        
+        # Şifre en az bir özel karakter içermeli
+        if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+            return False, "Şifre en az bir özel karakter içermelidir."
+        
+        if password2:
+            if password != password2:
+                return False, "Girilen şifreler birbiri ile uyuşmuyor"
+    
+        return True, "Şifre geçerli"
+    
+    def hash_password_md5(password: str) -> str:
+        md5_hash = hashlib.md5(password.encode()).hexdigest()
+        return md5_hash
+
+    def is_valid_email(email):
+        email_regex = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+
+        if not email:
+            return False, "E-posta adresi boş bırakılamaz."
+
+        if not re.match(email_regex, email):
+            return False, "Geçersiz e-posta formatı!"
+
+        return True, "Geçerli e-posta adresi."
+    
+    def get_pass(i):
+        if i == 1:
+            return getpass.getpass("Şifrenizi girin: ")
+        if i == 2:
+            return getpass.getpass("Şifrenizi tekar girin: ")
+        
+    def is_valid_phone_number(phone):
+        phone_regex = r"^(?:\+90|0)?\s?5[0-9]{2}[\s-]?[0-9]{3}[\s-]?[0-9]{4}$"
+
+        if not phone:
+            return False, "Telefon numarası boş bırakılamaz."
+
+        if not re.match(phone_regex, phone):
+            return False, "Geçersiz telefon numarası formatı!"
+
+        return True, "Geçerli telefon numarası."
+    
+    def is_username_valid(username):
+        # Kullanıcı adı en az 3, en fazla 20 karakter olmalı
+        if len(username) < 3 or len(username) > 20:
+            return False, "Kullanıcı adı 3 ile 20 karakter arasında olmalıdır."
+
+        # Kullanıcı adı sadece harf, rakam ve alt çizgi içerebilir
+        if not re.match("^[A-Za-z0-9_]+$", username):
+            return False, "Kullanıcı adı yalnızca harfler, rakamlar ve alt çizgi içerebilir."
+
+        # Kullanıcı adı bir rakamla başlayamaz
+        if username[0].isdigit():
+            return False, "Kullanıcı adı bir rakamla başlayamaz."
+
+        return True, "Kullanıcı adı geçerli"
+    
+    def users(**kwargs):
+        configs = MS.read_config()
+        database_folder = configs.get("database_path")
+        database_file = configs.get("users_db_file")
+        database_path = os.path.join(database_folder, database_file)
+        menu_file = configs.get("menu_file")
+        menu_root = configs.get("menu_root")
+        menu_data = MS.load_json(menu_file)
+        root = list(menu_data.keys())[int(menu_root)]
+        # my_profil_data = list(kwargs.get("user_data"))
+        # c_user_role= my_profil_data[3]
+
+
+        # Veritabanına bağlan
+        conn = sqlite3.connect(database_path)
+        cursor = conn.cursor()
+
+        # Tüm kullanıcıları getir
+        cursor.execute("SELECT * FROM users;")
+        users_data = cursor.fetchall()
+
+        user_list_data = []
+        [user_list_data.append(list(line)) for line in users_data]
+
+        user_list = []
+        for user in user_list_data:
+            user_list.append("Kullanıcı Adı: "+user[1]+" - Ad-Soyad: "+user[4]+" "+user[5]+" - E-Posta: "+user[6]+" - Tel: "+user[7])
+
+        conn.close()
+
+        user_list = user_list + ["####### Yeni Kullanıcı Ekle #######"] + ["#######    Kullanıcı Sil    #######"] + ["Ana Menü"]
+        selection = int(MS.create_frame("Kullanıcı Listesi", user_list, "menu"))
+
+        if selection == len(user_list_data) + 1:
+            first_init=None
+            if kwargs.get("user_data"):
+                my_profil_data = list(kwargs.get("user_data"))
+                c_user_role= my_profil_data[3]
+            while True:
+                username = MS.create_frame("Kullanıcı Oluştur", "Lüten bir kullanıcı adı belirleyin.", "Kullanıcı adı: ")
+                user_name_validation, user_name_validation_message = SettingsMenu.is_username_valid(username)
+                if user_name_validation == True:
+                    SQL_ = SQL(database_path)
+                    existing_user = SQL_.sql_read_users(username)
+                    if existing_user != False:
+                        MS.create_frame("Kullanıcı Mevcut", username+" adlı kullanıcı mevcut. Lüten farklı bir kullanıcı adı belirleyin.", "info")
+                    else:
+                        while True:  
+                            password = SettingsMenu.get_pass(1)
+                            password_validation, password_validation_message = SettingsMenu.is_valid_password(password)
+                            if password_validation == True:
+
+                                while True:
+                                    password2 = SettingsMenu.get_pass(2)
+                                    password_validation, password_validation_message = SettingsMenu.is_valid_password(password, password2)
+                                    if password_validation == True:
+                                        while True:
+                                            name = MS.create_frame("Kullanıcı Oluştur", "Lüten adınızı giriniz", "Adınız: ")
+                                            if name != "" or name != None:
+                                                while True:
+                                                    surname = MS.create_frame("Kullanıcı Oluştur", "Lüten soyadınızı giriniz", "Soyadınız: ")
+                                                    if surname != "" or surname != None:
+                                                        while True:
+                                                            email = MS.create_frame("Kullanıcı Oluştur", "Lüten e-posta adresinizi giriniz", "E-Posta adresiniz: ")
+                                                            email_validation, email_validation_message  = SettingsMenu.is_valid_email(email)
+                                                            if email_validation == True:
+                                                                while True:
+                                                                    tel = MS.create_frame("Kullanıcı Oluştur", "Lüten telefon numaranızı giriniz", "Telefon numaranız: ")
+                                                                    tel_validation, tel_validation_message = SettingsMenu.is_valid_phone_number(tel)
+                                                                    if tel_validation == True:
+                                                                        if first_init:
+                                                                            role = 0
+                                                                        elif c_user_role == 0:
+                                                                            role = int(MS.create_frame("Kullanıcı Oluştur", "Kullanıcı Rolü Giriniz (0 - 1)", "Rol değeri: "))
+                                                                        else:
+                                                                            role = 1
+                                                                        SQL_ = SQL(database_path)
+                                                                        SQL_.sql_add_user2(username, SettingsMenu.hash_password_md5(password), role, name, surname, email, tel)
+                                                                        SQL_.conncls()
+                                                                        break
+                                                                    else:
+                                                                        MS.create_frame("Telefon Numarası Hatası", tel_validation_message, "info")
+                                                                break
+                                                            else:
+                                                                MS.create_frame("E-Posta Hatası", email_validation_message, "info")
+                                                        break
+                                                    else:
+                                                        MS.create_frame("İsim Hatası", "Soyad boş bırakılamaz", "info")
+                                                break
+                                            else:
+                                                MS.create_frame("İsim Hatası", "Ad boş bırakılamaz", "info")
+                                        break
+                                    else:
+                                        MS.create_frame("Şifre Hatası", password_validation_message, "info")
+                                break
+                            else:
+                                MS.create_frame("Şifre Hatası", password_validation_message, "info")
+                    break   
+                else:
+                    MS.create_frame("Kullanıcı Adı Hatası", user_name_validation_message, "info")
+        
+        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+        selection = int(MS.create_frame("Kullanıcı Listesi", user_list, "menu"))
+        
+        if selection == 0:
+            ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
+            ms.show_menu(root)
 
 
         

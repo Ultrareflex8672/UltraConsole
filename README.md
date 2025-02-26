@@ -88,6 +88,13 @@
             <li>Soyisim değişikliği imkanı eklendi</li>
             <li>Kullanıcı adı değişikliği imkanı eklendi</li>
         </ul>
+        <li>26.02.2025 - Kullanıcının Yönetici Rolü Olması Halinde Diğer Kullanıcıları Düzenleme Eylemleri</li>
+        <ul>
+            <li>Bilinen bağzı hatalar giderildi</li>
+            <li>Diğer kullanıcıları listele eklendi</li>
+            <li>Yeni kullanıcı ekle eklendi</li>
+            <li>İlk çalışma kullanıcısı oluştuktan sonra login ekranı zorunlu kılındı</li>
+        </ul>
     </ul>
 
 <hr>

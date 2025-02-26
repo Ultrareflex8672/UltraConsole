@@ -93,3 +93,31 @@ class SqlProcess():
         
     def conncls(self):
         self.conn.close()  # Bağlantıyı kapat
+
+##################################################################################################################
+
+    def sql_add_user2(self, username, password, role, name, surname, email, tel):
+        try:
+            user_info = (
+            username,  # username
+            password,      # password
+            role,               # role (örneğin: 1 = admin, 2 = kullanıcı)
+            name,         # name
+            surname,      # surname
+            email,  # email
+            tel     # tel
+        )
+
+            # Kullanıcı ekleme sorgusu (OR IGNORE sayesinde tekrar eden kayıt eklenmez)
+            self.cursor.execute("""
+            INSERT INTO users (username, password, role, name, surname, email, tel)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
+        """, user_info)
+
+            self.conn.commit()  # Değişiklikleri kaydet
+            print(f"Kullanıcı eklendi veya zaten var: {username}")
+        
+        except sqlite3.Error as e:
+            print(f"Hata oluştu: {e}")
+
+##################################################################################################################

@@ -33,7 +33,7 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
             options = list(current_menu.keys())
             
             if self.type == 1:  # Eğer modül çağrısı yapıldıysa geri dön seçeneği ekle
-                options.append("Geri Dön")
+                options.append("Ana Menü")
             else:  # Modül çağrısı yapılmadıysa
                 if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
                     options.append("Geri Dön")
@@ -48,7 +48,8 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                 choice = int(choice)
                 if self.type != 1:
                     if self.path and choice == len(options) - len(options):  # "Geri Dön" seçildi
-                        self.path.pop()
+                        # self.path.pop()
+                        MenuSystem.main_menu(self)
                     elif self.path == [] and choice == len(options) - 1:  
                         # "Ayarlar" seçildi
                         print("Ayarlar açılıyor...")
@@ -85,27 +86,33 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                             run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
                             self.module_name = None #############################
                             self.func_name = None #############################
+                            
 
                             if run_module == None:
                                 SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
+                                MenuSystem.main_menu(self)
                             else:
                                 SV.create_frame("Modül: "+selected_key,run_module)
+                                MenuSystem.main_menu(self)
                 else:
                     if self.path and choice == len(options) - len(options):  
                         # "Geri Dön" seçildi
-                        self.path.pop()
+                        # self.path.pop()
+                        MenuSystem.main_menu(self)
                     elif not self.path and choice == len(options) - len(options):  
                         # "Çıkış" seçildi
-                        config = ModuleLoader.read_config()                                     # Ayarları oku
-                        menu_data = SV.load_json(config["menu_file"])                           # Menü verilerini yükle
-                        root = list(menu_data.keys())[int(config.get("menu_root"))]
-                        module_path = "application"
-                        module_name = "menu_olusturucu"
+                        # config = ModuleLoader.read_config()                                     # Ayarları oku
+                        # menu_data = SV.load_json(config["menu_file"])                           # Menü verilerini yükle
+                        # root = list(menu_data.keys())[int(config.get("menu_root"))]
+                        # module_path = "application"
+                        # module_name = "menu_olusturucu"
+                        MenuSystem.main_menu(self)
 
                         #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
-                        ModuleLoader.call_function(module_path, module_name, "MenuSystem", menu_data[root], "show_menu", root=root)
-                        self.module_name = None #############################
-                        self.func_name = None #############################
+                        # ModuleLoader.call_function(module_path, module_name, "MenuSystem", menu_data[root], "show_menu", root=root, **self.kwargs)
+                        # self.module_name = None #############################
+                        # self.func_name = None #############################
+                        # MenuSystem.main_menu(self)
 
                     else:
                         selected_key = options[choice - 1]
@@ -124,15 +131,30 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
 
                             #call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
                             run_module = ModuleLoader.call_function(self.module_path, self.module_name, self.class_name, self.init_data, self.func_name, **self.kwargs)
+                            
                             self.module_name = None #############################
                             self.func_name = None #############################
                             
-
+                            
+                            # input(self.kwargs)
                             if run_module == None:
                                 SV.create_frame("Modül: "+selected_key,selected_key+" modül uygulaması sona erdi.")
+                                MenuSystem.main_menu(self)
                             else:
                                 SV.create_frame("Modül: "+selected_key,run_module)
+                                MenuSystem.main_menu(self)
             except (ValueError, IndexError):
                     print("Geçersiz seçim, tekrar deneyin.")
                     
+    def main_menu(self):
+        configs = MenuSystem.read_config()
+        menu_file = configs.get("menu_file")
+        menu_root = configs.get("menu_root")
+        module_path = configs.get("module_path")
+        menu_data = MenuSystem.load_json(menu_file)
+        root_key = list(menu_data.keys())[int(menu_root)]
+
+        ms = MenuSystem(menu_data[root_key], **self.kwargs)  
+        # input(self.kwargs))
+        ms.show_menu(root_key)
     

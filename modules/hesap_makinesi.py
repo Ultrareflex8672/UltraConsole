@@ -1,9 +1,11 @@
 from application.ultraconsole import UltraConsole as UC
 
 def hesap_makinesi(**kwargs):
+    # input(kwargs)
     if UC.from_main_menu(**kwargs): 
-        UC.go_custom_menu(3) 
+        UC.go_custom_menu(3, **kwargs) 
     islem = UC.selected_key(**kwargs)
+    # input(kwargs)
     soru1 = ""
     soru2 = ""
     if islem == 2:

@@ -38,6 +38,7 @@ class User(UC, SQL):
                         UC.go_main_menu(user_data=self.user_data)
                         break
                     else:
+                        # User.add_user(self, first_init="yes")
                         User.login(self)
             else:
                 setup = True
@@ -48,7 +49,8 @@ class User(UC, SQL):
             UC.create_frame("UltraConsole 'a Hoş Geldiniz.", "UltraConsole sisteminde kayıtlı kullanıcı bulunmuyor. Kuruluma yönlendiriliyorsunuz...", "info")
             User.add_user(self, first_init="yes")
             UC.create_frame("UltraConsole", "Kurulum tamamlandı. Not: Tekrar ana kullanıcı ayarlamak için "+self.database_folder+" klasörünü ve "+self.database_file+" dosyasını silin.", "info")
-            UC.go_main_menu()
+            # UC.go_main_menu(user_data=self.user_data)
+            User.login(self)
 
     def add_user(self, first_init=None, **kwargs):
         if kwargs.get("user_role"):

@@ -43,6 +43,7 @@ class UltraConsole(MS):
     #     ms.show_menu(root)                                          # Menüyü göster
 
     def go_custom_menu(menu_root, **kwargs):
+        # input(kwargs)
         if kwargs.get("menu_data"):
             menu_data_ = kwargs.get("menu_data")
             if isinstance(menu_data_, dict):
@@ -90,7 +91,7 @@ class UltraConsole(MS):
             init_data = kwargs.get("init_data")
         else:
             init_data = None
-
+        # input(kwargs)
         ms = MS(menu_data[root], 1, module_path, module_name, class_name, init_data, func_name, **kwargs)
         ms.show_menu(root)
     
