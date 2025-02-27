@@ -3,6 +3,7 @@ import atexit
 from application.ultraconsole import UltraConsole as UC  
 
 def bayrak(**kwargs):
+    user_data = kwargs.get("user_data")
     UC.create_frame("Bayrak", "Şanlı Sancağı Görmek İçin Tıklayın (Çıkış: 'q')", "info")
     t = turtle.Turtle()
     w = turtle.Screen()
@@ -38,7 +39,7 @@ def bayrak(**kwargs):
 
     t.goto(-130, -190)
     t.color("white")
-    t.write("K. Burak YILDIRIM", font=("Verdana", 17, "bold"))
+    t.write(user_data[4]+" "+user_data[5], font=("Verdana", 17, "bold"))
 
     # Fare imlecini uzaklaştırarak görüntüyü bozmamasını sağlıyoruz
     t.goto(-999, 0)
@@ -53,8 +54,8 @@ def bayrak(**kwargs):
     atexit.register(lambda: ana_menu())
 
     def ana_menu():
-        UC.create_frame("Bayrak", "Hoşçakalın...", "info")      # Kapatma işlemi öncesinde mesaj yazdır
-        UC.go_main_menu()                                       # Ana menüye dön
+        UC.create_frame("Bayrak", "Hoşçakal "+user_data[4], "info")      # Kapatma işlemi öncesinde mesaj yazdır
+        UC.go_main_menu(**kwargs)                                      # Ana menüye dön
         
     # "q" tuşuna basıldığında çıkış yapsın
     w.listen()

@@ -16,6 +16,7 @@ class SqlProcess():
 ##################################################################################################################
 
     def sql_add_user(self, username, password, role, name, surname, email, tel):
+        SqlProcess(self.path)
         try:
             # Eğer tablo yoksa oluştur (opsiyonel güvenlik önlemi)
             self.cursor.execute("""
@@ -38,7 +39,7 @@ class SqlProcess():
             """, (username, password, role, name, surname, email, tel))
 
             self.conn.commit()  # Değişiklikleri kaydet
-            print(f"Kullanıcı eklendi veya zaten var: {username}")
+            # self.conn.close()
         
         except sqlite3.Error as e:
             print(f"Hata oluştu: {e}")
@@ -46,11 +47,13 @@ class SqlProcess():
 ##################################################################################################################
 
     def sql_read_users(self, username=None):
+        SqlProcess(self.path)
         if username:
             self.cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         else:
             self.cursor.execute("SELECT * FROM users")
         existing_user = self.cursor.fetchone()
+        # self.conn.close()
         
         if existing_user:
             return existing_user
@@ -60,8 +63,10 @@ class SqlProcess():
 ##################################################################################################################
     
     def is_user_table_exist(self, table_name):
+        SqlProcess(self.path)
         self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
         result = self.cursor.fetchone()
+        # self.conn.close()
         if result:
             return True
         else: 
@@ -70,6 +75,7 @@ class SqlProcess():
 ##################################################################################################################
         
     def sql_update_user(self, user_id, username, password, role, name, surname, email, tel):
+        # SqlProcess(self.path)
         try:
             self.cursor.execute("""
                 UPDATE users SET 
@@ -84,7 +90,7 @@ class SqlProcess():
             """, (username, password, role, name, surname, email, tel, user_id))
 
             self.conn.commit()  # Değişiklikleri kaydet
-            print(f"Kullanıcı eklendi veya zaten var: {username}")
+            # self.conn.close()
         
         except sqlite3.Error as e:
             print(f"Hata oluştu: {e}")
@@ -97,6 +103,7 @@ class SqlProcess():
 ##################################################################################################################
 
     def sql_add_user2(self, username, password, role, name, surname, email, tel):
+        SqlProcess(self.path)
         try:
             user_info = (
             username,  # username
@@ -114,10 +121,24 @@ class SqlProcess():
             VALUES (?, ?, ?, ?, ?, ?, ?);
         """, user_info)
 
-            self.conn.commit()  # Değişiklikleri kaydet
-            print(f"Kullanıcı eklendi veya zaten var: {username}")
+            self.conn.commit()
+            # self.conn.close()
         
         except sqlite3.Error as e:
             print(f"Hata oluştu: {e}")
 
 ##################################################################################################################
+
+    def sql_del_user(self, id):
+        SqlProcess(self.path)
+        try:
+            # Kullanıcıyı sil
+            self.cursor.execute("DELETE FROM users WHERE id = ?", (id,))
+
+            # Değişiklikleri kaydet
+            self.conn.commit()
+
+            # Bağlantıyı kapat
+            # self.conn.close()
+        except sqlite3.Error as e:
+            print(f"Hata oluştu: {e}")

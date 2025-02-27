@@ -3,8 +3,10 @@ import time
 import random
 import atexit
 from application.ultraconsole import UltraConsole as UC
+import modules.oyunlar as oyunlar
 
 def pong(**kwargs):
+    user_data = kwargs.get("user_data")
     UC.create_frame("Pong", "Pong Oyununa Hoş Geldiniz. Çıkış için 'q' basınız.", "info")
     pencere = turtle.Screen()
     pencere.title("Pong")
@@ -62,7 +64,7 @@ def pong(**kwargs):
 
     def ana_menu():
         UC.create_frame("Oyun Bitti", "Hoşçakalın...", "info")      # Kapatma işlemi öncesinde mesaj yazdır
-        UC.go_main_menu()
+        oyunlar.oyunlar_menu(user_data=user_data)
 
     # Çıkış işlemini izlemek için atexit kullan
     atexit.register(lambda: ana_menu())

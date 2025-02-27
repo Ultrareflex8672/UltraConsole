@@ -38,6 +38,7 @@ class User(UC, SQL):
                         UC.go_main_menu(user_data=self.user_data)
                         break
                     else:
+                        SQL_.conncls()
                         # User.add_user(self, first_init="yes")
                         User.login(self)
             else:
@@ -182,10 +183,11 @@ class User(UC, SQL):
     def login(self):
         logedin = False
         while logedin == False:
-            username = User.create_frame("Kullanıcı Girişi","Giriş Yapmak için lütfen kullanıcı adınızı ve şifrenizi girin.", "Kullanıcı adınız: ")
+            username = User.create_frame("Kullanıcı Girişi","Giriş Yapmak için lütfen kullanıcı adınızı ve şifrenizi girin.\nEğer tüm kullanıcıları sıfırlamak ve yeni kullanıcı oluşturmak istiyorsanız '"+self.database_path+"' dosyasını silip programı tekrar başlatın.", "Kullanıcı adınız: ")
             password = User.get_pass(1)
             SQL_ = SQL(self.database_path)
             user_data = SQL_.sql_read_users(username)
+            SQL_.conncls()
             if user_data == False:
                 UC.create_frame("GİRİŞ BAŞARISIZ", "Hatalı Kullanıcı Adı ve/veya Şifre", "info")
             else:
@@ -204,4 +206,5 @@ class User(UC, SQL):
     def hash_password_md5(password: str) -> str:
         md5_hash = hashlib.md5(password.encode()).hexdigest()
         return md5_hash
+    
             

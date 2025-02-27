@@ -1,13 +1,16 @@
 import json
 import os
 from application.ultraconsole import UltraConsole as UC
+import modules.oyunlar as oyunlar
  
 try:
     from termcolor import cprint
 except ImportError:
     def cprint(*args, **kwargs):
         print(*args)
- 
+name = ""
+surname = ""
+user_data = {}
 kelimeler = ["vantilatör", "adaptör", "kalem", "fare", "telefon", "kulaklık", "pervane", "merdane", "kestane"]
  
  
@@ -39,8 +42,8 @@ def harf_al():
     return harf.lower()
 
 def ana_menu():
-        UC.create_frame("Oyun Bitti", "Hoşçakalın...", "info")      # Kapatma işlemi öncesinde mesaj yazdır
-        UC.go_main_menu()                                           # Ana menüye dön
+        UC.create_frame("Oyun Bitti", "Hoşçakal "+name, "info")      # Kapatma işlemi öncesinde mesaj yazdır
+        oyunlar.oyunlar_menu(user_data=user_data)                                          # Ana menüye dön
  
 def oyun_dongusu():
     """Oyunun ana döngüsü, harf alır, tutarsa görünen karakterler listesi güncellenir,
@@ -138,16 +141,27 @@ def ayar_yaz(veri):
 def kullanici_adini_guncelle():
     """Kullanıcıdan isim alıp ayarlara yazdırmaya gönderir"""
     veri = ayar_oku()
-    veri["son_kullanan"] = str(UC.create_frame("Kullanıcı Adı Güncelleme", "Lütfen bir kullanıcı adı giriniz", "\n"))
+    # veri["son_kullanan"] = str(UC.create_frame("Kullanıcı Adı Güncelleme", "Lütfen bir kullanıcı adı giriniz", "\n"))
+    name_surname = name+" "+surname
+    veri["son_kullanan"] = name_surname[:9]
     while not veri["son_kullanan"] or len(veri["son_kullanan"]) > 9:
         veri["son_kullanan"] = str(UC.create_frame("Kullanıcı Adı Güncelleme", "Kullanıcı adı 9 karakterden uzun olamaz. Lütfen bir kullanıcı adı giriniz.", "\n"))
     ayar_yaz(veri)
  
- 
+# orjinal fonksiyon
+# def kullanici_kontrol():
+#     """Bir önce giriş yapan kullanıcı ismini gösterip kullanıcıya bu siz misiniz diye sorar"""
+#     veri = ayar_oku()
+#     user_input = UC.create_frame("Kullanıcı Kontrol", "Son giriş yapan: " + veri["son_kullanan"], "Bu siz misiniz? (e/h)\n")
+#     if not veri["son_kullanan"]:
+#         kullanici_adini_guncelle()
+#     elif user_input.lower() == "h":
+#         kullanici_adini_guncelle()
+
 def kullanici_kontrol():
     """Bir önce giriş yapan kullanıcı ismini gösterip kullanıcıya bu siz misiniz diye sorar"""
     veri = ayar_oku()
-    user_input = UC.create_frame("Kullanıcı Kontrol", "Son giriş yapan: " + veri["son_kullanan"], "Bu siz misiniz? (e/h)\n")
+    user_input = "h"
     if not veri["son_kullanan"]:
         kullanici_adini_guncelle()
     elif user_input.lower() == "h":
@@ -156,9 +170,15 @@ def kullanici_kontrol():
  
 def adamasmaca(**kwargs):
     """Programın ana döngüsü, oyunun çalışmasından yükümlü"""
+    global user_data
+    user_data = kwargs.get("user_data")
+    global name
+    name = user_data[4]
+    global surname
+    surname = user_data[5]
     tekrar_edecek_mi = True
     dosyay_kontrol_et_yoksa_olustur()
-    UC.create_frame("Adam Asmaca", "Merhaba, Adam Asmacaya hoşgeldiniz.")
+    UC.create_frame("Adam Asmaca", "Merhaba "+name+", Adam Asmacaya hoşgeldiniz.")
     UC.create_frame("Yardım", "Oyun sırasında quit diyerek çıkabilirsiniz")
     # skor_tablosunu_goster()
     kullanici_kontrol()

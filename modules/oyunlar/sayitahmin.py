@@ -1,9 +1,13 @@
 import random
 from application.ultraconsole import UltraConsole as UC
+import modules.oyunlar as oyunlar
 
 def sayitahmin(**kwargs):
+    user_data = kwargs.get("user_data")
+    name = user_data[4]
+    surname = user_data[5]
 
-    UC.create_frame("Sayı Tahmin Oyunu", "Sayı Tahmin Oyununa Hoş Geldiniz", "info")
+    UC.create_frame("Sayı Tahmin Oyunu", "Sayı Tahmin Oyununa Hoş Geldin "+name, "info")
 
     hak=3
     sayı=random.randint(0,10)
@@ -14,9 +18,9 @@ def sayitahmin(**kwargs):
         tahmin = int(UC.create_frame("Tahmin", "0-10 arasında bir sayı tahmin ediniz", "\n"))
         if sayı==tahmin:
             # print("Tebrikler bildiniz.")
-            UC.create_frame("Tebrikler", "Tebrikler bildiniz.", "info")
+            UC.create_frame("Tebrikler "+name, "Tebrikler bildiniz.", "info")
             bilindi=True
-            break
+            oyunlar.oyunlar_menu(user_data=user_data)
         elif sayı>tahmin and i!=hak-1:
             # print("Daha büyük bir sayı tahmin ediniz.")
             UC.create_frame("Daha Büyük", "Daha büyük bir sayı tahmin ediniz.", "info")

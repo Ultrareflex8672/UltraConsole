@@ -39,7 +39,7 @@ def ornek_modul(**kwargs):                                                      
         # go_custom_menu(menu_root, menu_data=None, module_name=None, func_name=None, module_path=None, class_name=None, init_data=None, **kwargs)
 
         # UC.go_custom_menu(0, menu_data=menu_data_)                                                                    # Modül içinden menü elemanı gönderimi örneği.
-        UC.go_custom_menu(2)                                                                                            # menu.cfg içindeki menü elemanlarını çağırma örneği.
+        UC.go_custom_menu(2, **kwargs)                                                                                            # menu.cfg içindeki menü elemanlarını çağırma örneği.
 
     if UC.selected_key(1, **kwargs):                                                                                    # Eğer menüden seçilen anahtar 1 ise True döner.
         UC.create_frame("ornek_modul.py Dosyası", "'ornek_modul' fonksiyonu çalıştı ve 'Seçenek 1' seçildi", "info")    # Bir bilgi ekrarnı basar Params: (Başlık, Bilgi, "info")

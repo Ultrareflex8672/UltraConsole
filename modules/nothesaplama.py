@@ -1,7 +1,9 @@
 from application.ultraconsole import UltraConsole as UC
 
 def nothesaplama(**kwargs):
-    myName = UC.create_frame("Not Hesaplama Programı", "Not: vize notunun %30 final notunun %70", "Lütfen isminizi giriniz:\n")
+    user_data = kwargs.get("user_data")
+    # myName = UC.create_frame("Not Hesaplama Programı", "Not: vize notunun %30 final notunun %70", "Lütfen isminizi giriniz:\n")
+    myName = user_data[4]+" "+user_data[5]
     # print('Basit Not Hesaplama Programı')
     # print('Not: vize notunun %30 final notunun %70'"\n")
 

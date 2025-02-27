@@ -94,6 +94,11 @@
             <li>Diğer kullanıcıları listele eklendi</li>
             <li>Yeni kullanıcı ekle eklendi</li>
             <li>İlk çalışma kullanıcısı oluştuktan sonra login ekranı zorunlu kılındı</li>
+            <li>Kullanıcı Sil Eklendi</li>
+            <li>SQL deki hatalar giderildi</li>
+            <li>Modül yöneticideki hatalar giderildi</li>
+            <li>Genel kararlılık çalışması yapıldı</li>
+            <li>Diğer kullanıcı bilgilerinin yöneticiler tarafından güncellenebilmesi eklendi</li>
         </ul>
     </ul>
 
