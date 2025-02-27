@@ -1,14 +1,21 @@
 <div align="center" id="title">
-    <h1>Vektörel Bilişim - Python98 - Çok Fonksiyonlu Konsol Uygulaması Projesi</h1>
+    <h1>UltraConsole - GUI Olmayan Kullanıcı Bazlı Modüler Çerçeve içi Çalışma Framework Uygulaması</h1>
 </div>
 <br>
 <br>
 <div align="left" id="workflow">
     <ul>
-        <li>14.02.2025 - Menuler Oluşturulmaya Başlandı</li>
-        <li>14.02.2025 - Hesap Makinesi Fonksiyonu Eklendi (Şimdilik Basit Bir Tane Yazıldı Daha Sonra Hazır Hesap Makinesi ile Değiştirilebilir)</li>
-        <li>18.02.2025 - Otomatik Menü Sistemi ve Modüler Yapı Tasarımına Geçildi</li>
+        <li><b>14.02.2025 - V0.0.0.1</b></li>
         <ul>
+            <li>Menuler Oluşturulmaya Başlandı</li>
+        </ul>
+        <li><b>14.02.2025 - V0.0.0.2</b></li>
+        <ul>
+            <li>Hesap Makinesi Fonksiyonu Eklendi (Şimdilik Basit Bir Tane Yazıldı Daha Sonra Hazır Hesap Makinesi ile Değiştirilebilir)</li>
+        </ul>
+        <li><b>18.02.2025 - V0.1.0.0</b></li>
+        <ul>
+            <li>Otomatik Menü Sistemi ve Modüler Yapı Tasarımına Geçildi</li>
             <li>Menülerin "menu.cfg" dosyasından okunarak otomatik oluşturlması sağlandı</li>
             <li>"Ayarlar" ve "Geri"/"Çıkış" seçenekleri sSabit Olarak Eklendi</li>
             <li>Genel ayarların "config.cfg" dosyasından okunması sağlandı</li>
@@ -27,8 +34,9 @@
             <li>Bir taş,kağıt,makas oyunu tam uyumlu modül örneği olacak şekilde yazılarak modül olarak eklendi</li>
             <li>Modül Yükleyicinin "config.cfg" ilişkisi oluşturuldu</li>
         </ul>
-        <li>19.02.2025 - Ayarlar Yapısı tasarlanmaya başlandı ve ekran görünümleri ayawrlandı</li>
+        <li><b>19.02.2025 - V0.1.0.5</b></li>
         <ul>
+            <li>Ayarlar Yapısı tasarlanmaya başlandı ve ekran görünümleri ayawrlandı</li>
             <li>Menü ve Info ekranları için max, min ve auto genişlikler düzenlendi</li>
             <li>Program içinden ayarların değiştirilmesi entegrasyonu yapıldı geliştiriliyor.</li>
             <li>Program içinden ayarların değiştirilmesi entegrasyonu tamamlandı</li>
@@ -37,8 +45,9 @@
             <li>Adam Asmaca Modülünde Geliştirmeler Yapıldı</li>
             <li>Taş Kağıt Makas Modülündeki büyük-küçük harf duyarlılığı hatası düzeltildi</li>
         </ul>
-        <li>20.02.2025 - Ayarlar Yapısı Son Halini Aldı</li>
+        <li><b>20.02.2025 - V0.9.0.0</b></li>
         <ul>
+            <li>Ayarlar Yapısı Son Halini Aldı</li>
             <li>Menü sistemi ve fonksiyon çağırıma motorları her türlü veri ve argümanı paylaşabilecek şekilde yeniden yazıldı</li>
             <li>Ayarlar menüsü de JSON dan okunmak üzere yeniden yazıldı. Ayar menüsü ayıklanması için yeni config anahtarı eklendi</li>
             <li>Takvim Modülü</li>
@@ -58,22 +67,25 @@
             <li>UltraConsole V1.0 Adı Verdiğim Sürüm Pyinstaller ile build edildi ancak henüz exe versiyonda sorunlar var</li>
             <li>Ayarlar Menüsünde Geri Gelindiğinde func_name argümanının boş dönmesi sorunu giderildi</li>
         </ul>
-        <li>22.02.2025 - Menü Çağırma Fonksiyonunda Köklü İyileştirme</li>
+        <li><b>22.02.2025 - V1.0.9.0</b></li>
         <ul>
+            <li>Menü Çağırma Fonksiyonunda Köklü İyileştirme</li>
             <li>Parametre döngüleri stabil hake getirildi</li>
             <li>Tek parametre ile menü döndürme kolaylığı sağlandı</li>
             <li>Basit, Orta ve İleri Seviyeye uygun modlar oluşturuldu</li>
             <li>Kullanıcılara klavuzluk etmesi için açıklamalı örnek modül oluşturuldu</li>
             <li>Konsol temizleme işlemi fonksiyon haline getirildi</li>
         </ul>
-        <li>23.02.2025 - Menü işleyişinde köklü değişiklikler</li>
+        <li><b>23.02.2025 - V1.9.0.0</b></li>
         <ul>
+            <li>Menü işleyişinde köklü değişiklikler</li>
             <li>Parametreli modül çağırma iyileştirildi</li>
             <li>Örnek Modülün yanısıra Hesap Makinesi ve Oyunlar da farklı modül ekleme örnekleri olarak değiştirildi</li>
             <li>Uygulama içerisinden modül ekle/sil/düzelt fonksiyonu eklendi</li>
         </ul>
-        <li>24.02.2025 - Kullanıcı Girişi Tsarlanmaya Başlandı</li>
+        <li><b>24.02.2025 - V1.9.5.0</b></li>
         <ul>
+            <li>Kullanıcı Girişi Tsarlanmaya Başlandı</li>
             <li>SQL lite için fonsiyonlar oluşturuldu</li>
             <li>Kullanı işlemlerini kontrol edeccek sınıf oluşturuldu</li>
             <li>Kullanıcı giriş işlemleri fonksiyoanları oluşturuldu</li>
@@ -82,19 +94,24 @@
             <li>Veri tabanında saklanan kullanıcı şifresi kriptolandı</li>
             <li>Kullanıcı datalarının modüllere aktarımı sağlandı</li>
         </ul>
-        <li>25.02.2025 - Kullanıcının Profil Düzenlemesi Eklendi</li>
+        <li><b>25.02.2025 - V1.9.5.5</b></li>
         <ul>
+            <li>Kullanıcının Profil Düzenlemesi Eklendi</li>
             <li>İsim değişikliği imkanı eklendi</li>
             <li>Soyisim değişikliği imkanı eklendi</li>
             <li>Kullanıcı adı değişikliği imkanı eklendi</li>
         </ul>
-        <li>26.02.2025 - Kullanıcının Yönetici Rolü Olması Halinde Diğer Kullanıcıları Düzenleme Eylemleri</li>
+        <li><b>26.02.2025 - V1.9.9.0</b></li>
         <ul>
+            <li>Kullanıcının Yönetici Rolü Olması Halinde Diğer Kullanıcıları Düzenleme Eylemleri</li>
             <li>Bilinen bağzı hatalar giderildi</li>
             <li>Diğer kullanıcıları listele eklendi</li>
             <li>Yeni kullanıcı ekle eklendi</li>
             <li>İlk çalışma kullanıcısı oluştuktan sonra login ekranı zorunlu kılındı</li>
             <li>Kullanıcı Sil Eklendi</li>
+        </ul>
+        <li><b>28.02.2025 - V2.0.0.0</b></li>
+        <ul>
             <li>SQL deki hatalar giderildi</li>
             <li>Modül yöneticideki hatalar giderildi</li>
             <li>Genel kararlılık çalışması yapıldı</li>
