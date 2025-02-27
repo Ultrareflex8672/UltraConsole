@@ -1,7 +1,7 @@
 <div align="center" id="title">
     <h1>UltraConsole</h1>
     <br>
-    <h2>GUI Olmayan Kullanıcı Bazlı Modüler Çerçeve içi Çalışma Framework Uygulaması</h2>
+    <h3>GUI Olmayan Kullanıcı Bazlı Modüler Çerçeve içi Çalışma Framework Uygulaması</h2>
 </div>
 <br>
 <br>
