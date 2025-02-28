@@ -4,13 +4,14 @@ import zipfile
 import shutil
 import os
 import time
+import sys
 
 class Updater(HTMLParser):
     def __init__(self):
         super().__init__()
         self.is_target = False  # Belirtilen id'yi bulmak için bayrak
         self.data_list = []  # Bulunan verileri saklamak için liste
-        self.current_version = 2504 # Bu programın sürümü
+        self.current_version = 2505 # Bu programın sürümü
 
 
     def handle_starttag(self, tag, attrs):
@@ -119,6 +120,8 @@ class Updater(HTMLParser):
             time.sleep(1)  # 1 saniye bekler
             print("UltraConsole V"+str_current_version+" 'dan V"+str_new_version+" 'a başarı ile güncellendi!")
             input("Devam etmek için Enter'a basın...")
+            if new_version != old_version:
+                os.system(os.path.join(main_folder, "main.py"))
             # time.sleep(1)  # 1 saniye bekler
         except Exception as e:
             print("Hata oluştu: "+e)

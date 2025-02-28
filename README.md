@@ -128,10 +128,11 @@
             <li>Giriş seçenekleri döngü hatası giderildi</li>
             <li>Otomatik menü config dosya oluşturma hatası giderildi</li>
         </ul>
-        <li><b>28.02.2025 - V</b><b id="version">2.5.0.4</b></li>
+        <li><b>28.02.2025 - V</b><b id="version">2.5.0.5</b></li>
         <ul>
             <li>Otomatik Versiyon Güncelleme Özelliği Eklendi</li>
             <li>Giriş seçenekleri döngü hatası giderildi</li>
+            <li>Güncelleme sonrası otomatik yeniden başlatma eklendi</li>
         </ul>
     </ul>
 

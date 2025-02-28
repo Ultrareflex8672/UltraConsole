@@ -242,17 +242,17 @@ class User(UC, SQL):
                 except:
                     UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
 
-                    if selection == 1:
-                        User.login(self)
-                    elif selection == 2:
-                        User.add_user(self, first_init=None, **kwargs)
-                    elif selection == 3:
-                        UC.create_frame("UltraConsole", reset_explain, "info")
-                    elif selection == 0:
-                        print("Çıkış yapılıyor...")
-                        sys.exit()
-                    else:
-                        UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
+                if selection == 1:
+                    User.login(self)
+                elif selection == 2:
+                    User.add_user(self, first_init=None, **kwargs)
+                elif selection == 3:
+                    UC.create_frame("UltraConsole", reset_explain, "info")
+                elif selection == 0:
+                    print("Çıkış yapılıyor...")
+                    sys.exit()
+                else:
+                    UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
                 
         return
 
