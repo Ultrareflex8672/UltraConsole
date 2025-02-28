@@ -67,6 +67,7 @@ class DefaultMenu:
 
     # Dosyanın var olup olmadığını ve geçerli JSON olup olmadığını kontrol et
     def check_and_create_config(config_path=None):
+        # input(config_path)
         if config_path:
             if not os.path.exists("config"):
                 os.makedirs("config")  # Klasör yoksa oluştur

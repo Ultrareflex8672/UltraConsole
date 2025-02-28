@@ -21,6 +21,7 @@ class UltraConsole(MS):
         else:
             module_path = configs.get("module_path")
 
+        MS.check_and_create_config(menu_file)                   # Menü dosyasını kontrol et ve oluştur
         menu_data = MS.load_json(menu_file)
         root_key = list(menu_data.keys())[int(menu_root)]
 
@@ -28,7 +29,6 @@ class UltraConsole(MS):
     
     def go_main_menu(**kwargs):
         root, root_index, menu_data, module_path = UltraConsole.module_configs()
-        MS.check_and_create_config(MS.read_config("menu_file"))     # Menü dosyasını kontrol et ve oluştur
         ms = MS(menu_data[root], **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
         ms.show_menu(root)                                          # Menüyü göster
 
