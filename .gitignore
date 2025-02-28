@@ -1,0 +1,8 @@
+*.ico
+*.spec
+version.txt
+dist
+build
+*.exe
+config/*.cfg
+user_db.db
