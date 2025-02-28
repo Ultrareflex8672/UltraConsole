@@ -119,6 +119,12 @@
             <li>Genel kararlılık çalışması yapıldı</li>
             <li>Diğer kullanıcı bilgilerinin yöneticiler tarafından güncellenebilmesi eklendi</li>
         </ul>
+        <li><b>28.02.2025 - V2.0.5.0</b></li>
+        <ul>
+            <li>Açılış ekranında hesap oluşturma imkanı sağlandı</li>
+            <li>Çeşitli menü hataları giderildi</li>
+            <li>Hesap oluşturma şifre tekrarı hatası giderildi</li>
+            <li>Ayarlar menüsü işlemlerinde Standart Kullanıcı ve Yönetici yetkilerine göre işlemler atandı</li>
     </ul>
 
 <hr>

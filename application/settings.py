@@ -30,16 +30,19 @@ class SettingsMenu():
         if kwargs.get("selected_key") == 1:
             SettingsMenu.ayarlari_goster(MS.read_config())
         elif kwargs.get("selected_key") == 2:
-            SettingsMenu.ayar_degistir(MS.read_config())
+            if my_profil_data[3] == 0:
+                SettingsMenu.ayar_degistir(MS.read_config())
+            else:
+                MS.create_frame("Erişim Yetkisi Hatası", "Bu menüye erişiminiz reddedildi. Yönetici yetkisi gerekli.")
         elif kwargs.get("selected_key") == 3:
-            SettingsMenu.menu_islem()
+            SettingsMenu.menu_islem(**kwargs)
         elif kwargs.get("selected_key") == 4:
             SettingsMenu.profil(**kwargs)
         elif kwargs.get("selected_key") == 5:
             if my_profil_data[3] == 0:
                 SettingsMenu.users(**kwargs)
             else:
-                MS.create_frame("Erişim Yetkisi Hatasu", "Bu menüye erişiminiz reddedildi. Yönetici yetkisi gerekli.")
+                MS.create_frame("Erişim Yetkisi Hatası", "Bu menüye erişiminiz reddedildi. Yönetici yetkisi gerekli.")
 
     def ayarlari_goster(ayarlar):
         ayar_dokumu = "            ".join(f"{key}: {value}" for key, value in ayarlar.items())
@@ -72,7 +75,7 @@ class SettingsMenu():
         MS.save_config(ayarlar)
         MS.create_frame("Ayarlar Kaydedildi", "Ayarlar başarıyla kaydedildi.")
 
-    def menu_islem():
+    def menu_islem(**kwargs):
         config = MS.read_config()                                   # Ayarları oku
         menu_data = MS.load_json(config["menu_file"])               # Menü verilerini yükle
         root = list(menu_data.keys())[int(config.get("menu_root"))]
@@ -91,85 +94,95 @@ class SettingsMenu():
             os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
             selection  = MS.create_frame("İşlem Yapmak İstediğiniz Modülü Seçiniz", no_submenu_keys+["Geri Dön"], "menu")
             if operation == 2:
-                if no_submenu_keys[int(selection)-1] in menu_data[root]:
-                    warn = MS.create_frame("SİLME İŞLEMİ ONAYI!", str(no_submenu_keys[int(selection)-1])+" adlı modül menüden silinmek üzrere! İşleme devam etmek istiyormusunuz!", "(E/H)")
-                    if warn.lower() == "e":
-                        del menu_data[root][no_submenu_keys[int(selection)-1]]
-                        SettingsMenu.save_menu(menu_data)
-                        MS.create_frame("MODÜL SİLİNDİ!", str([no_submenu_keys[int(selection)-1]])+" adlı modül menüden başarı ile silindi", "info")
-                    else:
-                        MS.create_frame("Silme İşlemi İptal Edildi", str([no_submenu_keys[int(selection)-1]])+" adlı modül silinmedi!", "info")
-                else:
-                    MS.create_frame("Modül Bulunamadı", str([no_submenu_keys[int(selection)-1]])+" adlı modül bulunamadı!", "info")
-                    
-            if operation == 3:
-                if no_submenu_keys[int(selection)-1] in menu_data[root]:
-                    ckey = no_submenu_keys[int(selection)-1]
-                    cvalue = menu_data[root][ckey]
-                    os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
-                    opt = MS.create_frame(ckey+" Modülünde Yapılacak Değişikliği Seçin", ["Modül Adı","Fonsiyon Adı","Her İkisi","Geri Dön"], "menu")
-                    if int(opt) == 1:
-                            while True:
-                                new_name = MS.create_frame("Modül Adı Değiştirme", ckey+" adlı modül için yeni ad girin!", "")
-                                if new_name not in menu_data[root]:
-                                    warn = MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adını "+new_name+" olarak değiştirmek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
-                                    if warn.lower() == "e":
-                                        menu_data[root][new_name] = menu_data[root][ckey]
-                                        del menu_data[root][ckey]
-                                        SettingsMenu.save_menu(menu_data)
-                                        MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak başarı ile değiştirildi", "info")
-                                        break
-                                    else:
-                                        MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak değiştirme işlemi iptal edildi!", "info")
-                                else:
-                                    MS.create_frame("Modül Adı Değiştirme", new_name+" adında bir modüz zaten mevcut!", "info")
-                
-
-                    if int(opt) == 2:
-                        new_fonk = MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" adlı modül için yeni fonksiyon adı girin! Not: Modül adı ve fonksiyon adı aynı olamk zorundadır.", "")
-                        warn = MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" modülünün "+cvalue+" fonksiyonunu "+new_fonk +" olarak değiştirmek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
+                my_profil_data = list(kwargs.get("user_data"))
+                if my_profil_data[3] == 0:
+                    if no_submenu_keys[int(selection)-1] in menu_data[root]:
+                        warn = MS.create_frame("SİLME İŞLEMİ ONAYI!", str(no_submenu_keys[int(selection)-1])+" adlı modül menüden silinmek üzrere! İşleme devam etmek istiyormusunuz!", "(E/H)")
                         if warn.lower() == "e":
-                            menu_data[root][ckey] = new_fonk 
+                            del menu_data[root][no_submenu_keys[int(selection)-1]]
                             SettingsMenu.save_menu(menu_data)
-                            MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" modülünün fonksiyonu "+new_fonk+" olarak başarı ile değiştirildi", "info")
+                            MS.create_frame("MODÜL SİLİNDİ!", str([no_submenu_keys[int(selection)-1]])+" adlı modül menüden başarı ile silindi", "info")
                         else:
-                            MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün fonksiyonu "+new_fonk+" olarak değiştirme işlemi iptal edildi!", "info")
-
-                    if int(opt) == 3:
-                            while True:
-                                new_name = MS.create_frame("Modül Adı Değiştirme", ckey+" adlı modül için yeni ad girin!", "")
-                                if new_name not in menu_data[root]:
-                                    new_fonk = MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" adlı modül için yeni fonksiyon adı girin! Not: Modül adı ve fonksiyon adı aynı olamk zorundadır.", "")
-                                    warn = MS.create_frame("Modül Adı ve Fonksiyon Değiştirme", ckey+" modülünün adını "+new_name+" olarak ve "+cvalue+" fonksiyonunu "+new_fonk +" olarak değiştirmek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
-                                    if warn.lower() == "e":
-                                        menu_data[root][new_name] = menu_data[root][ckey]
-                                        del menu_data[root][ckey]
-                                        menu_data[root][new_name] = new_fonk
-                                        SettingsMenu.save_menu(menu_data)
-                                        MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak başarı ile değiştirildi", "info")
-                                        break
-                                    else:
-                                        MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak değiştirme işlemi iptal edildi!", "info")
-                                else:
-                                    MS.create_frame("Modül Adı Değiştirme", new_name+" adında bir modüz zaten mevcut!", "info")
+                            MS.create_frame("Silme İşlemi İptal Edildi", str([no_submenu_keys[int(selection)-1]])+" adlı modül silinmedi!", "info")
+                    else:
+                        MS.create_frame("Modül Bulunamadı", str([no_submenu_keys[int(selection)-1]])+" adlı modül bulunamadı!", "info")
                 else:
-                    MS.create_frame("Modül Bulunamadı", str(ckey)+" adlı modül bulunamadı!", "info")
+                    MS.create_frame("Erişim Yetkisi Hatası", "Bu menüye erişiminiz reddedildi. Yönetici yetkisi gerekli.")
+
+            if operation == 3:
+                my_profil_data = list(kwargs.get("user_data"))
+                if my_profil_data[3] == 0:
+                    if no_submenu_keys[int(selection)-1] in menu_data[root]:
+                        ckey = no_submenu_keys[int(selection)-1]
+                        cvalue = menu_data[root][ckey]
+                        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+                        opt = MS.create_frame(ckey+" Modülünde Yapılacak Değişikliği Seçin", ["Modül Adı","Fonsiyon Adı","Her İkisi","Geri Dön"], "menu")
+                        if int(opt) == 1:
+                                while True:
+                                    new_name = MS.create_frame("Modül Adı Değiştirme", ckey+" adlı modül için yeni ad girin!", "")
+                                    if new_name not in menu_data[root]:
+                                        warn = MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adını "+new_name+" olarak değiştirmek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
+                                        if warn.lower() == "e":
+                                            menu_data[root][new_name] = menu_data[root][ckey]
+                                            del menu_data[root][ckey]
+                                            SettingsMenu.save_menu(menu_data)
+                                            MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak başarı ile değiştirildi", "info")
+                                            break
+                                        else:
+                                            MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak değiştirme işlemi iptal edildi!", "info")
+                                    else:
+                                        MS.create_frame("Modül Adı Değiştirme", new_name+" adında bir modüz zaten mevcut!", "info")
+                    
+
+                        if int(opt) == 2:
+                            new_fonk = MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" adlı modül için yeni fonksiyon adı girin! Not: Modül adı ve fonksiyon adı aynı olamk zorundadır.", "")
+                            warn = MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" modülünün "+cvalue+" fonksiyonunu "+new_fonk +" olarak değiştirmek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
+                            if warn.lower() == "e":
+                                menu_data[root][ckey] = new_fonk 
+                                SettingsMenu.save_menu(menu_data)
+                                MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" modülünün fonksiyonu "+new_fonk+" olarak başarı ile değiştirildi", "info")
+                            else:
+                                MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün fonksiyonu "+new_fonk+" olarak değiştirme işlemi iptal edildi!", "info")
+
+                        if int(opt) == 3:
+                                while True:
+                                    new_name = MS.create_frame("Modül Adı Değiştirme", ckey+" adlı modül için yeni ad girin!", "")
+                                    if new_name not in menu_data[root]:
+                                        new_fonk = MS.create_frame("Modül Fonksiyonu Değiştirme", ckey+" adlı modül için yeni fonksiyon adı girin! Not: Modül adı ve fonksiyon adı aynı olamk zorundadır.", "")
+                                        warn = MS.create_frame("Modül Adı ve Fonksiyon Değiştirme", ckey+" modülünün adını "+new_name+" olarak ve "+cvalue+" fonksiyonunu "+new_fonk +" olarak değiştirmek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
+                                        if warn.lower() == "e":
+                                            menu_data[root][new_name] = menu_data[root][ckey]
+                                            del menu_data[root][ckey]
+                                            menu_data[root][new_name] = new_fonk
+                                            SettingsMenu.save_menu(menu_data)
+                                            MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak başarı ile değiştirildi", "info")
+                                            break
+                                        else:
+                                            MS.create_frame("Modül Adı Değiştirme", ckey+" modülünün adı "+new_name+" olarak değiştirme işlemi iptal edildi!", "info")
+                                    else:
+                                        MS.create_frame("Modül Adı Değiştirme", new_name+" adında bir modüz zaten mevcut!", "info")
+                    else:
+                        MS.create_frame("Modül Bulunamadı", str(ckey)+" adlı modül bulunamadı!", "info")
+                else:
+                    MS.create_frame("Erişim Yetkisi Hatası", "Bu menüye erişiminiz reddedildi. Yönetici yetkisi gerekli.")
 
         elif operation == 1:
             while True:
-                new_key  = MS.create_frame("Mevcut Modüller", "|"+"|   |".join(f"{i+1}. {item}" for i, item in enumerate(no_submenu_keys))+"|", "Yeni Menü Adını Giriniz")
-                if new_key not in no_submenu_keys:
+                new_key  = MS.create_frame("Mevcut Modüller", "|"+"|   |".join(f"{i+1}. {item}" for i, item in enumerate(no_submenu_keys))+"|", "Yeni Menü Adını Giriniz (İptal: 'X'):")
+                if new_key not in no_submenu_keys or new_key.lower() == "x":
                     break
                 else:
                     MS.create_frame("Bu Menü Mevcut", new_key+" adında bir modül zaten mevcut!", "info")
-            new_value = MS.create_frame("Fonksiyon Adı", new_key+" adlı modül seçeneği için fonksiyon adı girin. Not: Modül adı ve fonksiyon adı aynı olamk zorundadır.", "")
-            warn = MS.create_frame("Modül Ekleme", new_key+" adlı modülü "+new_value+" fonksiyonu ile eklemek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
-            if warn.lower() == "e":
-                menu_data[root][new_key] = new_value
-                SettingsMenu.save_menu(menu_data)
-                MS.create_frame("Modül Ekleme", new_key+" adlı modül "+new_value+" fonksiyonu ile eklendi.", "info")
-            else:
-                MS.create_frame("Modül Ekleme", new_key+" adlı modül "+new_value+" fonksiyonu ile ekleme işlemi iptal edildi.", "info")
+            if new_key.lower() != "x":
+                new_value = MS.create_frame("Fonksiyon Adı", new_key+" adlı modül seçeneği için fonksiyon adı girin. Not: Modül adı ve fonksiyon adı aynı olamk zorundadır.", "(İptal: 'X')")
+                if new_value.lower() != "x":
+                    warn = MS.create_frame("Modül Ekleme", new_key+" adlı modülü "+new_value+" fonksiyonu ile eklemek üzeresiniz! Devam etmek istiyor musunuz?", "(E/H)")
+                    if warn.lower() == "e":
+                        menu_data[root][new_key] = new_value
+                        SettingsMenu.save_menu(menu_data)
+                        MS.create_frame("Modül Ekleme", new_key+" adlı modül "+new_value+" fonksiyonu ile eklendi.", "info")
+                    else:
+                        MS.create_frame("Modül Ekleme", new_key+" adlı modül "+new_value+" fonksiyonu ile ekleme işlemi iptal edildi.", "info")
 
     def save_menu(menu_data):
         config = MS.read_config()
@@ -187,7 +200,11 @@ class SettingsMenu():
         root = list(menu_data.keys())[int(menu_root)]
 
         my_profil_data = list(kwargs.get("user_data"))
-        profil_options = [f"İsim: {my_profil_data[4]}", f"Soyisim: {my_profil_data[5]}", f"Kullanıcı adı: {my_profil_data[1]}", "Şifre: ****", f"E-Posta: {my_profil_data[6]}", f"Telefon: {my_profil_data[7]}"]+["Ana Menü"]
+        if my_profil_data[3] == 0:
+            rol = "Yönetici"
+        elif my_profil_data[3] == 1:
+            rol = "Standart Kullanıcı"
+        profil_options = [f"İsim: {my_profil_data[4]}", f"Soyisim: {my_profil_data[5]}", f"Kullanıcı adı: {my_profil_data[1]}", "Şifre: ****", f"E-Posta: {my_profil_data[6]}", f"Telefon: {my_profil_data[7]}", f"Yetki: {rol}"]+["Ana Menü"]
         
         os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
         selection = int(MS.create_frame("Değiştirmek İstediğiniz Seçeneği Seçin", profil_options, "menu"))
@@ -329,6 +346,14 @@ class SettingsMenu():
                     break
                 else:
                     MS.create_frame("Geçersiz Telefon", message, "info")
+        
+        if selection == 7:
+            if my_profil_data[3] == 0:
+                MS.create_frame("Kullanıcı Rolü Değişikliği", "Kullanıcı rolü değişikliği yapabilmeniz için farklı bir yönetici hesabından giriş yaparak 'Kullanıcılar' menüsü üzerinden bu hesabı seçerek işlem yapmanız gerekir. Farklı bir yönetici hesabı bulunmuyorsa bu hesap ile 'Kullanıcılar' menüsü üzerinden 'Yeni Kullanıcı Ekle' seçeneği ile yönetici rolünde hesap ekleme işlemi yapabilirsiniz", "info")
+            elif my_profil_data[3] == 1:
+                MS.create_frame("Kullanıcı Rolü Değişikliği", "Kullanıcı rolü değişikliği yapamabilmek için bir yönetici hesabımdan giriş yaparak 'Kullanıcılar' menüsünü kullanmanız gereklidir.", "info")
+
+
                     
 
     def is_valid_password(password, password2=None):
@@ -476,67 +501,67 @@ class SettingsMenu():
                             password_validation, password_validation_message = SettingsMenu.is_valid_password(password)
                             if password_validation == True:
 
-                                while True:
-                                    password2 = SettingsMenu.get_pass(2)
-                                    password_validation, password_validation_message = SettingsMenu.is_valid_password(password, password2)
-                                    if password_validation == True:
-                                        while True:
-                                            name = MS.create_frame("Kullanıcı Oluştur", "Lütfen adınızı giriniz", "Adınız: ")
-                                            if name != "" or name != None:
-                                                while True:
-                                                    surname = MS.create_frame("Kullanıcı Oluştur", "Lütfen soyadınızı giriniz", "Soyadınız: ")
-                                                    if surname != "" or surname != None:
-                                                        while True:
-                                                            email = MS.create_frame("Kullanıcı Oluştur", "Lütfen e-posta adresinizi giriniz (Çıkıs: \"q\")", "E-Posta adresiniz: ")
-                                                            if email == "q":
-                                                                break
-                                                            email_validation, email_validation_message  = SettingsMenu.is_valid_email(email)
-                                                            if email_validation == True:
-                                                                while True:
-                                                                    tel = MS.create_frame("Kullanıcı Oluştur", "Lütfen telefon numaranızı giriniz (Çıkıs: \"q\")", "Telefon numaranız: ")
-                                                                    if tel == "q":
-                                                                        break
-                                                                    tel_validation, tel_validation_message = SettingsMenu.is_valid_phone_number(tel)
-                                                                    if tel_validation == True:
-                                                                        if first_init:
-                                                                            role = 0
-                                                                        elif c_user_role == 0:
-                                                                            while True:
-                                                                                os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
-                                                                                role = int(MS.create_frame("Kullanıcı Rolü Seçiniz", ["Yönetici", "Kullanıcı"], "menu"))
-                                                                                if role >= 1 and role  <= 2:
-                                                                                    break
-                                                                                else:
-                                                                                    MS.create_frame("Hatalı Rol Seçimi", "1 - 2 arasında bir seçim yapınız. (Yönetici yetkisi vermek için: 1, normal kullanıcı yetkisi için: 2)")
-                                                                            if role == 1:
-                                                                                role = 0
-                                                                            elif role == 2:
-                                                                                role = 1
-                                                                        else:
-                                                                            role = 1
-                                                                        SQL_ = SQL(database_path)
-                                                                        SQL_.sql_add_user2(username, SettingsMenu.hash_password_md5(password), role, name, surname, email, tel)
-                                                                        SQL_.conncls()
-                                                                        if role == 0:
-                                                                            MS.create_frame("Yönetici Oluşturuldu", username+" adlı yönetici başarı ile oluşturuldu.", "info")
+                            # while True:
+                                password2 = SettingsMenu.get_pass(2)
+                                password_validation, password_validation_message = SettingsMenu.is_valid_password(password, password2)
+                                if password_validation == True:
+                                    while True:
+                                        name = MS.create_frame("Kullanıcı Oluştur", "Lütfen adınızı giriniz", "Adınız: ")
+                                        if name != "" or name != None:
+                                            while True:
+                                                surname = MS.create_frame("Kullanıcı Oluştur", "Lütfen soyadınızı giriniz", "Soyadınız: ")
+                                                if surname != "" or surname != None:
+                                                    while True:
+                                                        email = MS.create_frame("Kullanıcı Oluştur", "Lütfen e-posta adresinizi giriniz (Çıkıs: \"q\")", "E-Posta adresiniz: ")
+                                                        if email == "q":
+                                                            break
+                                                        email_validation, email_validation_message  = SettingsMenu.is_valid_email(email)
+                                                        if email_validation == True:
+                                                            while True:
+                                                                tel = MS.create_frame("Kullanıcı Oluştur", "Lütfen telefon numaranızı giriniz (Çıkıs: \"q\")", "Telefon numaranız: ")
+                                                                if tel == "q":
+                                                                    break
+                                                                tel_validation, tel_validation_message = SettingsMenu.is_valid_phone_number(tel)
+                                                                if tel_validation == True:
+                                                                    if first_init:
+                                                                        role = 0
+                                                                    elif c_user_role == 0:
+                                                                        while True:
+                                                                            os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+                                                                            role = int(MS.create_frame("Kullanıcı Rolü Seçiniz", ["Yönetici", "Kullanıcı"], "menu"))
+                                                                            if role >= 1 and role  <= 2:
+                                                                                break
+                                                                            else:
+                                                                                MS.create_frame("Hatalı Rol Seçimi", "1 - 2 arasında bir seçim yapınız. (Yönetici yetkisi vermek için: 1, normal kullanıcı yetkisi için: 2)")
                                                                         if role == 1:
-                                                                            MS.create_frame("Kullanıcı Oluşturuldu", username+" adlı kullanıcı başarı ile oluşturuldu.", "info")
-                                                                        break
+                                                                            role = 0
+                                                                        elif role == 2:
+                                                                            role = 1
                                                                     else:
-                                                                        MS.create_frame("Telefon Numarası Hatası", tel_validation_message, "info")
-                                                                break
-                                                            else:
-                                                                MS.create_frame("E-Posta Hatası", email_validation_message, "info")
-                                                        break
-                                                    else:
-                                                        MS.create_frame("İsim Hatası", "Soyad boş bırakılamaz", "info")
-                                                break
-                                            else:
-                                                MS.create_frame("İsim Hatası", "Ad boş bırakılamaz", "info")
-                                        break
-                                    else:
-                                        MS.create_frame("Şifre Hatası", password_validation_message, "info")
-                                break
+                                                                        role = 1
+                                                                    SQL_ = SQL(database_path)
+                                                                    SQL_.sql_add_user2(username, SettingsMenu.hash_password_md5(password), role, name, surname, email, tel)
+                                                                    SQL_.conncls()
+                                                                    if role == 0:
+                                                                        MS.create_frame("Yönetici Oluşturuldu", username+" adlı yönetici başarı ile oluşturuldu.", "info")
+                                                                    if role == 1:
+                                                                        MS.create_frame("Kullanıcı Oluşturuldu", username+" adlı kullanıcı başarı ile oluşturuldu.", "info")
+                                                                    break
+                                                                else:
+                                                                    MS.create_frame("Telefon Numarası Hatası", tel_validation_message, "info")
+                                                            break
+                                                        else:
+                                                            MS.create_frame("E-Posta Hatası", email_validation_message, "info")
+                                                    break
+                                                else:
+                                                    MS.create_frame("İsim Hatası", "Soyad boş bırakılamaz", "info")
+                                            break
+                                        else:
+                                            MS.create_frame("İsim Hatası", "Ad boş bırakılamaz", "info")
+                                    break
+                                else:
+                                    MS.create_frame("Şifre Hatası", password_validation_message, "info")
+                                # break
                             else:
                                 MS.create_frame("Şifre Hatası", password_validation_message, "info")
                     break   

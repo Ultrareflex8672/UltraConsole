@@ -40,7 +40,8 @@ class User(UC, SQL):
                     else:
                         SQL_.conncls()
                         # User.add_user(self, first_init="yes")
-                        User.login(self)
+                        # User.login(self)
+                        User.wellcome(self)
             else:
                 setup = True
         else:
@@ -51,71 +52,80 @@ class User(UC, SQL):
             User.add_user(self, first_init="yes")
             UC.create_frame("UltraConsole", "Kurulum tamamlandı. Not: Tekrar ana kullanıcı ayarlamak için "+self.database_folder+" klasörünü ve "+self.database_file+" dosyasını silin.", "info")
             # UC.go_main_menu(user_data=self.user_data)
-            User.login(self)
+            # User.login(self)
+            User.wellcome(self)
 
     def add_user(self, first_init=None, **kwargs):
         if kwargs.get("user_role"):
             c_user_role= int(kwargs.get("user_role"))
+        else:
+            c_user_role= 1
         while True:
             username = UC.create_frame("Kullanıcı Oluştur", "Lüten bir kullanıcı adı belirleyin.", "Kullanıcı adı: ")
             user_name_validation, user_name_validation_message = User.is_username_valid(self, username)
             if user_name_validation == True:
                 SQL_ = SQL(self.database_path)
                 if first_init:
-                    existing_user = "ok"
+                    existing_user = None
                 else:
                     existing_user = SQL_.sql_read_users(username)
-                if existing_user != "ok":
+                if existing_user:
                     UC.create_frame("Kullanıcı Mevcut", username+" adlı kullanıcı mevcut. Lüten farklı bir kullanıcı adı belirleyin.", "info")
                 else:
+
                     while True:  
                         password = UC.get_pass(1)
                         password_validation, password_validation_message = User.is_valid_password(password)
                         if password_validation == True:
-
-                            while True:
-                                password2 = UC.get_pass(2)
-                                password_validation, password_validation_message = User.is_valid_password(password, password2)
-                                if password_validation == True:
-                                    while True:
-                                        name = UC.create_frame("Kullanıcı Oluştur", "Lüten adınızı giriniz", "Adınız: ")
-                                        if name != "" or name != None:
-                                            while True:
-                                                surname = UC.create_frame("Kullanıcı Oluştur", "Lüten soyadınızı giriniz", "Soyadınız: ")
-                                                if surname != "" or surname != None:
-                                                    while True:
-                                                        email = UC.create_frame("Kullanıcı Oluştur", "Lüten e-posta adresinizi giriniz", "E-Posta adresiniz: ")
-                                                        email_validation, email_validation_message  = User.is_valid_email(email)
-                                                        if email_validation == True:
-                                                            while True:
-                                                                tel = UC.create_frame("Kullanıcı Oluştur", "Lüten telefon numaranızı giriniz", "Telefon numaranız: ")
-                                                                tel_validation, tel_validation_message = User.is_valid_phone_number(tel)
-                                                                if tel_validation == True:
-                                                                    if first_init:
-                                                                        role = 0
-                                                                    elif c_user_role == 0:
-                                                                        role = int(UC.create_frame("Kullanıcı Oluştur", "Kullanıcı Rolü Giriniz (0 - 1)", "Rol değeri: "))
-                                                                    else:
-                                                                        role = 1
-                                                                    SQL_ = SQL(self.database_path)
-                                                                    SQL_.sql_add_user(username, User.hash_password_md5(password), role, name, surname, email, tel)
-                                                                    SQL_.conncls()
-                                                                    break
+                        # while True:
+                            password2 = UC.get_pass(2)
+                            password_validation, password_validation_message = User.is_valid_password(password, password2)
+                            if password_validation == True:
+                                while True:
+                                    name = UC.create_frame("Kullanıcı Oluştur", "Lüten adınızı giriniz", "Adınız: ")
+                                    if name != "" or name != None:
+                                        while True:
+                                            surname = UC.create_frame("Kullanıcı Oluştur", "Lüten soyadınızı giriniz", "Soyadınız: ")
+                                            if surname != "" or surname != None:
+                                                while True:
+                                                    email = UC.create_frame("Kullanıcı Oluştur", "Lüten e-posta adresinizi giriniz", "E-Posta adresiniz: ")
+                                                    email_validation, email_validation_message  = User.is_valid_email(email)
+                                                    if email_validation == True:
+                                                        while True:
+                                                            tel = UC.create_frame("Kullanıcı Oluştur", "Lüten telefon numaranızı giriniz", "Telefon numaranız: ")
+                                                            tel_validation, tel_validation_message = User.is_valid_phone_number(tel)
+                                                            if tel_validation == True:
+                                                                if first_init:
+                                                                    role = 0
+                                                                elif c_user_role == 0:
+                                                                    role = int(UC.create_frame("Kullanıcı Oluştur", "Kullanıcı Rolü Giriniz (0 - 1)", "Rol değeri: "))
                                                                 else:
-                                                                    UC.create_frame("Telefon Numarası Hatası", tel_validation_message, "info")
-                                                            break
-                                                        else:
-                                                            UC.create_frame("E-Posta Hatası", email_validation_message, "info")
-                                                    break
-                                                else:
-                                                    UC.create_frame("İsim Hatası", "Soyad boş bırakılamaz", "info")
-                                            break
-                                        else:
-                                            UC.create_frame("İsim Hatası", "Ad boş bırakılamaz", "info")
-                                    break
-                                else:
-                                    UC.create_frame("Şifre Hatası", password_validation_message, "info")
-                            break
+                                                                    role = 1
+                                                                SQL_ = SQL(self.database_path)
+                                                                SQL_.sql_add_user(username, User.hash_password_md5(password), role, name, surname, email, tel)
+                                                                SQL_.conncls()
+                                                                if role == 0:
+                                                                    UC.create_frame("Yönetici Oluşturuldu", username+" adlı yönetici başarı ile oluşturuldu.", "info")
+                                                                if role == 1:
+                                                                    UC.create_frame("Kullanıcı Oluşturuldu", username+" adlı kullanıcı başarı ile oluşturuldu.", "info")
+                                                                break
+                                                            else:
+                                                                UC.create_frame("Telefon Numarası Hatası", tel_validation_message, "info")
+                                                        break
+                                                    else:
+                                                        UC.create_frame("E-Posta Hatası", email_validation_message, "info")
+                                                break
+                                            else:
+                                                UC.create_frame("İsim Hatası", "Soyad boş bırakılamaz", "info")
+                                        break
+                                    else:
+                                        UC.create_frame("İsim Hatası", "Ad boş bırakılamaz", "info")
+                                break
+                            else:
+                                UC.create_frame("Şifre Hatası", password_validation_message, "info")
+
+                                    
+                            # break
                         else:
                             UC.create_frame("Şifre Hatası", password_validation_message, "info")
                 break   
@@ -140,17 +150,17 @@ class User(UC, SQL):
     def is_valid_password(password, password2=None):
         # Şifre en az 8 karakter olmalı
         if len(password) < 8:
-            return False, "Şifre en az 8 karakter olmalıdır."
+            return False, "Şifre en az 8 karakter olmalı, en az bir harf içermeli, en az bir rakam içermeli ve en az bir özel karakter içermelidir."
 
         # Şifre en az bir büyük harf, bir küçük harf ve bir rakam içermeli
         if not re.search(r"[A-Za-z]", password):
-            return False, "Şifre en az bir harf içermelidir."
+            return False, "Şifre en az 8 karakter olmalı, en az bir harf içermeli, en az bir rakam içermeli ve en az bir özel karakter içermelidir."
         if not re.search(r"[0-9]", password):
-            return False, "Şifre en az bir rakam içermelidir."
+            return False, "Şifre en az 8 karakter olmalı, en az bir harf içermeli, en az bir rakam içermeli ve en az bir özel karakter içermelidir."
         
         # Şifre en az bir özel karakter içermeli
         if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
-            return False, "Şifre en az bir özel karakter içermelidir."
+            return False, "Şifre en az 8 karakter olmalı, en az bir harf içermeli, en az bir rakam içermeli ve en az bir özel karakter içermelidir."
         
         if password2:
             if password != password2:
@@ -183,7 +193,7 @@ class User(UC, SQL):
     def login(self):
         logedin = False
         while logedin == False:
-            username = User.create_frame("Kullanıcı Girişi","Giriş Yapmak için lütfen kullanıcı adınızı ve şifrenizi girin.\nEğer tüm kullanıcıları sıfırlamak ve yeni kullanıcı oluşturmak istiyorsanız '"+self.database_path+"' dosyasını silip programı tekrar başlatın.", "Kullanıcı adınız: ")
+            username = User.create_frame("Kullanıcı Girişi","Giriş Yapmak için lütfen kullanıcı adınızı ve şifrenizi girin.", "Kullanıcı adınız: ")
             password = User.get_pass(1)
             SQL_ = SQL(self.database_path)
             user_data = SQL_.sql_read_users(username)
@@ -207,4 +217,29 @@ class User(UC, SQL):
         md5_hash = hashlib.md5(password.encode()).hexdigest()
         return md5_hash
     
-            
+    def wellcome(self, **kwargs):
+        
+        reset_explain = "Tekrar ana kullanıcı ayarlamak için '"+self.database_folder+"' klasörünü ve '"+self.database_file+"' dosyasını silin. Uygulamayı yeniden başlatın. Not: Bu işlem uygulama ayarlarını sıfırlamaz ancak uygulamadaki tüm kullanıcıları da silecektir. Eğer yönetici olarak giriş yapmak ile ilgili sorun yaşıyprsanız önce sistem yöneeticinize başvurmanız önerilir."
+        
+        if self.logedin == False or self.logedin == None:
+            if self.user_data == None:
+                os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+                selection = UC.create_frame("UltraConsole 'a Hoş Geldiniz...", ["Giriş Yap", "Hesap Oluştur", "Kullanıcı Sıfırlama", "Çıkış"], "menu")
+                try:
+                    selection = int(selection)
+                    if selection == 1:
+                        User.login(self)
+                    elif selection == 2:
+                        User.add_user(self, first_init=None, **kwargs)
+                    elif selection == 3:
+                        UC.create_frame("UltraConsole", reset_explain, "info")
+                    elif selection == 0:
+                        print("Çıkış yapılıyor...")
+                        exit()
+                    else:
+                        UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
+                except:
+                    UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
+
+                    
+        

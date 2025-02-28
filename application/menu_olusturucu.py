@@ -65,6 +65,7 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                         self.func_name = None #############################
 
                     elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
+                        # User.wellcome(**kwargs)
                         print("Çıkış yapılıyor...")
                         exit()
                     else:
