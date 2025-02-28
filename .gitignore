@@ -1,9 +1,11 @@
 *.ico
 *.spec
 version.txt
+database
+users_db.db
+database/users_db.db
 dist
 build
 *.exe
 config/*.cfg
-users_db.db
-database/users_db.db
+
