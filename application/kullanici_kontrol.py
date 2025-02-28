@@ -240,6 +240,7 @@ class User(UC, SQL):
                         UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
                 except:
                     UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
+        return
 
                     
         
