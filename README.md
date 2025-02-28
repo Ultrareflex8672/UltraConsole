@@ -119,7 +119,7 @@
             <li>Genel kararlılık çalışması yapıldı</li>
             <li>Diğer kullanıcı bilgilerinin yöneticiler tarafından güncellenebilmesi eklendi</li>
         </ul>
-        <li><b>28.02.2025 - <p id="version">V2.0.5.2</p></b></li>
+        <li><b>28.02.2025 - V</b><b id="version">2.0.5.2</b></li>
         <ul>
             <li>Açılış ekranında hesap oluşturma imkanı sağlandı</li>
             <li>Çeşitli menü hataları giderildi</li>
