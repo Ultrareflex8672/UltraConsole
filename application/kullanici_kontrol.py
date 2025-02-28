@@ -1,8 +1,10 @@
 from application.ultraconsole import UltraConsole as UC
 from application.sql_islem import SqlProcess as SQL
+from application.updater import Updater
 import os
 import re
 import hashlib
+import sys
 
 class User(UC, SQL):
     def __init__(self, logedin=None, user_data=None):
@@ -218,15 +220,28 @@ class User(UC, SQL):
         return md5_hash
     
     def wellcome(self, **kwargs):
+        updater = Updater()
         
+        new_version, current_version = updater.version()
+        str_new_version = ".".join(str(new_version))
+        str_current_version =".".join(str(current_version))
+        if new_version > current_version:
+            do_u_want_update = UC.create_frame("Güncelleme Mevcut", "UltraConsole 'un V"+str_new_version+" versiyonu şuanda kullanılabilir. Şuanki sürümünüz: V"+str_current_version+"   Şimdi güncellemek ister misiniz?", "(E/H)")
+            if do_u_want_update.lower() == "e":
+                updater.update()
+
         reset_explain = "Tekrar ana kullanıcı ayarlamak için '"+self.database_folder+"' klasörünü ve '"+self.database_file+"' dosyasını silin. Uygulamayı yeniden başlatın. Not: Bu işlem uygulama ayarlarını sıfırlamaz ancak uygulamadaki tüm kullanıcıları da silecektir. Eğer yönetici olarak giriş yapmak ile ilgili sorun yaşıyprsanız önce sistem yöneeticinize başvurmanız önerilir."
         
         if self.logedin == False or self.logedin == None:
             if self.user_data == None:
                 os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
                 selection = UC.create_frame("UltraConsole 'a Hoş Geldiniz...", ["Giriş Yap", "Hesap Oluştur", "Kullanıcı Sıfırlama", "Çıkış"], "menu")
+                
                 try:
                     selection = int(selection)
+                except:
+                    UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
+
                     if selection == 1:
                         User.login(self)
                     elif selection == 2:
@@ -235,11 +250,10 @@ class User(UC, SQL):
                         UC.create_frame("UltraConsole", reset_explain, "info")
                     elif selection == 0:
                         print("Çıkış yapılıyor...")
-                        exit()
+                        sys.exit()
                     else:
                         UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
-                except:
-                    UC.create_frame("UltraConsole", "0 - 3 arasında bir seçim yapınız", "info")
+                
         return
 
                     
