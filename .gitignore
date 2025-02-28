@@ -5,4 +5,4 @@ dist
 build
 *.exe
 config/*.cfg
-user_db.db
+users_db.db
