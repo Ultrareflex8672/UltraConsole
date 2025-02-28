@@ -11,7 +11,7 @@ class Updater(HTMLParser):
         super().__init__()
         self.is_target = False  # Belirtilen id'yi bulmak için bayrak
         self.data_list = []  # Bulunan verileri saklamak için liste
-        self.current_version = 2506 # Bu programın sürümü
+        self.current_version = 2507 # Bu programın sürümü
 
 
     def handle_starttag(self, tag, attrs):

@@ -5,21 +5,8 @@ class DefaultMenu:
     # Varsayılan veri yapısı
     default_menu = {
     "Ana Menü": {
-        "Hesap Makinesi": {
-            "Toplama": "hesap_makinesi",
-            "Çıkarma": "hesap_makinesi",
-            "Çarpma": "hesap_makinesi",
-            "Bölme": "hesap_makinesi",
-            "Üs Alma": "hesap_makinesi",
-            "Kare Alanı": "hesap_makinesi",
-            "Karenin Çevresi": "hesap_makinesi"
-        },
-        "Oyunlar": {
-            "Taş Kağıt Makas": "taskagitmakas",
-            "Adam Asmaca": "adamasmaca",
-            "Pong": "pong",
-            "Sayı Tahmin": "sayitahmin"
-        },
+        "Hesap Makinesi": "hesap_makinesi",
+        "Oyunlar": "oyunlar",
         "Bayrak Çiz": "bayrak",
         "Takvim": "takvim",
         "Ritmik Sayma": "ritmiksayma",
@@ -27,30 +14,14 @@ class DefaultMenu:
         "Çarpım Tablosu": "carpimtablosu",
         "BMI Hesaplama": "bmihesaplama",
         "Döviz Hesapla": "dovizhesaplama",
-        "Sıcaklık Çevirme": "sicaklikcevirme",
-        "Örnek Modül": "ornek_modul"
+        "Sıcaklık Çevirme": "sicaklikcevirme"
     },
     "Ayarlar": {
-        "Program Ayarları": {
-            "Ayarları Görüntüle": "settings",
-            "Ayarları Değiştir": "settings"
-        },
-        "Kullanıcı Ayarları": {
-            "Kendi Ayarlarım": {
-                "Bilgilerimi Görüntüle": "",
-                "Kullanıcı Adı Değiştir": "",
-                "E-Posta Değiştir": "",
-                "Telefon Değiştir": "",
-                "Şifre Değiştir": ""
-            },
-            "Diğer Kullanıcılar": {
-                "Kullanıcıları Görüntüle": "",
-                "Kullanıcı Adı Değiştir": "",
-                "E-Posta Değiştir": "",
-                "Telefon Değiştir": "",
-                "Şifre Değiştir": ""
-            }
-        }
+        "Ayarları Görüntüle": "settings",
+        "Ayarları Değiştir": "settings",
+        "Modül İşlemleri": "settings",
+        "Profilim": "settings",
+        "Kullanıcılar": "settings"
     },
     "Örnek Modül": {
         "Seçenek 1": "ornek_modul",
@@ -61,6 +32,15 @@ class DefaultMenu:
             "Seçenek 5.1": "ornek_modul_alt_fonkisyon",
             "Seçenek 5.2": "ornek_modul_alt_fonkisyon"
         }
+    },
+    "Hesap Makinesi": {
+        "Toplama": "hesap_makinesi",
+        "Çıkarma": "hesap_makinesi",
+        "Çarpma": "hesap_makinesi",
+        "Bölme": "hesap_makinesi",
+        "Üs Alma": "hesap_makinesi",
+        "Kare Alanı": "hesap_makinesi",
+        "Karenin Çevresi": "hesap_makinesi"
     }
 }
 
