@@ -145,10 +145,14 @@
             <li>Bağzı küçük hatalar düzeltildi</li>
             <li>EXE paketi olarak yayımlandı</li>
         </ul>
-        <li><b>05.03.2025 - V</b><b id="version">3.5.0.0</b></li>
+        <li><b>05.03.2025 - V3.5.0.0</b></li>
         <ul>
             <li>Exe dosyasının otomatik update modülü eklendi</li>
             <li>Modül ekle ayarları için otomatik modül algılama eklendi</li>
+        </ul>
+        <li><b>05.03.2025 - V</b><b id="version">3.5.0.1</b></li>
+        <ul>
+            <li>Exe dosyasının otomatik update modülü eklendi</li>
         </ul>
     </ul>
 
