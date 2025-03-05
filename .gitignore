@@ -5,7 +5,6 @@ users_db.db
 database/users_db.db
 dist
 build
-*.exe
 config/*.cfg
 pyinstaller.txt
 adamasmaca.json
