@@ -119,7 +119,7 @@
             <li>Genel kararlılık çalışması yapıldı</li>
             <li>Diğer kullanıcı bilgilerinin yöneticiler tarafından güncellenebilmesi eklendi</li>
         </ul>
-        <li><b>28.02.2025 - V2.0.5.2</li>
+        <li><b>28.02.2025 - V2.0.5.2</b></li>
         <ul>
             <li>Açılış ekranında hesap oluşturma imkanı sağlandı</li>
             <li>Çeşitli menü hataları giderildi</li>
@@ -128,7 +128,7 @@
             <li>Giriş seçenekleri döngü hatası giderildi</li>
             <li>Otomatik menü config dosya oluşturma hatası giderildi</li>
         </ul>
-        <li><b>28.02.2025 - V2.5.0.6</li>
+        <li><b>28.02.2025 - V2.5.0.6</b></li>
         <ul>
             <li>Otomatik Versiyon Güncelleme Özelliği Eklendi</li>
             <li>Giriş seçenekleri döngü hatası giderildi</li>
