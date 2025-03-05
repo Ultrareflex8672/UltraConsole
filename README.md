@@ -143,7 +143,7 @@
             <li>Ayarlar menüsü modül formatından integrated formatına çevrildi</li>
             <li>Modül kalsörünün ve dosyalarının mevcut olup olmadığı kontrolü fonksiyonu eklendi</li>
             <li>Bağzı küçük hatalar düzeltildi</li>
-            <li>EXE paketi olarak yayımlandı</li>
+            <li>EXE paketi olarak yayımlandı </li>
         </ul>
     </ul>
 
