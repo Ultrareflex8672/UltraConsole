@@ -10,3 +10,4 @@ config/*.cfg
 pyinstaller.txt
 adamasmaca.json
 application
+main.py
