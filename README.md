@@ -138,12 +138,17 @@
         <ul>
             <li>Varsayılan menü hatası düzeltildi</li>
         </ul>
-        <li><b>05.03.2025 - V</b><b id="version">3.0.0.2</b></li>
+        <li><b>05.03.2025 - V3.0.0.2</b></li>
         <ul>
             <li>Ayarlar menüsü modül formatından integrated formatına çevrildi</li>
             <li>Modül kalsörünün ve dosyalarının mevcut olup olmadığı kontrolü fonksiyonu eklendi</li>
             <li>Bağzı küçük hatalar düzeltildi</li>
             <li>EXE paketi olarak yayımlandı</li>
+        </ul>
+        <li><b>05.03.2025 - V</b><b id="version">3.5.0.0</b></li>
+        <ul>
+            <li>Exe dosyasının otomatik update modülü eklendi</li>
+            <li>Modül ekle ayarları için otomatik modül algılama eklendi</li>
         </ul>
     </ul>
 
