@@ -138,7 +138,7 @@
         <ul>
             <li>Varsayılan menü hatası düzeltildi</li>
         </ul>
-        <li><b>05.03.2025 - V</b><b id="version">3.0.0.0</b></li>
+        <li><b>05.03.2025 - V</b><b id="version">3.0.0.1</b></li>
         <ul>
             <li>Ayarlar menüsü modül formatından integrated formatına çevrildi</li>
             <li>Modül kalsörünün ve dosyalarının mevcut olup olmadığı kontrolü fonksiyonu eklendi</li>
