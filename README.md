@@ -134,9 +134,16 @@
             <li>Giriş seçenekleri döngü hatası giderildi</li>
             <li>Güncelleme sonrası otomatik yeniden başlatma eklendi</li>
         </ul>
-        <li><b>28.02.2025 - V</b><b id="version">2.5.0.7</b></li>
+        <li><b>28.02.2025 - V2.5.0.7</b></li>
         <ul>
             <li>Varsayılan menü hatası düzeltildi</li>
+        </ul>
+        <li><b>05.03.2025 - V</b><b id="version">3.0.0.0</b></li>
+        <ul>
+            <li>Ayarlar menüsü modül formatından integrated formatına çevrildi</li>
+            <li>Modül kalsörünün ve dosyalarının mevcut olup olmadığı kontrolü fonksiyonu eklendi</li>
+            <li>Bağzı küçük hatalar düzeltildi</li>
+            <li>EXE paketi olarak yayımlandı</li>
         </ul>
     </ul>
 

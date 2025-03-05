@@ -1,4 +1,4 @@
-from application.menu_olusturucu import MenuSystem as MS
+from application.ekran_olustur import ScreenView as MS
 from application.sql_islem import SqlProcess as SQL
 import os
 import json
@@ -8,7 +8,7 @@ import getpass
 import sqlite3
 import msvcrt
 
-class SettingsMenu():
+class SettingsMenu(MS):
     # def __init__(self, **kwargs):
     #     self.config = MS.read_config() 
     #     self.database_folder = self.config.get("database_path")
@@ -16,13 +16,13 @@ class SettingsMenu():
     #     self.database_path = os.path.join(self.database_folder, self.database_file)
     #     self.kwargs = kwargs
 
-    def menu_goster(self, **kwargs):
-        config = MS.read_config()                                   # Ayarları oku
-        menu_data = MS.load_json(config["menu_file"])               # Menü verilerini yükle
-        root = list(menu_data.keys())[int(config.get("settings_menu_root"))]
+    # def menu_goster(self, **kwargs):
+    #     config = MS.read_config()                                   # Ayarları oku
+    #     menu_data = MS.load_json(config["menu_file"])               # Menü verilerini yükle
+    #     root = list(menu_data.keys())[int(config.get("settings_menu_root"))]
 
-        settings_menu = MS(menu_data[root], 1, "application", "settings", "SettingsMenu", None, "settings", **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
-        settings_menu.show_menu(root)
+    #     settings_menu = MS(menu_data[root], 1, "application", "settings", "SettingsMenu", None, "settings", **kwargs)                                    # Menü sistemini başlat (init fonksiyonu çalışır ancak henüz menü gösterilmez)
+    #     settings_menu.show_menu(root)
         
     def settings(self, **kwargs):
         # input(kwargs)
@@ -209,9 +209,9 @@ class SettingsMenu():
         os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
         selection = int(MS.create_frame("Değiştirmek İstediğiniz Seçeneği Seçin", profil_options, "menu"))
         
-        if selection == 0:
-            ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
-            ms.show_menu(root)
+        # if selection == 0:
+        #     ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
+        #     ms.show_menu(root)
 
         if selection == 1:
             new_name = MS.create_frame("İsim Değiştirme", my_profil_data[4]+" ile değiştirilecek yeni isim giriniz.", "")
@@ -596,9 +596,9 @@ class SettingsMenu():
                 else:
                     MS.create_frame("Kullanıcı Silme", "Sistemde bulunan kullanıcı sayısı "+len(user_list_data2)+". 0 - "+len(user_list_data2)+" arasında bir seçim yapın.")
 
-        elif selection == 0:
-            ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
-            ms.show_menu(root)
+        # elif selection == 0:
+        #     ms = MS(menu_data[root], 0, [], None, None, None, None, **kwargs)
+        #     ms.show_menu(root)
 
         elif selection > 0 and selection <= len(user_list_data2):
             selected_user_data = user_list_data2[selection-1]

@@ -8,3 +8,5 @@ build
 *.exe
 config/*.cfg
 pyinstaller.txt
+adamasmaca.json
+application

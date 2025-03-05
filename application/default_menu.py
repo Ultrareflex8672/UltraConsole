@@ -16,13 +16,6 @@ class DefaultMenu:
         "Döviz Hesapla": "dovizhesaplama",
         "Sıcaklık Çevirme": "sicaklikcevirme"
     },
-    "Ayarlar": {
-        "Ayarları Görüntüle": "settings",
-        "Ayarları Değiştir": "settings",
-        "Modül İşlemleri": "settings",
-        "Profilim": "settings",
-        "Kullanıcılar": "settings"
-    },
     "Örnek Modül": {
         "Seçenek 1": "ornek_modul",
         "Seçenek 2": "ornek_modul",
@@ -41,6 +34,12 @@ class DefaultMenu:
         "Üs Alma": "hesap_makinesi",
         "Kare Alanı": "hesap_makinesi",
         "Karenin Çevresi": "hesap_makinesi"
+    },
+    "Oyunlar": {
+        "Adam Asmaca": "adamasmaca",
+        "Pong": "pong",
+        "Sayı Tahmin Etme": "sayitahmin",
+        "Taş Kağıt Makas": "taskagitmakas"
     }
 }
 
@@ -50,9 +49,11 @@ class DefaultMenu:
         # input(config_path)
         if config_path:
             if not os.path.exists("config"):
+                # input("Dizin yok")
                 os.makedirs("config")  # Klasör yoksa oluştur
 
             if not os.path.exists(config_path):
+                # input("Dosya yok")
                 DefaultMenu.save_config(config_path)  # Dosya yoksa oluştur
                 return
 
@@ -61,15 +62,18 @@ class DefaultMenu:
                     content = file.read().strip()
 
                 if not content:  # Dosya boşsa
+                    # input("Dosya boş")
                     DefaultMenu.save_config(config_path)
                     return
 
                 config_data = json.loads(content)  # JSON formatında olup olmadığını kontrol et
 
-                if not isinstance(config_data, dict) or "Ana Menü" not in config_data or "Ayarlar" not in config_data:
+                if not isinstance(config_data, dict) or "Ana Menü" not in config_data:
+                    # input("yapı bozuk")
                     DefaultMenu.save_config(config_path)  # Yapı uygun değilse varsayılan veriyi kaydet
 
             except (json.JSONDecodeError, FileNotFoundError):  # JSON hatası varsa dosyayı oluştur
+                # input("json hatası")
                 DefaultMenu.save_config(config_path)
         else:
             print("Menü dosyası yolu belirtilmedi.")

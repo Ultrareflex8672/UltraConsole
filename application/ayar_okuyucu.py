@@ -10,7 +10,6 @@ class ConfigHandler(FL):
             "users_db_file": "users_db.db",
             "menu_file": "config/menu.cfg",
             "menu_root": 0,
-            "settings_menu_root": 1,
             "module_path": "modules",
             "menu_min_screen_width": 0,  # Menü ekranının minimum genişliği (0 girilirse otomatik hesaplanır)
             "menu_max_screen_width": 75,
@@ -22,9 +21,6 @@ class ConfigHandler(FL):
             "info_frame_color": "33",
             "info_min_screen_width": 50,  # Info ekranının minimum genişliği (En düşük 50. 50 nin altındaki değerlerde 50 olarak alınır)
             "info_max_screen_width": 100,
-            "games_menu_file": "modules/oyunlar/menu.cfg",
-            "games_menu_root": 0,
-            "games_module_path": "modules/oyunlar",
         }
 
         # **config klasörünü oluştur (Yeni Eklendi)**

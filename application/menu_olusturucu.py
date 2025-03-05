@@ -1,7 +1,9 @@
 import os
 from application.modul_olusturucu import ModuleLoader
-from application.ekran_olustur import ScreenView as SV
+# from application.ekran_olustur import ScreenView as SV
 from application.default_menu import DefaultMenu
+from application.settings import SettingsMenu as SV
+from application.settings import SettingsMenu
 
 class MenuSystem(ModuleLoader,SV,DefaultMenu):
     def __init__(self, menu_data_, type_=0, module_path_=[], module_name_=None, class_name_=None, init_data_=None, func_name_=None, **kwargs):
@@ -23,6 +25,7 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
             os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
 
             current_menu = self.menu_data # Kullanıcının bulunduğu menüyü al
+            
             for key in self.path: # Menü yolu üzerinde ilerle
                 current_menu = current_menu[key] # Alt menüye geç
 
@@ -30,7 +33,25 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
             menu_title = " > ".join(self.path) if self.path else title
 
             # Seçenekleri listele
-            options = list(current_menu.keys())
+            additional_configs = MenuSystem.read_config()
+            static_modul_path = additional_configs.get("module_path")
+            if os.path.isdir(static_modul_path):
+                module_files = [f[:-3] for f in os.listdir(static_modul_path) if f.endswith(".py")]
+            else:
+                module_files = []
+                SV.create_frame("Modül Hatası", static_modul_path+" adlı dizin bulunamadı! Lütfen uygulama ayarlarından 'module_path' yolunun doğru girildiğinden emin olun yada modüllerinizi "+static_modul_path+" klasörüne taşıyın!", "info")
+                os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+
+                
+            options = []
+            for key, value in self.menu_data.items():
+                if value in module_files:
+                    options.append(key)
+                else:
+                    SV.create_frame(f"{key} Modülü Hatası", f"Uyarı: {key} adlı modül için ({value}.py) dosyası {static_modul_path} klasöründe mevcut değil. Lütfen ayarlardan gerekli düzenlemeyi yapın yada {static_modul_path} klasörüne ({value}.py) dosyasını ekleyin!", "info")
+                    os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+
+            # options = list(current_menu.keys())
             
             if self.type == 1:  # Eğer modül çağrısı yapıldıysa geri dön seçeneği ekle
                 options.append("Ana Menü")
@@ -53,16 +74,35 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                     elif self.path == [] and choice == len(options) - 1:  
                         # "Ayarlar" seçildi
                         print("Ayarlar açılıyor...")
-                        module_path = "application"
-                        module_name = "settings"
-                        class_name = "SettingsMenu"
-                        func_name = "menu_goster"
-                        self.kwargs.update({"selected_key": choice})
 
-                        # call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
-                        run_module = ModuleLoader.call_function(module_path, module_name, class_name, None, func_name, **self.kwargs)
-                        self.module_name = None #############################
-                        self.func_name = None #############################
+                        # setting_menu_data = {
+                        #     "Ayarlar": {
+                        #                 "Ayarları Görüntüle": "settings",
+                        #                 "Ayarları Değiştir": "settings",
+                        #                 "Modül İşlemleri": "settings",
+                        #                 "Profilim": "settings",
+                        #                 "Kullanıcılar": "settings"
+                        #                 }
+                        #                     }
+
+                        setting_menu_data = ["Ayarları Görüntüle", "Ayarları Değiştir", "Modül İşlemleri", "Profilim", "Kullanıcılar"]+["Ana Menü"]
+                        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+                        setting_selection = int(SV.create_frame("Ayarlar", setting_menu_data, "menu"))
+                        self.kwargs.update({"selected_key": setting_selection})
+                        if setting_selection != 0:
+                            SettingsMenu().settings(**self.kwargs)
+                        
+
+                        # module_path = "application"
+                        # module_name = "settings"
+                        # class_name = "SettingsMenu"
+                        # func_name = "menu_goster"
+                        
+
+                        # # call_function(Modül Klasörü, Modül Adı, Sınıf Adı, Init Data, Fonksiyon Adı, Fonksiyon Argümanları **kwargs)
+                        # run_module = ModuleLoader.call_function(module_path, module_name, class_name, None, func_name, **self.kwargs)
+                        # self.module_name = None #############################
+                        # self.func_name = None #############################
 
                     elif not self.path and choice == len(options) - len(options):  # "Çıkış" seçildi
                         # User.wellcome(**kwargs)

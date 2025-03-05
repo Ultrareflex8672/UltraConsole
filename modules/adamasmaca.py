@@ -112,12 +112,12 @@ def dosyay_kontrol_et_yoksa_olustur():
     """Ayar dosyası var mı kontrol eder, varsa sağlam mı diye bakar,
     bozuk ya da olmayan durum için dosyayı öntanımlı değerlerle oluşturur"""
     yaz = False
-    if os.path.exists("modules/oyunlar/adamasmaca.json"):
+    if os.path.exists("modules/adamasmaca.json"):
         try:
             ayar_oku()
         except ValueError as e:
             cprint("Hata: ValueError(" + ",".join(e.args) + ")", color="red", on_color="on_blue", attrs=["bold"])
-            os.remove("modules/oyunlar/adamasmaca.json")
+            os.remove("modules/adamasmaca.json")
             yaz = True
     else:
         yaz = True
@@ -128,13 +128,13 @@ def dosyay_kontrol_et_yoksa_olustur():
  
 def ayar_oku():
     """Ayarlar dosyasını okur"""
-    with open("modules/oyunlar/adamasmaca.json") as f:
+    with open("modules/adamasmaca.json") as f:
         return json.load(f)
  
  
 def ayar_yaz(veri):
     """Ayarlar dosyasına gönderilen veriyi yazar"""
-    with open("modules/oyunlar/adamasmaca.json", "w") as f:
+    with open("modules/adamasmaca.json", "w") as f:
         json.dump(veri, f)
  
  

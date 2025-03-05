@@ -1,4 +1,4 @@
-from application.menu_olusturucu import MenuSystem as MS
+from application.ekran_olustur import ScreenView as MS
 import sqlite3
 
 class SqlProcess():
