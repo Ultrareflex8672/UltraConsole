@@ -233,25 +233,29 @@ Kullanıcı seçimlerini almak için aşağıdaki gibi bir kod yapısı kullanab
 
 Bir menüyü JSON formatında tanımlamak, daha büyük ve dinamik menüler için ideal bir yöntemdir. Menü seçeneklerini JSON formatında aşağıdaki gibi tanımlayabilirsiniz:
 
-```{
+```json
+{
     "Örnek Modül": { 
         "Seçenek 1": "ornek_modul",
         "Seçenek 2": "ornek_modul",
         "Seçenek 3": "ornek_modul",
         "Seçenek 4": "ornek_modul"
     }
-}``` 
+}
+```
 
 Bu yapıda, her seçeneğin karşılığı olan modül veya fonksiyon belirlenmiştir. Alt modüller çalıştırılacak şekilde de yapılandırabilirsiniz. Örneğin:
 
-```{
+```json
+{
     "Örnek Modül": { 
         "Seçenek 1": "_ornek_modul1", 
         "Seçenek 2": "_ornek_modul2", 
         "Seçenek 3": "_ornek_modul3", 
         "Seçenek 4": "_ornek_modul4" 
     }
-}``` 
+}
+``` 
 
 Yukarıdaki JSON verisini, `config/menu.cfg` dosyasına ekleyebilirsiniz.
 
@@ -259,24 +263,29 @@ Yukarıdaki JSON verisini, `config/menu.cfg` dosyasına ekleyebilirsiniz.
 
 Menüyü modülünüzde kullanmak için şu adımları takip edebilirsiniz:
 
-```from application.ultraconsole import UltraConsole as UC
+```
+from application.ultraconsole import UltraConsole as UC
 
 def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
-      UC.go_custom_menu(2, **kwargs)``` 
+      UC.go_custom_menu(2, **kwargs)
+``` 
 
 Kullanıcı seçimlerini yakalamak için aşağıdaki yapıyı kullanabilirsiniz:
 
-```if UC.selected_key(1, **kwargs): 
+```
+if UC.selected_key(1, **kwargs): 
     print("1 seçildi")
 if UC.selected_key(2, **kwargs): 
-    print("2 seçildi")``` 
+    print("2 seçildi")
+``` 
 
 ### 2.4. JSON Yapısını Dinamik Olarak Kullanma<a id="2.4"></a>
 
 Menüyü dinamik olarak oluşturmak için JSON verisini bir değişkene atayıp kullanabilirsiniz:
 
-```menu_json = {
+```
+menu_json = {
     "Örnek Modül": { 
         "Seçenek 1": "_ornek_modul1", 
         "Seçenek 2": "_ornek_modul2", 
@@ -288,17 +297,20 @@ Menüyü dinamik olarak oluşturmak için JSON verisini bir değişkene atayıp 
 def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
       kwargs.update({"menu_data": menu_json})
-      UC.go_custom_menu(None, **kwargs)``` 
+      UC.go_custom_menu(None, **kwargs)
+``` 
 
 ### 2.5. `_init_` Fonksiyonu ile Parametre Gönderme<a id="2.5"></a>
 
 Sınıf yapısı kullanıyorsanız, `_init_` fonksiyonuna parametreler gönderebilirsiniz. Bunun için aşağıdaki yapıyı kullanabilirsiniz:
 
-```def ornek_modul(**kwargs):
+```
+def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
       kwargs.update({"class_name": "OrnekSinif"})
       kwargs.update({"init_data": "parametre"})
-      UC.go_custom_menu(None, **kwargs)``` 
+      UC.go_custom_menu(None, **kwargs)
+``` 
 
 ----------
 
@@ -328,11 +340,13 @@ Kullanıcıdan input almak için şu kodu kullanabilirsiniz:
 
 Giriş yapmış bir kullanıcının bilgilerini modülünüzde kullanmak için şu şekilde `kwargs.get("user_data")` ifadesini kullanabilirsiniz:
 
-```def ornek_modul(**kwargs):
+```
+def ornek_modul(**kwargs):
    user_data = kwargs.get("user_data")
    isim = user_data[4]  # 4. index isim bilgisi
    if UC.selected_key(1, **kwargs): 
-      print(f"Merhaba {isim}")``` 
+      print(f"Merhaba {isim}")
+``` 
 
 ### user_data İndeksleri:<a id="5.1"></a>
 
