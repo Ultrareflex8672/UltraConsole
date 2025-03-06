@@ -196,7 +196,7 @@ Modül eklemek için öncelikle yeni bir Python dosyası (.py uzantılı) oluşt
     -   Bu dosya içerisinde modülünüzü çalıştıracak fonksiyonlar veya sınıflar yer almalıdır.
 2.  **Modülünüzü UltraConsole’a Dahil Etme:**<a id="1.2"></a>
     
-    -   UltraConsole içerisinde modülünüzü kullanabilmek için `from application.ultraconsole import UltraConsole as UC` kodu ile UltraConsole modülünü içe aktarın.
+    -   UltraConsole içerisinde modülünüzü kullanabilmek için ```from application.ultraconsole import UltraConsole as UC``` kodu ile UltraConsole modülünü içe aktarın.
 3.  **Fonksiyon İsimlendirmesi:**<a id="1.3"></a>
     
     -   Modülünüzdeki ana fonksiyon, dosya ismiyle aynı isme sahip olmalıdır. Örneğin, `ornek_modul.py` dosyasındaki ana fonksiyon `ornek_modul()` olmalıdır.
@@ -219,59 +219,39 @@ Modülünüzde kullanıcıya seçim yapma imkanı veren menüler oluşturmak iç
 
 Basit bir menü oluşturmak için aşağıdaki gibi bir liste veri yapısı kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`menu_elemanlari = ["1. Seçenek", "2. Seçenek", "3. Seçenek", "4. Seçenek"]` 
+```menu_elemanlari = ["1. Seçenek", "2. Seçenek", "3. Seçenek", "4. Seçenek"]``` 
 
 Eğer "Geri Dön" veya "Ana Menü" gibi seçenekler eklemek isterseniz, bunları şu şekilde ekleyebilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`menu_elemanlari = menu_elemanlari + ["Geri Dön"]  # Veya menu_elemanlari.append("Ana Menü")` 
+```menu_elemanlari = menu_elemanlari + ["Geri Dön"]  # Veya menu_elemanlari.append("Ana Menü")``` 
 
 Kullanıcı seçimlerini almak için aşağıdaki gibi bir kod yapısı kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`kullanici_secimi = UC.create_frame("Menü Başlığı", menu_elemanlari, "menu")` 
+```kullanici_secimi = UC.create_frame("Menü Başlığı", menu_elemanlari, "menu")``` 
 
 ### 2.2. JSON Yapısı ile Menü<a id="2.2"></a>
 
 Bir menüyü JSON formatında tanımlamak, daha büyük ve dinamik menüler için ideal bir yöntemdir. Menü seçeneklerini JSON formatında aşağıdaki gibi tanımlayabilirsiniz:
 
-json
-
-KopyalaDüzenle
-
-`{
+```{
     "Örnek Modül": { 
         "Seçenek 1": "ornek_modul",
         "Seçenek 2": "ornek_modul",
         "Seçenek 3": "ornek_modul",
         "Seçenek 4": "ornek_modul"
     }
-}` 
+}``` 
 
 Bu yapıda, her seçeneğin karşılığı olan modül veya fonksiyon belirlenmiştir. Alt modüller çalıştırılacak şekilde de yapılandırabilirsiniz. Örneğin:
 
-json
-
-KopyalaDüzenle
-
-`{
+```{
     "Örnek Modül": { 
         "Seçenek 1": "_ornek_modul1", 
         "Seçenek 2": "_ornek_modul2", 
         "Seçenek 3": "_ornek_modul3", 
         "Seçenek 4": "_ornek_modul4" 
     }
-}` 
+}``` 
 
 Yukarıdaki JSON verisini, `config/menu.cfg` dosyasına ekleyebilirsiniz.
 
@@ -279,36 +259,24 @@ Yukarıdaki JSON verisini, `config/menu.cfg` dosyasına ekleyebilirsiniz.
 
 Menüyü modülünüzde kullanmak için şu adımları takip edebilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`from application.ultraconsole import UltraConsole as UC
+```from application.ultraconsole import UltraConsole as UC
 
 def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
-      UC.go_custom_menu(2, **kwargs)` 
+      UC.go_custom_menu(2, **kwargs)``` 
 
 Kullanıcı seçimlerini yakalamak için aşağıdaki yapıyı kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`if UC.selected_key(1, **kwargs): 
+```if UC.selected_key(1, **kwargs): 
     print("1 seçildi")
 if UC.selected_key(2, **kwargs): 
-    print("2 seçildi")` 
+    print("2 seçildi")``` 
 
 ### 2.4. JSON Yapısını Dinamik Olarak Kullanma<a id="2.4"></a>
 
 Menüyü dinamik olarak oluşturmak için JSON verisini bir değişkene atayıp kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`menu_json = {
+```menu_json = {
     "Örnek Modül": { 
         "Seçenek 1": "_ornek_modul1", 
         "Seçenek 2": "_ornek_modul2", 
@@ -320,21 +288,17 @@ KopyalaDüzenle
 def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
       kwargs.update({"menu_data": menu_json})
-      UC.go_custom_menu(None, **kwargs)` 
+      UC.go_custom_menu(None, **kwargs)``` 
 
 ### 2.5. `_init_` Fonksiyonu ile Parametre Gönderme<a id="2.5"></a>
 
 Sınıf yapısı kullanıyorsanız, `_init_` fonksiyonuna parametreler gönderebilirsiniz. Bunun için aşağıdaki yapıyı kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`def ornek_modul(**kwargs):
+```def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
       kwargs.update({"class_name": "OrnekSinif"})
       kwargs.update({"init_data": "parametre"})
-      UC.go_custom_menu(None, **kwargs)` 
+      UC.go_custom_menu(None, **kwargs)``` 
 
 ----------
 
@@ -342,11 +306,7 @@ KopyalaDüzenle
 
 Kullanıcıya bilgi göstermek için aşağıdaki kodu kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`UC.create_frame("Başlık", "Bilgi içeriği", "info")` 
+```UC.create_frame("Başlık", "Bilgi içeriği", "info")``` 
 
 Bu, ekrana bir bilgi penceresi açacaktır.
 
@@ -356,19 +316,11 @@ Bu, ekrana bir bilgi penceresi açacaktır.
 
 Kullanıcıdan input almak için şu kodu kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`UC.create_frame("Başlık", "Input talebi açıklaması", "")` 
+```UC.create_frame("Başlık", "Input talebi açıklaması", "")``` 
 
 Örneğin, kullanıcıdan adını almak için:
 
-python
-
-KopyalaDüzenle
-
-`UC.create_frame("Bilgi Girişi", "İsim Bilginiz Gereklidir", "Adınız: ")` 
+```UC.create_frame("Bilgi Girişi", "İsim Bilginiz Gereklidir", "Adınız: ")``` 
 
 ----------
 
@@ -376,15 +328,11 @@ KopyalaDüzenle
 
 Giriş yapmış bir kullanıcının bilgilerini modülünüzde kullanmak için şu şekilde `kwargs.get("user_data")` ifadesini kullanabilirsiniz:
 
-python
-
-KopyalaDüzenle
-
-`def ornek_modul(**kwargs):
+```def ornek_modul(**kwargs):
    user_data = kwargs.get("user_data")
    isim = user_data[4]  # 4. index isim bilgisi
    if UC.selected_key(1, **kwargs): 
-      print(f"Merhaba {isim}")` 
+      print(f"Merhaba {isim}")``` 
 
 ### user_data İndeksleri:<a id="5.1"></a>
 
@@ -420,15 +368,15 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ## 8. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
 
--   **`UC.cls()`**: Konsolu temizler.
--   **`UC.go_main_menu(**kwargs)`**: Ana menüye geri gider.
--   **`UC.get_pass(1)`**: Kullanıcıdan şifre girişi ister.
--   **`UC.get_pass(2)`**: Kullanıcıdan tekrar şifre girişi ister.
--   **`UC.load_json("dosya_yolu")`**: JSON dosyası yükler.
--   **`UC.create_file("dosya_yolu")`**: Dosya oluşturur.
--   **`UC.load_file("dosya_yolu")`**: Dosya yükler.
--   **`UC.load_lines("dosya_yolu")`**: Dosyayı satır satır yükler.
--   **`UC.write_file("dosya_yolu", "içerik")`**: Dosyayı kaydeder.
+-   **```UC.cls()```**: Konsolu temizler.
+-   **```UC.go_main_menu(**kwargs)```**: Ana menüye geri gider.
+-   **```UC.get_pass(1)```**: Kullanıcıdan şifre girişi ister.
+-   **```UC.get_pass(2)```**: Kullanıcıdan tekrar şifre girişi ister.
+-   **```UC.load_json("dosya_yolu")```**: JSON dosyası yükler.
+-   **```UC.create_file("dosya_yolu")```**: Dosya oluşturur.
+-   **```UC.load_file("dosya_yolu")```**: Dosya yükler.
+-   **```UC.load_lines("dosya_yolu")```**: Dosyayı satır satır yükler.
+-   **```UC.write_file("dosya_yolu", "içerik")```**: Dosyayı kaydeder.
 
 ----------
 
