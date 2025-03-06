@@ -555,9 +555,13 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 		<li>Exe dosyasının otomatik update modülü eklendi</li>
 		<li>Modül ekle ayarları için otomatik modül algılama eklendi</li>
 	</ul>
-	<li><b>05.03.2025 - V</b><b id="version">3.5.0.1</b></li>
+	<li><b>05.03.2025 - V3.5.0.1</b></li>
 	<ul>
 		<li>Exe dosyasının otomatik update modülü eklendi</li>
+	</ul>
+	<li><b>05.03.2025 - V</b><b id="version">3.5.0.2</b></li>
+	<ul>
+		<li>Turtle kütüphanesi sabitlendi</li>
 	</ul>
 </ul>
 
