@@ -10,3 +10,5 @@ pyinstaller.txt
 adamasmaca.json
 application
 main.py
+*.ifp
+UltraConsole_Setup.exe
