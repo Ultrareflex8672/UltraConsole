@@ -13,3 +13,4 @@ main.py
 *.ifp
 UltraConsole_Setup.exe
 ultraconsole.png
+*.log

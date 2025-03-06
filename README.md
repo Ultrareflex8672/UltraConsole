@@ -103,6 +103,8 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
 -   Basit, Orta ve İleri Seviye modları.
     
 -   Stabilize edilmiş menü çağırma fonksiyonu.
+
+-   Gelişmiş LOG kayıtları.
     
 
 ----------
@@ -113,7 +115,7 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
 
 ```
 # Seçenek 1: Kurulum dosyasını indirin ve yükleyin
-https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.5.0.2/UltraConsole_Setup.exe
+https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.0.3/UltraConsole_Setup.exe
 
 # Seçenek 2: Depoyu klonlayın
 git clone https://github.com/Ultrareflex8672/UltraConsole.git
@@ -561,9 +563,14 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Exe dosyasının otomatik update modülü eklendi</li>
 	</ul>
-	<li><b>06.03.2025 - V</b><b id="version">3.5.0.2</b></li>
+	<li><b>06.03.2025 - V3.5.0.2</b></li>
 	<ul>
 		<li>Turtle kütüphanesi sabitlendi</li>
+	</ul>
+	<li><b>07.03.2025 - V</b><b id="version">3.8.0.3</b></li>
+	<ul>
+		<li>Log sistemi eklendi</li>
+		<li>Profil ayarlarından ana menüye dönüşte bir hata düzeltildi</li>
 	</ul>
 </ul>
 
