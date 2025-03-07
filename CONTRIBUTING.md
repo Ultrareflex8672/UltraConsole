@@ -166,11 +166,29 @@ def ornek_modul(**kwargs):
 Sınıf yapısı kullanıyorsanız, `_init_` fonksiyonuna parametreler gönderebilirsiniz. Bunun için aşağıdaki yapıyı kullanabilirsiniz:
 
 ```
-def ornek_modul(**kwargs):
-   if UC.from_main_menu(**kwargs):
-      kwargs.update({"class_name": "OrnekSinif"})
-      kwargs.update({"init_data": "parametre"})
-      UC.go_custom_menu(2, **kwargs)
+from application.ultraconsole import UltraConsole as UC
+
+menu_data = UC.load_json("config/test.cfg")
+def test(**kwargs):
+        if UC.from_main_menu(**kwargs):
+            kwargs.update({"menu_data": menu_data})
+            kwargs.update({"class_name": "Test"})
+            kwargs.update({"func_name": "go_func"})
+            kwargs.update({"init_data": {"parametre": 123}})
+            UC.go_custom_menu(0, **kwargs)
+        else:
+            Test().go_func(**kwargs)
+
+class Test(UC):
+    def __init__(self, **kwargs):
+        self.parametre = kwargs.get("parametre")
+        UC.create_frame("Gelen Parametreler", "params: "+str(self.parametre))
+
+    def go_func(self, **kwargs):
+        user_data = kwargs.get("user_data")
+        isim = user_data[4]  # 4. index isim bilgisi
+        if UC.selected_key(1, **kwargs):
+            UC.create_frame("Seçim 1", f"Merhaba {isim} Seçenek 1 Seçildi")
 ``` 
 
 ```UC.go_custom_menu(menu_index, **kwargs)``` fonksiyonuna gönderebileceğiniz diğer parametreler:
@@ -268,7 +286,8 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 -   **```UC.create_file("dosya_yolu")```**: Dosya oluşturur.
 -   **```UC.load_file("dosya_yolu")```**: Dosya yükler.
 -   **```UC.load_lines("dosya_yolu")```**: Dosyayı satır satır yükler.
--   **```UC.write_file("dosya_yolu", "içerik")```**: Dosyayı kaydeder.
+-   **```UC.write_file("dosya_yolu", "içerik")```**: Dosyayı kaydeder.from application.log import log_ekle as LOG
+-   **```from application.log import log_ekle as LOG```**: Modüle import edilerek **```LOG("Log mesajı")```** şeklinde log kaydı tutar
 
 ----------
 

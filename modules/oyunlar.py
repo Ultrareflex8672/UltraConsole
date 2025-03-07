@@ -7,4 +7,4 @@ def oyunlar(**kwargs):
         oyunlar_menu(**kwargs)
 
 def oyunlar_menu(**kwargs):
-    UC.go_custom_menu(3,**kwargs)
+    UC.go_custom_menu(2,**kwargs)
