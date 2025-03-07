@@ -180,14 +180,14 @@ def ornek_modul(**kwargs):
 from application.ultraconsole import UltraConsole as UC
 
 def ornek_modul(**kwargs):
-   if UC.from_main_menu(**kwargs):
-   	  kwargs.update({"menu_data": menu_json})		# Özel json verisi ile menü oluşturma
-	  kwargs.update({"module_name": "modul_dosyası_adi"})	# Bağımsız modül dosyası adı tanımlamam
-	  kwargs.update({"func_name": "fonksiyon_adi"})		# Modül dosyası adından bağımsız fonsiyon tanımlama
-	  kwargs.update({"module_path": "modul_konumu"})	# 'modules' kalsöründen farklı modül klasörü tanımlama
-      kwargs.update({"class_name": "OrnekSinif"})		# Modül içinde çalıştırılacak sınıfı tanımlama
-      kwargs.update({"init_data": "parametre"})			# Sınıf içinde init yapısına gönderilecek parametre
-      UC.go_custom_menu(2, **kwargs)
+    if UC.from_main_menu(**kwargs):
+        kwargs.update({"menu_data": menu_json})		# Özel json verisi ile menü oluşturma
+	    kwargs.update({"module_name": "modul_dosyası_adi"})	# Bağımsız modül dosyası adı tanımlamam
+	    kwargs.update({"func_name": "fonksiyon_adi"})		# Modül dosyası adından bağımsız fonsiyon tanımlama
+	    kwargs.update({"module_path": "modul_konumu"})	# 'modules' kalsöründen farklı modül klasörü tanımlama
+        kwargs.update({"class_name": "OrnekSinif"})		# Modül içinde çalıştırılacak sınıfı tanımlama
+        kwargs.update({"init_data": "parametre"})			# Sınıf içinde init yapısına gönderilecek parametre
+        UC.go_custom_menu(2, **kwargs)
 ```
 
 ----------
