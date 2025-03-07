@@ -138,9 +138,9 @@ UltraConsole.exe
     
     -   [Python Dosyası Oluşturma](#1.1)
     -   [Modülünüzü UltraConsole’a Dahil Etme](#1.2)
-    -   [Modül Ekleme](#1.3)
+    -   [Fonksiyon İsimlendirmesi](#1.3)
     -   [Modül Klasörüne Yerleştirme](#1.4)
-    -   [Fonksiyon İsimlendirmesi](#1.5)
+	-   [Modül Ekleme](#1.5)
 2.  [**Menü Oluşturma**](#2)
     
     -   [Basit Menü Yapısı (Liste Kullanarak)](#2.1)
