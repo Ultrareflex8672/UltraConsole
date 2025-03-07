@@ -215,7 +215,7 @@ Modül eklemek için öncelikle yeni bir Python dosyası (.py uzantılı) oluşt
 
 ----------
 
-## 2. Menü Oluşturma<a id="2"></a>
+## 2. Menü Oluşturma - (Basit - Orta ve İleri Düzeylerde)<a id="2"></a>
 
 Modülünüzde kullanıcıya seçim yapma imkanı veren menüler oluşturmak için birkaç farklı yöntem bulunmaktadır. Aşağıda iki ana seçenek açıklanmıştır.
 
@@ -267,12 +267,39 @@ Yukarıdaki JSON verisini, `config/menu.cfg` dosyasına ekleyebilirsiniz.
 
 Menüyü modülünüzde kullanmak için şu adımları takip edebilirsiniz:
 
+```munu.cfg``` dosyası içeriğinin aşağıdaki gibi olduğunu varsayalım
+
+```json
+{
+    "Ana Menü": {
+        "Hesap Makinesi": "hesap_makinesi",
+        "Oyunlar": "oyunlar",
+        "Bayrak Çiz": "bayrak"
+    },
+    "Oyunlar": {
+        "Adam Asmaca": "_adamasmaca",
+        "Pong": "_pong",
+        "Sayı Tahmin Etme": "_sayitahmin",
+        "Taş Kağıt Makas": "_taskagitmakas"
+    },
+    "Örnek Modül": {
+        "Seçenek 1": "ornek_modul",
+        "Seçenek 2": "ornek_modul",
+        "Seçenek 3": "ornek_modul",
+        "Seçenek 4": "ornek_modul"
+    }
+}
+```
+Yukarıdaki menü yapılandırılmasına göre 'Ana Menü' 0. Index, 'Oyunlar' 1. Index ve yeni eklenen 'Örnek Modül' 2. Index.
+Bu durum da index değerimizi ilk parametresine yazarak ```UC.go_custom_menu(2, **kwargs)``` fonksiyonu ile menümüzü çağırabiliriz.
+Örneğin:
+
 ```
 from application.ultraconsole import UltraConsole as UC
 
 def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
-      UC.go_custom_menu(2, **kwargs)
+      UC.go_custom_menu(2, **kwargs) # 2. index
 ``` 
 
 Kullanıcı seçimlerini yakalamak için aşağıdaki yapıyı kullanabilirsiniz:
@@ -288,6 +315,9 @@ if UC.selected_key(2, **kwargs):
 
 Menüyü dinamik olarak oluşturmak için JSON verisini bir değişkene atayıp kullanabilirsiniz:
 
+Aşağıda verilen örnekte olduğu gibi menü verisini ```menu.cfg``` dosyasından çağırmak yerine bir değişken üzerinden de gönderebilirsiniz.
+
+
 ```
 menu_json = {
     "Örnek Modül": { 
@@ -301,8 +331,21 @@ menu_json = {
 def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
       kwargs.update({"menu_data": menu_json})
-      UC.go_custom_menu(None, **kwargs)
+      UC.go_custom_menu(0, **kwargs) # Gönderilen menü verisinde hangi ana menü çalıştırılmak isteniyorsa o anahtarın index değeri girilmelidir. (Bu örenekte index 0)
 ``` 
+
+Yukarıdaki örnekte menü yapısı ```menu_json``` değişkenine doğrudan tanımlanmıştır ancak dilerseniz menü yapısı json verisini kendi oluşturacağınız bir dosyadan da okuyarak ```menu_json``` değişkenide atayabilirsiniz. Örneğin:
+
+```
+from application.ultraconsole import UltraConsole as UC
+
+menu_json = UC.load_json("kendi_menu_dosyam.cfg")
+
+def ornek_modul(**kwargs):
+   if UC.from_main_menu(**kwargs):
+      kwargs.update({"menu_data": menu_json})
+      UC.go_custom_menu(0, **kwargs) # Gönderilen menü verisinde hangi ana menü çalıştırılmak isteniyorsa o anahtarın index değeri girilmelidir.
+```
 
 ### 2.5. `_init_` Fonksiyonu ile Parametre Gönderme<a id="2.5"></a>
 
@@ -313,8 +356,25 @@ def ornek_modul(**kwargs):
    if UC.from_main_menu(**kwargs):
       kwargs.update({"class_name": "OrnekSinif"})
       kwargs.update({"init_data": "parametre"})
-      UC.go_custom_menu(None, **kwargs)
+      UC.go_custom_menu(2, **kwargs)
 ``` 
+
+```UC.go_custom_menu(menu_index, **kwargs)``` fonksiyonuna gönderebileceğiniz diğer parametreler:
+```module_name``` , ```func_name``` , ```module_path``` Örneğin:
+
+```
+from application.ultraconsole import UltraConsole as UC
+
+def ornek_modul(**kwargs):
+   if UC.from_main_menu(**kwargs):
+   	  kwargs.update({"menu_data": menu_json})		# Özel json verisi ile menü oluşturma
+	  kwargs.update({"module_name": menu_json})		# Bağımsız modül dosyası adı tanımlamam
+	  kwargs.update({"func_name": menu_json})		# Modül dosyası adından bağımsız fonsiyon tanımlama
+	  kwargs.update({"module_path": menu_json})		# 'modules' kalsöründen farklı modül klasörü tanımlama
+      kwargs.update({"class_name": "OrnekSinif"})	# Modül içinde çalıştırılacak sınıfı tanımlama
+      kwargs.update({"init_data": "parametre"})		# Sınıf içinde init yapısına gönderilecek parametre
+      UC.go_custom_menu(2, **kwargs)
+```
 
 ----------
 
