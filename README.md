@@ -646,12 +646,12 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Turtle kütüphanesi sabitlendi</li>
 	</ul>
-	<li><b>07.03.2025 - V</b><b id="version">3.8.0.3</b></li>
+	<li><b>07.03.2025 - V3.8.0.3</b></li>
 	<ul>
 		<li>Log sistemi eklendi</li>
 		<li>Profil ayarlarından ana menüye dönüşte bir hata düzeltildi</li>
 	</ul>
-	<li><b>07.03.2025 - V3.8.5.5</b></li>
+	<li><b>07.03.2025 - V</b><b id="version">3.8.5.5</b></li>
 	<ul>
 		<li>Modül oluşturucudaki key value döngü hatası giderildi</li>
 		<li>Daha kapsamlı örnek modül yerleştirildi</li>
