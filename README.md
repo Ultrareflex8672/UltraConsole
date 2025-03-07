@@ -111,11 +111,11 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
 
 ## 📥 Kurulum
 
-### 💾 [UltraConsole 'u İndirin](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.0.3/UltraConsole_Setup.exe)
+### 💾 [UltraConsole 'u İndirin](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.5.8/UltraConsole_Setup.exe)
 
 ```
 # Seçenek 1: Kurulum dosyasını indirin ve yükleyin
-https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.0.3/UltraConsole_Setup.exe
+https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.5.8/UltraConsole_Setup.exe
 
 # Seçenek 2: Depoyu klonlayın
 git clone https://github.com/Ultrareflex8672/UltraConsole.git
