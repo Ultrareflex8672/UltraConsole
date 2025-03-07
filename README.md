@@ -651,10 +651,17 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 		<li>Log sistemi eklendi</li>
 		<li>Profil ayarlarından ana menüye dönüşte bir hata düzeltildi</li>
 	</ul>
-	<li><b>07.03.2025 - V</b><b id="version">3.8.5.5</b></li>
+	<li><b>07.03.2025 - V3.8.5.5</b></li>
 	<ul>
 		<li>Modül oluşturucudaki key value döngü hatası giderildi</li>
 		<li>Daha kapsamlı örnek modül yerleştirildi</li>
+	</ul>
+	<li><b>07.03.2025 - V</b><b id="version">3.8.5.8</b></li>
+	<ul>
+		<li>Modül ekle, sil, değiştir işlemlerinden sonra uygulamanın yeniden başlatma zorunluluğu kaldırıldı.</li>
+		<li>LOG Sistemi bazı hatalar giderildi</li>
+		<li>Eklenmiş modülleri görüntüle farklı seçeneğe taşındı</li>
+		<li>Geliştiriciler için kaynak kodlar 'UltraConsole_Setup.exe' içine dahil edildi.</li>
 	</ul>
 </ul>
 
