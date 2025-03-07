@@ -289,7 +289,7 @@ Menüyü modülünüzde kullanmak için şu adımları takip edebilirsiniz:
         "Seçenek 4": "ornek_modul"
     }
 }
-```
+``` 
 Yukarıdaki menü yapılandırılmasına göre 'Ana Menü' 0. Index, 'Oyunlar' 1. Index ve yeni eklenen 'Örnek Modül' 2. Index.
 Bu durum da index değerimizi ilk parametresine yazarak ```UC.go_custom_menu(2, **kwargs)``` fonksiyonu ile menümüzü çağırabiliriz.
 Örneğin:
