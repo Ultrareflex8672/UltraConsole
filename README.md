@@ -666,9 +666,13 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 		<li>Eklenmiş modülleri görüntüle farklı seçeneğe taşındı</li>
 		<li>Geliştiriciler için kaynak kodlar 'UltraConsole_Setup.exe' içine dahil edildi.</li>
 	</ul>
-	<li><b>08.03.2025 - V</b><b id="version">3.9.5.8</b></li>
+	<li><b>08.03.2025 - V3.9.5.8</b></li>
 	<ul>
 		<li>Artılışmış dahili kütüphane sayısı.</li>
+	</ul>
+	<li><b>08.03.2025 - V</b><b id="version">3.9.5.9</b></li>
+	<ul>
+		<li>Hata düzeltmesi.</li>
 	</ul>
 </ul>
 
