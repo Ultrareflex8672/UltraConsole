@@ -114,15 +114,18 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
 ### 💾 [UltraConsole 'u İndirin](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.5.8/UltraConsole_Setup.exe)
 
 ```
-# Seçenek 1: Kurulum dosyasını indirin ve yükleyin
+# Seçenek 1: Kurulum dosyasını indirin ve yükleyin (Modül Kullanıcıları için Tavsiye Edilir)
 https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.8.5.8/UltraConsole_Setup.exe
 
-# Seçenek 2: Depoyu klonlayın
+# Seçenek 2: Depoyu klonlayın (Framework Geliştiriciler için Tavsiye Edilir)
 git clone https://github.com/Ultrareflex8672/UltraConsole.git
-
-# Bağımlılıkları yükleyin (gerekliyse)
-python -m pip install -r requirements.txt
 ```
+
+### UltraConsole Framework Yapısını Geliştirme
+
+UltraConsole 'a modül geliştirmekten ayrıca UltraConsole Framework yapısında geliştirme ve değişiklik yapmak istiyorsanız [buradan son versiyon `UltraConsole_Setup.exe`](https://github.com/Ultrareflex8672/UltraConsole/releases) dosyasını indirin ve kurun. Uygulama kaynak kodları UltraConsole 'un yüklü olduğu dizinde `main.py` dosyası ve `application` klasöründedir. `UltraConsole.exe` dosyası çalışırken `main.py` dosyası ve  `application` klasörüne ihtiyaç duymaz. Bu sadece geliştiriciler için açık kaynak kodları içerir. Ayrıca ```python -m pip install -r requirements.txt``` komutu ile bağımlılıkları yükleyin (gerekliyse). Bu işlem yalnız framework geliştiricileri içindir, modül üretici kullanıcılar için dahili kütüphaneler `UltraConsole.exe` içinde mevcuttur ve aşağıdaki gibidir. Geliştireceğiniz modül için farklı bir kütüphane ihticayınız varsa `application\ultraconsole.py` içine import ettikten sonra ```pyinstaller --name=UltraConsole --onefile --add-data "application;application" --add-data "modules;modules" --icon=ultraconsole.ico main.py``` çalıştırarak özel bir sürüm elde edebilsiniz.
+
+ `catalogue`, `charset_normalizer`, `cycler`, `datetime`, `getpass`, `gTTS`, `hashlib`, `http.client`, `HTMLParser`, `importlib.util`, `jiter`, `json` `kiwisolver`, `logging`, `mdurl`, `msvcrt`, `murmurhash`, `os`, `packaging`, `playsound`, `preshed`, `pytz`, `re`, `regex`, `requests`, `signal`, `six`, `sqlite3`, `shutil`, `sys`, `textwrap`, `time`, `turtle`, `urllib3`, `urllib.request`, `wasabi`, `webbrowser`, `wrapt`, `zipfile` `zipp`
 
 ----------
 
@@ -656,12 +659,16 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 		<li>Modül oluşturucudaki key value döngü hatası giderildi</li>
 		<li>Daha kapsamlı örnek modül yerleştirildi</li>
 	</ul>
-	<li><b>07.03.2025 - V</b><b id="version">3.8.5.8</b></li>
+	<li><b>07.03.2025 - V3.8.5.8</b></li>
 	<ul>
 		<li>Modül ekle, sil, değiştir işlemlerinden sonra uygulamanın yeniden başlatma zorunluluğu kaldırıldı.</li>
 		<li>LOG Sistemi bazı hatalar giderildi</li>
 		<li>Eklenmiş modülleri görüntüle farklı seçeneğe taşındı</li>
 		<li>Geliştiriciler için kaynak kodlar 'UltraConsole_Setup.exe' içine dahil edildi.</li>
+	</ul>
+	<li><b>08.03.2025 - V</b><b id="version">3.9.5.8</b></li>
+	<ul>
+		<li>Artılışmış dahili kütüphane sayısı.</li>
 	</ul>
 </ul>
 
