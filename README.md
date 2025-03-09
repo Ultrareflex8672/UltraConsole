@@ -29,7 +29,9 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
     
 -   Framework 'ün nasıl çalıştığını analiz edebileceğiniz bazı örnek dahili modüller:
     
-    -   🧮 Hesap Makinesi
+    -   🔉 Sesli Asistan
+
+	-   🧮 Hesap Makinesi
         
     -   🎭 Adam Asmaca Oyunu
         
@@ -670,9 +672,13 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Artılışmış dahili kütüphane sayısı.</li>
 	</ul>
-	<li><b>08.03.2025 - V</b><b id="version">3.9.5.9</b></li>
+	<li><b>08.03.2025 - V3.9.5.9</b></li>
 	<ul>
 		<li>Hata düzeltmesi.</li>
+	</ul>
+	<li><b>09.03.2025 - V</b><b id="version">3.9.6.9</b></li>
+	<ul>
+		<li>Sesli Asistan modülü eklendi.</li>
 	</ul>
 </ul>
 
