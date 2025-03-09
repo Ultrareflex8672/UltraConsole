@@ -184,6 +184,12 @@ Bu proje [MIT Lisansı](https://github.com/Ultrareflex8672/UltraConsole/tree/mai
 
 ----------
 
+## 🔒 Güvenlik
+
+UltraConsole Güvenlik Politikasına [buradan ulaşabilirsiniz.](https://github.com/Ultrareflex8672/UltraConsole?tab=security-ov-file) 
+
+----------
+
 🚀 **UltraConsole ile komut satırını daha güçlü hale getirin!**
 
 
