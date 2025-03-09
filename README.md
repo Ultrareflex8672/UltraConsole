@@ -1,5 +1,10 @@
+<img src="https://www.hizmetimiz.com/files/github/ultraconsole/ultraconsole.png" alt="ultareflex8672" />
 
-# UltraConsole
+# UltraConsole ![GitHub Repo stars](https://img.shields.io/github/stars/Ultrareflex8672/UltraConsole)
+	
+![GitHub Release](https://img.shields.io/github/v/release/Ultrareflex8672/UltraConsole) ![GitHub Release Date](https://img.shields.io/github/release-date/Ultrareflex8672/UltraConsole) 
+![GitHub top language](https://img.shields.io/github/languages/top/Ultrareflex8672/UltraConsole) ![GitHub License](https://img.shields.io/github/license/Ultrareflex8672/UltraConsole) 
+![GitHub repo size](https://img.shields.io/github/repo-size/Ultrareflex8672/UltraConsole) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Ultrareflex8672/UltraConsole/total)
 
 ## 🚀 UltraConsole Nedir?
 
@@ -473,7 +478,22 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 8. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
+## 8. Renk Referansı
+
+| Renk          | ANSI |
+| ------------- | ---- |
+| BLACK         | *30* |
+| RED           | *31* |
+| GREEN         | *32* |
+| BROWN         | *33* |
+| BLUE          | *34* |
+| PURPLE        | *35* |
+| CYAN          | *36* |
+| LIGHT_GRAY    | *37* |
+
+----------
+
+## 9. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
 
 -   **```UC.cls()```**: Konsolu temizler.
 -   **```UC.go_main_menu(**kwargs)```**: Ana menüye geri gider.
@@ -488,13 +508,13 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 9. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="9"></a>
+## 10. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="9"></a>
 
 Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasını silebilirsiniz. Uygulama açıldığında yeni bir yönetici hesabı tanımlamanız istenecektir.
 
 ----------
 
-## 10. Ayar ve Menü Yapısı Sıfırlama<a id="10"></a>
+## 11. Ayar ve Menü Yapısı Sıfırlama<a id="10"></a>
 
 -   Sadece **ayarları sıfırlamak** için: `config/config.cfg` dosyasını silebilirsiniz.
 -   Sadece **menü yapısını sıfırlamak** için: `config/menu.cfg` dosyasını silebilirsiniz.
