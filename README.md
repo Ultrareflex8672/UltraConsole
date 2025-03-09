@@ -1,10 +1,13 @@
-<img src="https://www.hizmetimiz.com/files/github/ultraconsole/ultraconsole.png" alt="ultareflex8672" />
+<a href="https://github.com/Ultrareflex8672/UltraConsole"><img src="https://www.hizmetimiz.com/files/github/ultraconsole/ultraconsole.png" alt="ultareflex8672" /></a>
 
 # UltraConsole ![GitHub Repo stars](https://img.shields.io/github/stars/Ultrareflex8672/UltraConsole)
 	
-![GitHub Release](https://img.shields.io/github/v/release/Ultrareflex8672/UltraConsole) ![GitHub Release Date](https://img.shields.io/github/release-date/Ultrareflex8672/UltraConsole) 
-![GitHub top language](https://img.shields.io/github/languages/top/Ultrareflex8672/UltraConsole) ![GitHub License](https://img.shields.io/github/license/Ultrareflex8672/UltraConsole) 
-![GitHub repo size](https://img.shields.io/github/repo-size/Ultrareflex8672/UltraConsole) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Ultrareflex8672/UltraConsole/total)
+[![GitHub Release](https://img.shields.io/github/v/release/Ultrareflex8672/UltraConsole)](https://github.com/Ultrareflex8672/UltraConsole/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/Ultrareflex8672/UltraConsole)](https://github.com/Ultrareflex8672/UltraConsole/releases)
+[![GitHub top language](https://img.shields.io/github/languages/top/Ultrareflex8672/UltraConsole)](https://github.com/Ultrareflex8672/UltraConsole)
+[![GitHub License](https://img.shields.io/github/license/Ultrareflex8672/UltraConsole)](https://github.com/Ultrareflex8672/UltraConsole?tab=MIT-1-ov-file)
+[![GitHub repo size](https://img.shields.io/github/repo-size/Ultrareflex8672/UltraConsole)](https://github.com/Ultrareflex8672/UltraConsole)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Ultrareflex8672/UltraConsole/total)](https://github.com/Ultrareflex8672/UltraConsole/releases)
 
 ## 🚀 UltraConsole Nedir?
 
