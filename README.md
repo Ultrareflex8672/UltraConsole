@@ -121,7 +121,7 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
 
 ## 📥 Kurulum
 
-### 💾 [UltraConsole 'u İndirin](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.9.5.8/UltraConsole_Setup.exe)
+### [💾 UltraConsole 'u İndirin - ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Ultrareflex8672/UltraConsole/total)](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V3.9.5.8/UltraConsole_Setup.exe)
 
 ```
 # Seçenek 1: Kurulum dosyasını indirin ve yükleyin (Modül Kullanıcıları için Tavsiye Edilir)
