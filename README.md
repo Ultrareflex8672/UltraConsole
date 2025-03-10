@@ -709,10 +709,14 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Sesli Asistan modülü eklendi.</li>
 	</ul>
-	<li><b>10.03.2025 - V</b><b id="version">3.9.7.0</b></li>
+	<li><b>10.03.2025 - V3.9.7.0</b></li>
 	<ul>
 		<li>Bilgi penceresinde başlık taşma sorunu düzeltildi.</li>
 		<li>Sesli Asistan modülüne özel arama fonksiyonu eklendi</li>
+	</ul>
+	<li><b>10.03.2025 - V</b><b id="version">4.0.0.0</b></li>
+	<ul>
+		<li>Dahili kütüphane sayısı artırıldı</li>
 	</ul>
 </ul>
 
