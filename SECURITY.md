@@ -6,12 +6,12 @@ UltraConsole olarak güvenliği en üst düzeyde tutuyor ve potansiyel güvenlik
 
 Aşağıdaki tabloda, aktif olarak desteklenen ve güvenlik güncellemeleri alacak olan sürümler yer almaktadır:
 
-| Sürüm          | Destek Durumu   |
+| Sürüm              | Destek Durumu                               |
 |--------------------|---------------------------------------------|
 | V3.9.5.8 Latest    | ✅ Destekleniyor                           |
-| V3.8.5.5       | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.8.0.3       | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.5.0.2      | ⚠️ Kritik güncellemeler için destekleniyor |
+| V3.8.5.5           | ⚠️ Kritik güncellemeler için destekleniyor |
+| V3.8.0.3           | ⚠️ Kritik güncellemeler için destekleniyor |
+| V3.5.0.2           | ⚠️ Kritik güncellemeler için destekleniyor |
 | Daha Eski Sürümler | ❌ Desteklenmiyor                          |
 
 ## 🚨 Güvenlik Açıklarını Bildirme
@@ -19,7 +19,7 @@ Aşağıdaki tabloda, aktif olarak desteklenen ve güvenlik güncellemeleri alac
 Eğer UltraConsole'de bir güvenlik açığı bulduysanız, lütfen aşağıdaki adımları takip ederek bildirimde bulunun:
 
 1. **Açığı herkese açık bir ortamda paylaşmayın.**  
-2. Güvenlik ekibimize şu e-posta adresi üzerinden özel olarak bildirin: **ultrareflex@ultraconsole.com**  
+2. Güvenlik ekibimize şu e-posta adresi üzerinden özel olarak bildirin: **ultrareflex@ultrareflex.com**  
 3. Açığı detaylıca açıklayın (hangi sürümde bulunduğu, nasıl tetiklenebildiği gibi).  
 4. Gerekirse, açığın nasıl istismar edilebileceğini gösteren örnek kod veya adımları ekleyin.  
 
@@ -51,4 +51,4 @@ UltraConsole'un güvenlik politikası, açık kaynak ruhuna uygun olarak oluştu
 
 Teşekkürler,  
 **UltraConsole**  
-ultrareflex@ultraconsole.com
+ultrareflex@ultrareflex.com
