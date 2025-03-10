@@ -6,12 +6,12 @@ UltraConsole olarak güvenliği en üst düzeyde tutuyor ve potansiyel güvenlik
 
 Aşağıdaki tabloda, aktif olarak desteklenen ve güvenlik güncellemeleri alacak olan sürümler yer almaktadır:
 
-| Sürüm          | Destek Durumu   |
+| Sürüm              | Destek Durumu                               |
 |--------------------|---------------------------------------------|
 | V3.9.5.8 Latest    | ✅ Destekleniyor                           |
-| V3.8.5.5       | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.8.0.3       | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.5.0.2      | ⚠️ Kritik güncellemeler için destekleniyor |
+| V3.8.5.5           | ⚠️ Kritik güncellemeler için destekleniyor |
+| V3.8.0.3           | ⚠️ Kritik güncellemeler için destekleniyor |
+| V3.5.0.2           | ⚠️ Kritik güncellemeler için destekleniyor |
 | Daha Eski Sürümler | ❌ Desteklenmiyor                          |
 
 ## 🚨 Güvenlik Açıklarını Bildirme
