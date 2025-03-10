@@ -705,9 +705,14 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Hata düzeltmesi.</li>
 	</ul>
-	<li><b>09.03.2025 - V</b><b id="version">3.9.6.9</b></li>
+	<li><b>09.03.2025 - V3.9.6.9</b></li>
 	<ul>
 		<li>Sesli Asistan modülü eklendi.</li>
+	</ul>
+	<li><b>10.03.2025 - V</b><b id="version">3.9.7.0</b></li>
+	<ul>
+		<li>Bilgi penceresinde başlık taşma sorunu düzeltildi.</li>
+		<li>Sesli Asistan modülüne özel arama fonksiyonu eklendi</li>
 	</ul>
 </ul>
 

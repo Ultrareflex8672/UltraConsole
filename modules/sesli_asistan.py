@@ -11,7 +11,8 @@ import webbrowser
 menu_data = {
     "Sesli Asistan": {
         "Konu Araştırması": "sesli_asistan",
-        "Ürün Tavsiyesi": "sesli_asistan"
+        "Ürün Tavsiyesi": "sesli_asistan",
+        "Özel Arama Motoru": "sesli_asistan"
     }
 }
 
@@ -25,6 +26,9 @@ def sesli_asistan(**kwargs):
             UC.go_custom_menu(0, **kwargs)
         elif UC.selected_key(2, **kwargs):
             urun_tavsiye(**kwargs)
+            UC.go_custom_menu(0, **kwargs)
+        elif UC.selected_key(3, **kwargs):
+            ozel_arama(**kwargs)
             UC.go_custom_menu(0, **kwargs)
         else:
             del kwargs["menu_data"]
@@ -154,3 +158,59 @@ def urun_tavsiye(**kwargs):
         speak_ = f"Malesef girilen ürün için bilgi sağlayamadım {user_data[4]}. Lütfen ürün adını farklı bir şekilde girerek tekrar dene"
         speak(speak_)
 
+def ozel_arama(**kwargs):
+    user_data = kwargs.get("user_data")
+    sub_menu_items = ["Film/Video", "Kitap", "Müzik", "Program/ISO/Oyun", "Görsel", "Diğer"] + ["Geri Dön"]
+    engine = "https://www.google.com/search?q="
+    speak(f"Merhaba {user_data[4]}, UltraKonsol arama motoruna hoş geldin.")
+
+    while True:
+        while True:
+            try:
+                speak(f"Lütfen arama yapılacak kategori seçimini yap.")
+                UC.cls()
+                selected_item = int(UC.create_frame("Aranak Dosya Türü", sub_menu_items, "menu"))
+                break
+            except:
+                print("Lütfen numerik bir seçim yapınız.")
+
+        if selected_item == 1:
+            title = "Film/Video Arama"
+            parameter = "%20%2B(mkv%7Cmp4%7Cavi%7Cmov%7Cmpg%7Cwmv%7Cdivx%7Cmpeg)%20-inurl%3A(jsp%7Cpl%7Cphp%7Chtml%7Caspx%7Chtm%7Ccf%7Cshtml)%20intitle%3Aindex.of%20-inurl%3A(listen77%7Cmp3raid%7Cmp3toss%7Cmp3drug%7Cindex_of%7Cindex-of%7Cwallywashis%7Cdownloadmana)"
+        elif selected_item == 2:
+            title = "Kitap Arama"
+            parameter = "%20%2B(MOBI%7CCBZ%7CCBR%7CCBC%7CCHM%7CEPUB%7CFB2%7CLIT%7CLRF%7CODT%7CPDF%7CPRC%7CPDB%7CPML%7CRB%7CRTF%7CTCR%7CDOC%7CDOCX)%20-inurl%3A(jsp%7Cpl%7Cphp%7Chtml%7Caspx%7Chtm%7Ccf%7Cshtml)%20intitle%3Aindex.of%20-inurl%3A(listen77%7Cmp3raid%7Cmp3toss%7Cmp3drug%7Cindex_of%7Cindex-of%7Cwallywashis%7Cdownloadmana)"
+        elif selected_item == 3:
+            title = "Müzik Arama"
+            parameter = "%20%2B(mp3%7Cwav%7Cac3%7Cogg%7Cflac%7Cwma%7Cm4a%7Caac%7Cmod)%20-inurl%3A(jsp%7Cpl%7Cphp%7Chtml%7Caspx%7Chtm%7Ccf%7Cshtml)%20intitle%3Aindex.of%20-inurl%3A(listen77%7Cmp3raid%7Cmp3toss%7Cmp3drug%7Cindex_of%7Cindex-of%7Cwallywashis%7Cdownloadmana)"
+        elif selected_item == 4:
+            title = "Program/ISO/Oyun Arama"
+            parameter = "%20%2B(exe%7Ciso%7Cdmg%7Ctar%7C7z%7Cbz2%7Cgz%7Crar%7Czip%7Capk)%20-inurl%3A(jsp%7Cpl%7Cphp%7Chtml%7Caspx%7Chtm%7Ccf%7Cshtml)%20intitle%3Aindex.of%20-inurl%3A(listen77%7Cmp3raid%7Cmp3toss%7Cmp3drug%7Cindex_of%7Cindex-of%7Cwallywashis%7Cdownloadmana)"
+        elif selected_item == 5:
+            title = "Görsel Arama"
+            parameter = "%20%2B(jpg%7Cpng%7Cbmp%7Cgif%7Ctif%7Ctiff%7Cpsd)%20-inurl%3A(jsp%7Cpl%7Cphp%7Chtml%7Caspx%7Chtm%7Ccf%7Cshtml)%20intitle%3Aindex.of%20-inurl%3A(listen77%7Cmp3raid%7Cmp3toss%7Cmp3drug%7Cindex_of%7Cindex-of%7Cwallywashis%7Cdownloadmana)"
+        elif selected_item == 6:
+            title = "Diğer Türler Arama"
+            parameter = "%20-inurl%3A(jsp%7Cpl%7Cphp%7Chtml%7Caspx%7Chtm%7Ccf%7Cshtml)%20intitle%3Aindex.of%20-inurl%3A(listen77%7Cmp3raid%7Cmp3toss%7Cmp3drug%7Cindex_of%7Cindex-of%7Cwallywashis%7Cdownloadmana)"
+        elif selected_item == 0:
+            speak_ = f"Başka bir aramada görüşmek üzere, hoşçakal {user_data[4]}."
+            speak(speak_)
+            break
+        else:
+            UC.create_frame("Geçersiz Seçim", "Lütfen listedeki seçenekler dahilinde bir numerik seçim yapın", "info")
+
+        while True:
+            speak_ = f"Lütfen {title}sı yapmak için aranacak nesneyi gir."
+            speak(speak_)
+            search_object = UC.create_frame(title, "Arama yapmak istediğiniz anahtar kelimeyi/kelimeleri giriniz.", "")
+            if search_object:
+                webbrowser.get().open(engine+search_object+parameter)
+                speak_ = f"İşte {search_object} ile ilgili {title} sonuçları. Başka bir aramada görüşmek üzere, hoşçakal {user_data[4]}."
+                speak(speak_)
+                break
+            else:
+                speak_ = f"İşte {search_object} ile ilgili {title} sonuçları."
+                speak(speak_)
+        
+        if search_object:
+            break
