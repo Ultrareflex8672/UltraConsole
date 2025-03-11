@@ -75,10 +75,10 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                 options.append("Ana Menü")
             else:  # Modül çağrısı yapılmadıysa
                 if self.path:  # Eğer ana menüde değilsek "Geri Dön" seçeneği koy
-                    options.append("↩ Geri Dön")
+                    options.append("Geri Dön")
                 else:  # Ana menüdeysek "Ayarlar" ve "Çıkış" seçenekleri ekle
-                    options.append("🌣 Ayarlar")
-                    options.append("⍈ Çıkış")
+                    options.append("Ayarlar")
+                    options.append("Çıkış")
 
             # choice = input("Seçiminizi yapın: ")
             choice = SV.create_frame(menu_title, options, "menu")
@@ -103,7 +103,7 @@ class MenuSystem(ModuleLoader,SV,DefaultMenu):
                         #                 }
                         #                     }
 
-                        setting_menu_data = ["Ayarları Görüntüle", "Ayarları Değiştir", "Modül İşlemleri", "Profilim", "Kullanıcılar", "UC Hakkında"]+["⌂ Ana Menü"]
+                        setting_menu_data = ["Ayarları Görüntüle", "Ayarları Değiştir", "Modül İşlemleri", "Profilim", "Kullanıcılar", "UC Hakkında"]+["Ana Menü"]
                         os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
                         setting_selection = int(SV.create_frame("Ayarlar", setting_menu_data, "menu"))
                         self.kwargs.update({"selected_key": setting_selection})

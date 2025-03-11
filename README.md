@@ -722,13 +722,17 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Bir dizi hata düzeltmesi</li>
 	</ul>
-	<li><b>12.03.2025 - V</b><b id="version">4.1.0.0</b></li>
+	<li><b>12.03.2025 - V4.1.0.0</b></li>
 	<ul>
 		<li>Updater fonksiyonu EXE haline getirilerek pyhon yüklü olma bağımlılığı kaldırıldı.</li>
 		<li>Updater fonksiyonuda Linux ve Windows sistemlerinin algılanarak doğru fonksiyonun otomatik seçilmesi sağlandı</li>
 		<li>UltraConsole hakkında ve dökümanlara kısa erişim eklendi</li>
 		<li>İsteğe bağlı kaynak kod indirme seçeneği eklendi</li>
 		<li>Uygulama içinde manuel güncelleştirme kontrolü eklendi</li>
+	</ul>
+	<li><b>12.03.2025 - V</b><b id="version">4.1.0.1</b></li>
+	<ul>
+		<li>Yazım hatası düzeltmesi.</li>
 	</ul>
 </ul>
 
