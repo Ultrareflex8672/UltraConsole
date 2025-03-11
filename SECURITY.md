@@ -8,7 +8,8 @@ Aşağıdaki tabloda, aktif olarak desteklenen ve güvenlik güncellemeleri alac
 
 | Sürüm              | Destek Durumu                               |
 |--------------------|---------------------------------------------|
-| V3.9.5.8 Latest    | ✅ Destekleniyor                           |
+| V4.0.0.0 Latest    | ✅ Destekleniyor                           |
+| V3.9.5.8           | ⚠️ Kritik güncellemeler için destekleniyor |
 | V3.8.5.5           | ⚠️ Kritik güncellemeler için destekleniyor |
 | V3.8.0.3           | ⚠️ Kritik güncellemeler için destekleniyor |
 | V3.5.0.2           | ⚠️ Kritik güncellemeler için destekleniyor |

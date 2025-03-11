@@ -121,11 +121,11 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
 
 ## 📥 Kurulum
 
-### [💾 UltraConsole 'u İndirin - ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Ultrareflex8672/UltraConsole/total)](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V4.0.0.0/UltraConsole_Setup.exe)
+### [💾 UltraConsole 'u İndirin - ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Ultrareflex8672/UltraConsole/total)](https://github.com/Ultrareflex8672/UltraConsole/releases/download/V4.1.0.0/UltraConsole_Setup.exe)
 
 ```
 # Seçenek 1: Kurulum dosyasını indirin ve yükleyin (Modül Kullanıcıları için Tavsiye Edilir)
-https://github.com/Ultrareflex8672/UltraConsole/releases/download/V4.0.0.0/UltraConsole_Setup.exe
+https://github.com/Ultrareflex8672/UltraConsole/releases/download/V4.1.0.0/UltraConsole_Setup.exe
 
 # Seçenek 2: Depoyu klonlayın (Framework Geliştiriciler için Tavsiye Edilir)
 git clone https://github.com/Ultrareflex8672/UltraConsole.git
@@ -718,9 +718,17 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<ul>
 		<li>Dahili kütüphane sayısı artırıldı</li>
 	</ul>
-	<li><b>10.03.2025 - V</b><b id="version">4.0.0.1</b></li>
+	<li><b>10.03.2025 - V4.0.0.1</b></li>
 	<ul>
 		<li>Bir dizi hata düzeltmesi</li>
+	</ul>
+	<li><b>12.03.2025 - V</b><b id="version">4.1.0.0</b></li>
+	<ul>
+		<li>Updater fonksiyonu EXE haline getirilerek pyhon yüklü olma bağımlılığı kaldırıldı.</li>
+		<li>Updater fonksiyonuda Linux ve Windows sistemlerinin algılanarak doğru fonksiyonun otomatik seçilmesi sağlandı</li>
+		<li>UltraConsole hakkında ve dökümanlara kısa erişim eklendi</li>
+		<li>İsteğe bağlı kaynak kod indirme seçeneği eklendi</li>
+		<li>Uygulama içinde manuel güncelleştirme kontrolü eklendi</li>
 	</ul>
 </ul>
 
