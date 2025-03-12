@@ -52,8 +52,12 @@ class Updater(HTMLParser):
     
     def update(self):
         if os.name == "nt":  # Windows için "nt"
-            exe_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater", "UC_updater.exe"))
-            exe_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater.exe"))
+            if getattr(sys, 'frozen', False):
+                exe_path = os.path.join(sys.executable, "UC_updater.exe")
+                exe_path = sys.executable
+            else:
+                exe_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater", "UC_updater.exe"))
+                exe_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater.exe"))
 
             if os.path.exists(exe_path):
                 print(f"▶️ Çalıştırılıyor: {exe_path}")
