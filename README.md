@@ -733,6 +733,7 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 	<li><b>12.03.2025 - V</b><b id="version">4.1.0.2</b></li>
 	<ul>
 		<li>Yazım hatası düzeltmesi.</li>
+		<li>Exe düzeltmesi.</li>
 	</ul>
 </ul>
 
