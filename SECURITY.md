@@ -9,10 +9,11 @@ Aşağıdaki tabloda, aktif olarak desteklenen ve güvenlik güncellemeleri alac
 | Sürüm              | Destek Durumu                               |
 |--------------------|---------------------------------------------|
 | V4.0.0.0 Latest    | ✅ Destekleniyor                           |
-| V3.9.5.8           | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.8.5.5           | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.8.0.3           | ⚠️ Kritik güncellemeler için destekleniyor |
-| V3.5.0.2           | ⚠️ Kritik güncellemeler için destekleniyor |
+| V4.0.0.0 Latest    | ⚠️ V4.1.0.0 a manuel güngelleme gerekli    |
+| V3.9.5.8           | ❌ Desteklenmiyor                          |
+| V3.8.5.5           | ❌ Desteklenmiyor                          |
+| V3.8.0.3           | ❌ Desteklenmiyor                          |
+| V3.5.0.2           | ❌ Desteklenmiyor                          |
 | Daha Eski Sürümler | ❌ Desteklenmiyor                          |
 
 ## 🚨 Güvenlik Açıklarını Bildirme
