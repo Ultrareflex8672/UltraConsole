@@ -103,7 +103,7 @@ Menüyü modülünüzde kullanmak için şu adımları takip edebilirsiniz:
         "Seçenek 4": "ornek_modul"
     }
 }
-```
+``` 
 Yukarıdaki menü yapılandırılmasına göre 'Ana Menü' 0. Index, 'Oyunlar' 1. Index ve yeni eklenen 'Örnek Modül' 2. Index.
 Bu durum da index değerimizi ilk parametresine yazarak ```UC.go_custom_menu(2, **kwargs)``` fonksiyonu ile menümüzü çağırabiliriz.
 Örneğin:
@@ -200,9 +200,9 @@ from application.ultraconsole import UltraConsole as UC
 def ornek_modul(**kwargs):
     if UC.from_main_menu(**kwargs):
         kwargs.update({"menu_data": menu_json})		        # Özel json verisi ile menü oluşturma
-	kwargs.update({"module_name": "modul_dosyası_adi"})	# Bağımsız modül dosyası adı tanımlamam
-	kwargs.update({"func_name": "fonksiyon_adi"})		# Modül dosyası adından bağımsız fonsiyon tanımlama
-	kwargs.update({"module_path": "modul_konumu"})	        # 'modules' kalsöründen farklı modül klasörü tanımlama
+    kwargs.update({"module_name": "modul_dosyası_adi"})	# Bağımsız modül dosyası adı tanımlamam
+    kwargs.update({"func_name": "fonksiyon_adi"})		# Modül dosyası adından bağımsız fonsiyon tanımlama
+    kwargs.update({"module_path": "modul_konumu"})	        # 'modules' kalsöründen farklı modül klasörü tanımlama
         kwargs.update({"class_name": "OrnekSinif"})		# Modül içinde çalıştırılacak sınıfı tanımlama
         kwargs.update({"init_data": "parametre"})		# Sınıf içinde init yapısına gönderilecek parametre
         UC.go_custom_menu(2, **kwargs)
@@ -276,7 +276,22 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 8. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
+## 8. Renk Referansı
+
+| Renk          | ANSI |
+| ------------- | ---- |
+| BLACK         | *30* |
+| RED           | *31* |
+| GREEN         | *32* |
+| BROWN         | *33* |
+| BLUE          | *34* |
+| PURPLE        | *35* |
+| CYAN          | *36* |
+| LIGHT_GRAY    | *37* |
+
+----------
+
+## 9. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
 
 -   **```UC.cls()```**: Konsolu temizler.
 -   **```UC.go_main_menu(**kwargs)```**: Ana menüye geri gider.
@@ -286,18 +301,18 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 -   **```UC.create_file("dosya_yolu")```**: Dosya oluşturur.
 -   **```UC.load_file("dosya_yolu")```**: Dosya yükler.
 -   **```UC.load_lines("dosya_yolu")```**: Dosyayı satır satır yükler.
--   **```UC.write_file("dosya_yolu", "içerik")```**: Dosyayı kaydeder.from application.log import log_ekle as LOG
+-   **```UC.write_file("dosya_yolu", "içerik")```**: Dosyayı kaydeder.
 -   **```from application.log import log_ekle as LOG```**: Modüle import edilerek **```LOG("Log mesajı")```** şeklinde log kaydı tutar
 
 ----------
 
-## 9. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="9"></a>
+## 10. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="9"></a>
 
 Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasını silebilirsiniz. Uygulama açıldığında yeni bir yönetici hesabı tanımlamanız istenecektir.
 
 ----------
 
-## 10. Ayar ve Menü Yapısı Sıfırlama<a id="10"></a>
+## 11. Ayar ve Menü Yapısı Sıfırlama<a id="10"></a>
 
 -   Sadece **ayarları sıfırlamak** için: `config/config.cfg` dosyasını silebilirsiniz.
 -   Sadece **menü yapısını sıfırlamak** için: `config/menu.cfg` dosyasını silebilirsiniz.
