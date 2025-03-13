@@ -532,5 +532,11 @@ Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasın
 
 <hr>
 
-
+<h3 align="center">İletişim:</h3>
+<p align="center">
+<a href="https://twitter.com/ultrareflexofcl" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="ultrareflexofcl" height="30" width="40" /></a>
+<a href="https://linkedin.com/in/kemalburakyildirim" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="kemalburakyildirim" height="30" width="40" /></a>
+<a href="https://fb.com/ultrareflex" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="ultrareflex" height="30" width="40" /></a>
+<a href="https://instagram.com/kemalburakyildirim" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="kemalburakyildirim" height="30" width="40" /></a>
+</p>
 
