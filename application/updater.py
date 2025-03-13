@@ -15,7 +15,7 @@ class Updater(HTMLParser):
         super().__init__()
         self.is_target = False  # Belirtilen id'yi bulmak için bayrak
         self.data_list = []  # Bulunan verileri saklamak için liste
-        self.current_version = 4106 # Bu programın sürümü
+        self.current_version = 4107 # Bu programın sürümü
 
 
     def handle_starttag(self, tag, attrs):
@@ -52,51 +52,40 @@ class Updater(HTMLParser):
     
     def update(self):
         if os.name == "nt":  # Windows için "nt"
-            if getattr(sys, 'frozen', False):
-                temp_dir = os.path.join(os.path.dirname(sys.executable), "UC_updater")
-                main_dir = os.path.dirname(sys.executable)
-                exe_path = os.path.join(os.path.dirname(sys.executable), "UC_updater", "UC_updater.exe")
-                exe_path2 = os.path.join(os.path.dirname(sys.executable), "UC_updater.exe")
-                
-            else:
-                temp_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater"))
-                main_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-                exe_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater", "UC_updater.exe"))
-                exe_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater.exe"))
+            try:
+                if getattr(sys, 'frozen', False):
+                    temp_dir = os.path.join(os.path.dirname(sys.executable), "UC_updater")
+                    main_dir = os.path.dirname(sys.executable)
+                    exe_path = os.path.join(os.path.dirname(sys.executable), "UC_updater", "UC_updater.exe")
+                    exe_path2 = os.path.join(os.path.dirname(sys.executable), "UC_updater.exe")
+                    
+                else:
+                    temp_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater"))
+                    main_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+                    exe_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater", "UC_updater.exe"))
+                    exe_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater.exe"))
 
-            if os.path.exists(exe_path2):
-                if not os.path.exists(temp_dir):
-                    os.makedirs(temp_dir)
-                shutil.copy2(exe_path2, exe_path)
-                print(f"▶️ Çalıştırılıyor: {exe_path}")
-                print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
-                print("| 0%")
-                process = subprocess.Popen(exe_path, shell=True)
-                process.wait()  # İşlem tamamlanana kadar bekle
-            elif os.path.exists(exe_path):
-                print("⚠️ UltraConsole Ana Updater Hizmeti Bulunamadı!")
-                print(f"▶️ Yedek Hizmet Çalıştırılıyor: {exe_path}")
-                print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
-                print("| 0%")
-                process = subprocess.Popen(exe_path, shell=True)
-                process.wait()  # İşlem tamamlanana kadar bekle
-            else:
-                print("❌ 'updater.exe' bulunamadı!")
-
-            # if os.path.exists(exe_path):
-            #     print(f"▶️ Çalıştırılıyor: {exe_path}")
-            #     print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
-            #     print("| 0%")
-            #     process = subprocess.Popen(exe_path, shell=True)
-            #     process.wait()  # İşlem tamamlanana kadar bekle
-            # elif os.path.exists(exe_path2):
-            #     print(f"▶️ Çalıştırılıyor: {exe_path2}")
-            #     print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
-            #     print("| 0%")
-            #     process = subprocess.Popen(exe_path2, shell=True)
-            #     process.wait()  # İşlem tamamlanana kadar bekle
-            # else:
-            #     print("❌ 'updater.exe' bulunamadı!")
+                if os.path.exists(exe_path2):
+                    if not os.path.exists(temp_dir):
+                        os.makedirs(temp_dir)
+                    shutil.copy2(exe_path2, exe_path)
+                    print(f"▶️ UC_updater for Windows Çalıştırılıyor: {exe_path}")
+                    print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
+                    print("| 0%")
+                    process = subprocess.Popen(exe_path, shell=True)
+                    process.wait()  # İşlem tamamlanana kadar bekle
+                elif os.path.exists(exe_path):
+                    print("⚠️ UltraConsole Ana Updater Hizmeti Bulunamadı!")
+                    print(f"▶️ UC_updater for Windows Yedek Hizmet Çalıştırılıyor: {exe_path}")
+                    print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
+                    print("| 0%")
+                    process = subprocess.Popen(exe_path, shell=True)
+                    process.wait()  # İşlem tamamlanana kadar bekle
+                else:
+                    raise Exception("'UC_updater.py' bulunamadı!")
+            except Exception as e:
+                print("❌ Hata oluştu: ", e)
+                input("Devam etmek için Enter'a basın... ➡️")
 
         elif os.name == "posix":  # Linux ve Mac için "posix"
             # Güncelleme betiğinin içeriği
@@ -110,10 +99,11 @@ import time
 import sys
 import subprocess
 
-exe_name = "main.py"
+exe_name = "main.py" #Linux e özel
 selection = input("\n</> UltraConsol kaynak kodlarının da indirilmesini istiyor musunuz?\n(Kaynak kodlar FrameWaork geliştricileri için gereklidir, yalnız modül geliştirici iseniz genellikle gerekli değildir)\n(E/H): ")
 
 try:
+    #Linuxe özel kapalı alan
     # Çalışan ana programı kapat
     # try:
     #     print(f"✖ {exe_name} kapatılıyor...")
@@ -152,7 +142,7 @@ try:
         temp_folder = current_dir
         os.makedirs(os.path.join(main_folder, "UC_updater"), exist_ok=True)
     else:
-        raise f"Güncelleme yapılacak '{exe_name}' bulunamadı. 'UC_updater' ı '{exe_name}' nin bulunduğu klasörde ya da alt klasöründe çalıştırın."
+        raise Exception(f"Güncelleme yapılacak '{exe_name}' bulunamadı. 'UC_updater' ı '{exe_name}' nin bulunduğu klasörde ya da alt klasöründe çalıştırın.")
 
     zip_url = "https://github.com/Ultrareflex8672/UltraConsole/archive/refs/heads/main.zip"
     zip_path = os.path.join(temp_folder, "UltraConsole.zip")
@@ -180,10 +170,11 @@ try:
         except Exception as e:
             print("❌ Hata oluştu: ", e)
 
-        not_including = {"application", "main.py", "UC_updater.py", "pyinstaller.txt", "requirements.txt"}
+        not_including = {"UC_updater.py", "pyinstaller.txt", "requirements.txt", ".gitignore", "CHANGELOG.md"} #Linux e özel
+        not_including_static = {"UltraConsole.exe", "UC_updater.exe"} #Linux e özel
 
         for item in os.listdir(source_folder):
-            if selection.lower() == "h" and item in not_including:
+            if selection.lower() == "h" and item in not_including and item in not_including_static: #Linux e özel
                 print(f"❌ {item} atlandı.")
                 continue
 
@@ -229,19 +220,57 @@ try:
         except Exception as e:
                 print(f"⚠️ İşlem hatalarla tamamlandı! Güncelleme doğru yüklenmemiş olabilir. Hata: {e}")
     else:
-        raise "❌ Güncelleme devam edemiyor! Dosya yada klasör yollarında sorun var."
+        raise Exception("❌ Güncelleme devam edemiyor! Dosya yada klasör yollarında sorun var.")
     
 except Exception as e:
     print("❌ Hata oluştu: ", e)
     input("Devam etmek için Enter'a basın... ➡️")
-    
-subprocess.run([UC_path])
+
+subprocess.run(['python3', UC_path]) #Linux e özel
                                 '''
+            try:
+                os.makedirs("UC_updater", exist_ok=True)  # Eğer yoksa klasörü oluştur
+                with open("UC_updater/UC_updater.py", "w", encoding="utf-8") as file:
+                    file.write(update_script)
 
-            os.makedirs("UC_updater", exist_ok=True)  # Eğer yoksa klasörü oluştur
-            with open("UC_updater/UC_updater.py", "w", encoding="utf-8") as file:
-                file.write(update_script)
+                if getattr(sys, 'frozen', False):
+                    temp_dir = os.path.join(os.path.dirname(sys.executable), "UC_updater")
+                    main_dir = os.path.dirname(sys.executable)
+                    exe_path = os.path.join(os.path.dirname(sys.executable), "UC_updater", "UC_updater.py")
+                    exe_path2 = os.path.join(os.path.dirname(sys.executable), "UC_updater.py")
+                    
+                else:
+                    temp_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater"))
+                    main_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+                    exe_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater", "UC_updater.py"))
+                    exe_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater.py"))
 
-            # Güncelleme betiğini çalıştır
-            python_cmd = "python" if sys.platform.startswith("win") else "python3"
-            os.system(f"{python_cmd} UC_updater/UC_updater.py")
+                if os.path.exists(exe_path2):
+                    if not os.path.exists(temp_dir):
+                        os.makedirs(temp_dir)
+                    shutil.copy2(exe_path2, exe_path)
+                    print(f"▶️ UC_updater for Linux Çalıştırılıyor: {exe_path}")
+                    print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
+                    print("| 0%")
+                    # process = subprocess.Popen(exe_path, shell=True)
+                    # Güncelleme betiğini çalıştır
+                    python_cmd = "python" if sys.platform.startswith("win") else "python3"
+                    os.system(f"{python_cmd} UC_updater/UC_updater.py")
+                    process.wait()  # İşlem tamamlanana kadar bekle
+                elif os.path.exists(exe_path):
+                    print("⚠️ UltraConsole Ana Updater Hizmeti Bulunamadı!")
+                    print(f"▶️ UC_updater for Linux Yedek Hizmet Çalıştırılıyor: {exe_path}")
+                    print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
+                    print("| 0%")
+                    # process = subprocess.Popen(exe_path, shell=True)
+                    # Güncelleme betiğini çalıştır
+                    python_cmd = "python" if sys.platform.startswith("win") else "python3"
+                    os.system(f"{python_cmd} UC_updater/UC_updater.py")
+                    process.wait()  # İşlem tamamlanana kadar bekle
+                else:
+                    raise Exception("'UC_updater.py' bulunamadı!")
+            except Exception as e:
+                print("❌ Hata oluştu: ", e)
+                input("Devam etmek için Enter'a basın... ➡️")
+
+            

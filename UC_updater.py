@@ -49,7 +49,7 @@ try:
         temp_folder = current_dir
         os.makedirs(os.path.join(main_folder, "UC_updater"), exist_ok=True)
     else:
-        raise f"Güncelleme yapılacak '{exe_name}' bulunamadı. 'UC_updater' ı '{exe_name}' nin bulunduğu klasörde ya da alt klasöründe çalıştırın."
+        raise Exception(f"Güncelleme yapılacak '{exe_name}' bulunamadı. 'UC_updater' ı '{exe_name}' nin bulunduğu klasörde ya da alt klasöründe çalıştırın.")
 
     
     zip_url = "https://github.com/Ultrareflex8672/UltraConsole/archive/refs/heads/main.zip"
@@ -79,7 +79,7 @@ try:
             print("❌ Hata oluştu: ", e)
 
         
-        not_including = {"application", "main.py", "UC_updater.py", "pyinstaller.txt", "requirements.txt"}
+        not_including = {"application", "main.py", "UC_updater.py", "pyinstaller.txt", "requirements.txt", ".gitignore", "CHANGELOG.md"}
 
         for item in os.listdir(source_folder):
             if selection.lower() == "h" and item in not_including:
@@ -128,7 +128,7 @@ try:
         except Exception as e:
                 print(f"⚠️ İşlem hatalarla tamamlandı! Güncelleme doğru yüklenmemiş olabilir. Hata: {e}")
     else:
-        raise "❌ Güncelleme devam edemiyor! Dosya yada klasör yollarında sorun var."
+        raise Exception("❌ Güncelleme devam edemiyor! Dosya yada klasör yollarında sorun var.")
     
 except Exception as e:
     print("❌ Hata oluştu: ", e)
