@@ -203,10 +203,14 @@
 		<li>İsteğe bağlı kaynak kod indirme seçeneği eklendi</li>
 		<li>Uygulama içinde manuel güncelleştirme kontrolü eklendi</li>
 	</ul>
-	<li><b>12.03.2025 - V</b><b id="version">4.1.0.4</b></li>
+	<li><b>12.03.2025 - V4.1.0.4</b></li>
 	<ul>
 		<li>Yazım hatası düzeltmesi.</li>
 		<li>Exe düzeltmesi.</li>
+	</ul>
+    <li><b>12.03.2025 - V</b><b id="version">4.1.0.5</b></li>
+	<ul>
+		<li>UltraConsole Hakkında Menüsü Güncellemesi.</li>
 	</ul>
 </ul>
 

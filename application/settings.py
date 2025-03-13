@@ -868,11 +868,31 @@ class SettingsMenu(MS):
     def about_UC(**kwargs):
         updater = UP()
         menu_items = ["UltraConsle Dökümanlar (GitHub)", "</> Kaynak Kodları İndir", "Güncelleştirmeleri Kontrol Et"]
+        os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
         selection = int(MS.create_frame("UltraConsole Hakkında", menu_items, "menu"))
 
         if selection == 1:
-            webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole")
-            MS.create_frame("Dökümanlar", "UltraConsol kaynak kodları, tanıtımı, kullanım kalvuzu ve teknik dökümanlar, lisans ve güvenlik politikası vb. içerikleri barındıran GitHub sayfasına yönlendirildiniz.")
+            doc_menu_items = ["Ana Sayfa", "Teknik Kılavuz", "Version Geçmişi", "Lisans", "Güvenlik Politikası", "Davranış Kuralları"] + ["Geri Dön"]
+            os.system('cls' if os.name == 'nt' else 'clear')  # Konsolu temizle
+            doc_selection = int(MS.create_frame("UltraConsle Dökümanlar (GitHub)", doc_menu_items, "menu"))
+            if doc_selection == 1:
+                webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole")
+                MS.create_frame("GitHub Anasayfa ve README.md", "UltraConsol kaynak kodları, tanıtımı, kullanım kılavuzu ve teknik dökümanlar, lisans ve güvenlik politikası vb. içerikleri barındıran GitHub sayfasına yönlendirildiniz.")
+            if doc_selection == 2:
+                webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole/blob/main/CONTRIBUTING.md")
+                MS.create_frame("Teknik Kılavuz", "UltraConsol kullanım kılavuzu ve teknik dökümanları barındıran GitHub sayfasına yönlendirildiniz.")
+            if doc_selection == 3:
+                webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole/blob/main/CHANGELOG.md")
+                MS.create_frame("Version Geçmişi", "UltraConsol Version Geçmişini barındıran GitHub sayfasına yönlendirildiniz.")
+            if doc_selection == 4:
+                webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole?tab=MIT-1-ov-file")
+                MS.create_frame("Lisans", "UltraConsol lisans bilgisini barındıran GitHub sayfasına yönlendirildiniz.")
+            if doc_selection == 5:
+                webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole?tab=security-ov-file")
+                MS.create_frame("Güvenlik Politikası", "UltraConsol güvenlik politikasını barındıran GitHub sayfasına yönlendirildiniz.")
+            if doc_selection == 6:
+                webbrowser.get().open("https://github.com/Ultrareflex8672/UltraConsole?tab=coc-ov-file")
+                MS.create_frame("Davranış Kuralları", "UltraConsol davranış kurallarını barındıran GitHub sayfasına yönlendirildiniz.")
         if selection == 2:
             warn = MS.create_frame("</> Kaynak Kod", "Birazdan UltraConsol Updater hizmeti başlatılacak. - !UltraConsol kaynak kodlarını indirebilmek için Updater içinde gelen kaynak kodu sorusuna 'E' yanıtı vermeniz gerekmektedir! - (ℹ UltraConsole kaynak kodları FrameWork yapısı geliştiricileri içindir. Eğer sadece modül kullanıcısı ya da modül geliştiricisi iseniz genelleikle kaynak kodlara ihtiyacınız yoktur.ℹ) ", "⚠️ Devam etmek istiyor musunuz? (E/H): ")
             if warn.lower() == "e":

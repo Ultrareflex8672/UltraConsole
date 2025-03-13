@@ -145,6 +145,12 @@ Katkılarınızı bekliyoruz! Yeni modüller ekleyerek veya mevcut kodu gelişti
 
 ----------
 
+## 🏷️ Versiyon Geçmişi
+
+UltraConsole [Versiyon Geçmişi](https://github.com/Ultrareflex8672/UltraConsole/blob/main/CHANGELOG.md)
+
+----------
+
 ## 📜 Lisans
 
 Bu proje [MIT Lisansı](https://github.com/Ultrareflex8672/UltraConsole/tree/main?tab=MIT-1-ov-file) altında lisanslanmıştır.

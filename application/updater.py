@@ -15,7 +15,7 @@ class Updater(HTMLParser):
         super().__init__()
         self.is_target = False  # Belirtilen id'yi bulmak için bayrak
         self.data_list = []  # Bulunan verileri saklamak için liste
-        self.current_version = 4104 # Bu programın sürümü
+        self.current_version = 4105 # Bu programın sürümü
 
 
     def handle_starttag(self, tag, attrs):
@@ -37,7 +37,7 @@ class Updater(HTMLParser):
 
     def version(self):
         # Web sayfasından HTML içeriğini al
-        url = "https://github.com/Ultrareflex8672/UltraConsole"
+        url = "https://github.com/Ultrareflex8672/UltraConsole/blob/main/CHANGELOG.md"
         with urllib.request.urlopen(url) as response:
             html_content = response.read().decode("utf-8")
 
