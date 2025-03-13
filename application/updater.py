@@ -53,6 +53,14 @@ class Updater(HTMLParser):
     def update(self):
         if os.name == "nt":  # Windows için "nt"
             try:
+                try:
+                    if sys.platform.startswith("win"):
+                        os.system(f"taskkill /F /IM UC_updater.exe 2>nul")
+                    else:
+                        os.system(f"pkill -f UC_updater.exe 2>/dev/null")
+                except Exception as e:
+                    print(f"❌ Hata oluştu: {e}")
+
                 if getattr(sys, 'frozen', False):
                     temp_dir = os.path.join(os.path.dirname(sys.executable), "UC_updater")
                     main_dir = os.path.dirname(sys.executable)
