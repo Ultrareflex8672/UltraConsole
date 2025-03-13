@@ -15,7 +15,7 @@ class Updater(HTMLParser):
         super().__init__()
         self.is_target = False  # Belirtilen id'yi bulmak için bayrak
         self.data_list = []  # Bulunan verileri saklamak için liste
-        self.current_version = 4105 # Bu programın sürümü
+        self.current_version = 4106 # Bu programın sürümü
 
 
     def handle_starttag(self, tag, attrs):
@@ -53,26 +53,50 @@ class Updater(HTMLParser):
     def update(self):
         if os.name == "nt":  # Windows için "nt"
             if getattr(sys, 'frozen', False):
+                temp_dir = os.path.join(os.path.dirname(sys.executable), "UC_updater")
+                main_dir = os.path.dirname(sys.executable)
                 exe_path = os.path.join(os.path.dirname(sys.executable), "UC_updater", "UC_updater.exe")
                 exe_path2 = os.path.join(os.path.dirname(sys.executable), "UC_updater.exe")
+                
             else:
+                temp_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater"))
+                main_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
                 exe_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater", "UC_updater.exe"))
                 exe_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "UC_updater.exe"))
 
-            if os.path.exists(exe_path):
+            if os.path.exists(exe_path2):
+                if not os.path.exists(temp_dir):
+                    os.makedirs(temp_dir)
+                shutil.copy2(exe_path2, exe_path)
                 print(f"▶️ Çalıştırılıyor: {exe_path}")
                 print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
                 print("| 0%")
                 process = subprocess.Popen(exe_path, shell=True)
                 process.wait()  # İşlem tamamlanana kadar bekle
-            elif os.path.exists(exe_path2):
-                print(f"▶️ Çalıştırılıyor: {exe_path2}")
+            elif os.path.exists(exe_path):
+                print("⚠️ UltraConsole Ana Updater Hizmeti Bulunamadı!")
+                print(f"▶️ Yedek Hizmet Çalıştırılıyor: {exe_path}")
                 print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
                 print("| 0%")
-                process = subprocess.Popen(exe_path2, shell=True)
+                process = subprocess.Popen(exe_path, shell=True)
                 process.wait()  # İşlem tamamlanana kadar bekle
             else:
                 print("❌ 'updater.exe' bulunamadı!")
+
+            # if os.path.exists(exe_path):
+            #     print(f"▶️ Çalıştırılıyor: {exe_path}")
+            #     print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
+            #     print("| 0%")
+            #     process = subprocess.Popen(exe_path, shell=True)
+            #     process.wait()  # İşlem tamamlanana kadar bekle
+            # elif os.path.exists(exe_path2):
+            #     print(f"▶️ Çalıştırılıyor: {exe_path2}")
+            #     print("🔄 UltraConsole Güncelleştirme Hizmeti Başlatıldı!")
+            #     print("| 0%")
+            #     process = subprocess.Popen(exe_path2, shell=True)
+            #     process.wait()  # İşlem tamamlanana kadar bekle
+            # else:
+            #     print("❌ 'updater.exe' bulunamadı!")
 
         elif os.name == "posix":  # Linux ve Mac için "posix"
             # Güncelleme betiğinin içeriği
