@@ -139,6 +139,28 @@ UltraConsole 'a modül geliştirmekten ayrıca UltraConsole Framework yapısınd
 
 ----------
 
+## 📌 Katkıda Bulunma
+
+Katkılarınızı bekliyoruz! Yeni modüller ekleyerek veya mevcut kodu geliştirerek projeye destek olabilirsiniz. PR'lerinizi açabilirsiniz.
+
+----------
+
+## 📜 Lisans
+
+Bu proje [MIT Lisansı](https://github.com/Ultrareflex8672/UltraConsole/tree/main?tab=MIT-1-ov-file) altında lisanslanmıştır.
+
+----------
+
+## 🔒 Güvenlik
+
+UltraConsole Güvenlik Politikasına [buradan ulaşabilirsiniz.](https://github.com/Ultrareflex8672/UltraConsole?tab=security-ov-file) 
+
+----------
+
+🚀 **UltraConsole ile komut satırını daha güçlü hale getirin!**
+
+----------
+
 ## 🎯 Kullanım
 
 ```
@@ -171,35 +193,14 @@ UltraConsole.exe
 6.  [**Menü Pencere Boyutları ve Renklerini Değiştirme**](#6)
     
 7.  [**Bilgi ve Input Pencere Boyutları ve Renklerini Değiştirme**](#7)
+
+8.  [**Renk Referansı**](#8)
     
-8.  [**Modülde Kullanabileceğiniz Diğer Fonksiyonlar**](#8)
+9.  [**Modülde Kullanabileceğiniz Diğer Fonksiyonlar**](#9)
     
-9.  [**Yönetici Kullanıcı Adı ve Şifremi Unuttum**](#9)
+10.  [**Yönetici Kullanıcı Adı ve Şifremi Unuttum**](#10)
     
-10.  [**Ayar ve Menü Yapısı Sıfırlama**](#10)
-
-----------
-
-## 📌 Katkıda Bulunma
-
-Katkılarınızı bekliyoruz! Yeni modüller ekleyerek veya mevcut kodu geliştirerek projeye destek olabilirsiniz. PR'lerinizi açabilirsiniz.
-
-----------
-
-## 📜 Lisans
-
-Bu proje [MIT Lisansı](https://github.com/Ultrareflex8672/UltraConsole/tree/main?tab=MIT-1-ov-file) altında lisanslanmıştır.
-
-----------
-
-## 🔒 Güvenlik
-
-UltraConsole Güvenlik Politikasına [buradan ulaşabilirsiniz.](https://github.com/Ultrareflex8672/UltraConsole?tab=security-ov-file) 
-
-----------
-
-🚀 **UltraConsole ile komut satırını daha güçlü hale getirin!**
-
+11.  [**Ayar ve Menü Yapısı Sıfırlama**](#11)
 
 <hr>
 
@@ -481,7 +482,7 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 8. Renk Referansı
+## 8. Renk Referansı<a id="8"></a>
 
 | Renk          | ANSI |
 | ------------- | ---- |
@@ -496,7 +497,7 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 9. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
+## 9. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="9"></a>
 
 -   **```UC.cls()```**: Konsolu temizler.
 -   **```UC.go_main_menu(**kwargs)```**: Ana menüye geri gider.
@@ -511,13 +512,13 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 10. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="9"></a>
+## 10. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="10"></a>
 
 Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasını silebilirsiniz. Uygulama açıldığında yeni bir yönetici hesabı tanımlamanız istenecektir.
 
 ----------
 
-## 11. Ayar ve Menü Yapısı Sıfırlama<a id="10"></a>
+## 11. Ayar ve Menü Yapısı Sıfırlama<a id="11"></a>
 
 -   Sadece **ayarları sıfırlamak** için: `config/config.cfg` dosyasını silebilirsiniz.
 -   Sadece **menü yapısını sıfırlamak** için: `config/menu.cfg` dosyasını silebilirsiniz.

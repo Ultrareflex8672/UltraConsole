@@ -1,3 +1,41 @@
+# UltraConsole Klavuz Index
+### [UltraConsole Modülü Eklemek ve Kullanmak](#0)
+
+1. [ **Modül Ekleme**](#1)
+    
+    -   [Python Dosyası Oluşturma](#1.1)
+    -   [Modülünüzü UltraConsole’a Dahil Etme](#1.2)
+    -   [Fonksiyon İsimlendirmesi](#1.3)
+    -   [Modül Klasörüne Yerleştirme](#1.4)
+    -   [Modül Ekleme](#1.5)
+2.  [**Menü Oluşturma**](#2)
+    
+    -   [Basit Menü Yapısı (Liste Kullanarak)](#2.1)
+    -   [JSON Yapısı ile Menü](#2.2)
+    -   [Menüyü Modül İçerisinde Kullanma](#2.3)
+    -   [JSON Yapısını Dinamik Olarak Kullanma](#2.4)
+    -   [`_init_` Fonksiyonu ile Parametre Gönderme](#2.5)
+3.  [**Bilgi Penceresi Oluşturma**](#3)
+    
+4.  [**Kullanıcıdan Input Alma**](#4)
+    
+5.  [**Giriş Yapmış Kullanıcının Bilgilerini Kullanma**](#5)
+    
+    -   [`user_data` İndeksleri](#5.1)
+6.  [**Menü Pencere Boyutları ve Renklerini Değiştirme**](#6)
+    
+7.  [**Bilgi ve Input Pencere Boyutları ve Renklerini Değiştirme**](#7)
+
+8.  [**Renk Referansı**](#8)
+    
+9.  [**Modülde Kullanabileceğiniz Diğer Fonksiyonlar**](#9)
+    
+10.  [**Yönetici Kullanıcı Adı ve Şifremi Unuttum**](#10)
+    
+11.  [**Ayar ve Menü Yapısı Sıfırlama**](#11)
+
+<hr>
+
 # UltraConsole Modülü Eklemek ve Kullanmak<a id="0"></a>
 
 Bu yazıda UltraConsole modülünde yeni modüller nasıl eklenir, menü nasıl oluşturulur ve modül içerisinde hangi fonksiyonlar kullanılabilir gibi detayları bulabilirsiniz.
@@ -276,7 +314,7 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 8. Renk Referansı
+## 8. Renk Referansı<a id="8"></a>
 
 | Renk          | ANSI |
 | ------------- | ---- |
@@ -291,7 +329,7 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 9. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="8"></a>
+## 9. Modülde Kullanabileceğiniz Diğer Fonksiyonlar<a id="9"></a>
 
 -   **```UC.cls()```**: Konsolu temizler.
 -   **```UC.go_main_menu(**kwargs)```**: Ana menüye geri gider.
@@ -306,13 +344,13 @@ Bilgi ve input pencere boyutlarını ve renklerini de Ayar -> Ayar Değiştir me
 
 ----------
 
-## 10. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="9"></a>
+## 10. Yönetici Kullanıcı Adı ve Şifremi Unuttum<a id="10"></a>
 
 Eğer giriş yapamıyorsanız, `database` klasöründeki `users_db.db` dosyasını silebilirsiniz. Uygulama açıldığında yeni bir yönetici hesabı tanımlamanız istenecektir.
 
 ----------
 
-## 11. Ayar ve Menü Yapısı Sıfırlama<a id="10"></a>
+## 11. Ayar ve Menü Yapısı Sıfırlama<a id="11"></a>
 
 -   Sadece **ayarları sıfırlamak** için: `config/config.cfg` dosyasını silebilirsiniz.
 -   Sadece **menü yapısını sıfırlamak** için: `config/menu.cfg` dosyasını silebilirsiniz.
