@@ -41,31 +41,31 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
     
     -   🔉 Sesli Asistan
 
-	-   🧮 Hesap Makinesi
+    -   💱 Döviz Hesaplama Modülü (API ile anlık veri)
+
+    -   🌡️ Sıcaklık Birim Çevirici
+
+    -   ⚖️ BMI Hesaplama Modülü
+
+    -   📊 Not Hesaplama Modülü
         
     -   🎭 Adam Asmaca Oyunu
         
     -   ✂️ Taş, Kağıt, Makas
         
-    -   📅 Takvim Modülü
-        
-    -   🚩 Bayrak Çizme Modülü
-        
     -   🏓 Pong Oyunu
         
     -   🎲 Sayı Tahmin Oyunu
+
+	-   🧮 Hesap Makinesi
+
+    -   🚩 Bayrak Çizme Modülü
         
     -   🔢 Ritmik Sayma Modülü
         
-    -   📊 Not Hesaplama Modülü
-        
     -   🔢 Çarpım Tablosu
-        
-    -   ⚖️ BMI Hesaplama Modülü
-        
-    -   🌡️ Sıcaklık Birim Çevirici
-        
-    -   💱 Döviz Hesaplama Modülü (API ile anlık veri)
+
+    -   📅 Takvim Modülü
         
 
 ### ⚙️ Ayarlar ve Konfigürasyon
@@ -137,7 +137,7 @@ git clone https://github.com/Ultrareflex8672/UltraConsole.git
 
 UltraConsole 'a modül geliştirmekten ayrıca UltraConsole Framework yapısında geliştirme ve değişiklik yapmak istiyorsanız [buradan son versiyon `UltraConsole_Setup.exe`](https://github.com/Ultrareflex8672/UltraConsole/releases) dosyasını indirin ve kurun. Uygulama kaynak kodları UltraConsole 'un yüklü olduğu dizinde `main.py` dosyası ve `application` klasöründedir. `UltraConsole.exe` dosyası çalışırken `main.py` dosyası ve  `application` klasörüne ihtiyaç duymaz. Bu sadece geliştiriciler için açık kaynak kodları içerir. Ayrıca ```python -m pip install -r requirements.txt``` komutu ile bağımlılıkları yükleyin (gerekliyse). Bu işlem yalnız framework geliştiricileri içindir, modül üretici kullanıcılar için dahili kütüphaneler `UltraConsole.exe` içinde mevcuttur ve aşağıdaki gibidir. Geliştireceğiniz modül için farklı bir kütüphane ihticayınız varsa `application\ultraconsole.py` içine import ettikten sonra ```pyinstaller --name=UltraConsole --onefile --add-data "application;application" --add-data "modules;modules" --icon=ultraconsole.ico main.py``` çalıştırarak özel bir sürüm elde edebilsiniz.
 
- `base64`, `BeautifulSoup`, `catalogue`, `charset_normalizer`, `cycler`, `datetime`, `getpass`, `gTTS`, `hashlib`, `http.client`, `HTMLParser`, `importlib.util`, `jiter`, `json` `kiwisolver`, `logging`, `mdurl`, `msvcrt`, `murmurhash`, `os`, `uuid`, `packaging`, `playsound`, `preshed`, `pytz`, `re`, `regex`, `requests`, `signal`, `six`, `sqlite3`,  `subprocess`,`shutil`, `sys`, `textwrap`, `time`, `turtle`, `urllib3`, `urllib.request`, `wasabi`, `webbrowser`, `wrapt`, `zipfile` `zipp`
+ `base64`, `BeautifulSoup`, `catalogue`, `charset_normalizer`, `cycler`, `datetime`, `getpass`, `gTTS`, `hashlib`, `http.client`, `HTMLParser`, `importlib.util`, `jiter`, `json`, `kiwisolver`, `logging`, `mdurl`, `msvcrt`, `murmurhash`, `os`, `uuid`, `packaging`, `playsound`, `preshed`, `pytz`, `re`, `regex`, `requests`, `signal`, `six`, `sqlite3`,  `subprocess`,`shutil`, `sys`, `textwrap`, `time`, `turtle`, `urllib3`, `urllib.request`, `wasabi`, `webbrowser`, `wrapt`, `zipfile`, `zipp`
 
 ----------
 
