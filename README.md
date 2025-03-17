@@ -37,6 +37,8 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
     
 -   Framework 'ün nasıl çalıştığını analiz edebileceğiniz bazı örnek dahili modüller:
     
+    -   🔒 Şifreli Dosya Kasası
+    
     -   🔉 Sesli Asistan
 
 	-   🧮 Hesap Makinesi

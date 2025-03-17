@@ -216,9 +216,13 @@
 	<ul>
 		<li>UltraConsole Updater for Windows hizmetinde iyileştirme.</li>
 	</ul>
-	<li><b>13.03.2025 - V</b><b id="version">4.1.0.7</b></li>
+	<li><b>13.03.2025 - V4.1.0.7</b></li>
 	<ul>
 		<li>UltraConsole Updater for Linux hizmetinde iyileştirme.</li>
+	</ul>
+	<li><b>17.03.2025 - V</b><b id="version">4.1.1.7</b></li>
+	<ul>
+		<li>Şifreli Dosya Kasa modülü eklendi.</li>
 	</ul>
 </ul>
 
