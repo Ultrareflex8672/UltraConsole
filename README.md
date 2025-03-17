@@ -35,7 +35,7 @@ UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak ü
     
 -   Modüller parametre alabilir ve ana uygulama ile veri paylaşabilir.
     
--   Framework 'ün nasıl çalıştığını analiz edebileceğiniz bazı örnek dahili modüller:
+-   Framework 'ün nasıl çalıştığını analiz edebileceğiniz ve kullanışlı bulabileceğiniz bazı örnek dahili modüller:
     
     -   🔒 Şifreli Dosya Kasası
     
