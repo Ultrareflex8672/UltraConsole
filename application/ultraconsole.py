@@ -122,6 +122,8 @@ class UltraConsole(MS):
             return getpass.getpass("Şifrenizi tekar girin: ")
 
 
+from colorama import Fore, Back, Style
+import colorama
 from gtts import gTTS
 from datetime import datetime
 from playsound import playsound
