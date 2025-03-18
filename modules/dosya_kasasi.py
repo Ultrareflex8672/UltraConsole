@@ -7,44 +7,61 @@ import hashlib
 import uuid
 import shutil
 
-menu_json = {
-    "Kilitli Dosya Kasası": { 
-        "Kasayı Kilitle": "dosya_kasasi", 
-        "Kasayı Görüntüle": "dosya_kasasi"
-    }
-}
+access_authorization = False
 
 def dosya_kasasi(**kwargs):
-        if UC.from_main_menu(**kwargs):
-            user_data = kwargs.get("user_data")
-            if user_data[3] == 0:
-                menu_json["Kilitli Dosya Kasası"]["Ana Kasa Erişim Yetkisi"] = "dosya_kasasi"
-            kwargs.update({"menu_data": menu_json})
-            cpassword = user_data[2]
-            main_dir, safe_dir, user_unlock_folder, user_unlock_temp_folder, user_lock_folder = get_dir(**kwargs)
-            try:
-                if not os.path.exists(user_unlock_temp_folder):
-                    subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
-                    subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
-                    subprocess.run(f'icacls "{user_lock_folder}" /remove:d Everyone', shell=True)
-                    subprocess.run(f'icacls "{user_lock_folder}" /grant Everyone:(OI)(CI)F', shell=True)
-                    os.rename(user_lock_folder, user_unlock_temp_folder)
-            finally:
-                if not os.path.exists(user_unlock_folder) and not os.path.exists(user_unlock_temp_folder):
-                    os.makedirs(user_unlock_folder)
-                    LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) için dosya kasası oluşturuldu.")
-                    UC.create_frame("⚿ Yeni Dosya Kasası ☑", f"{user_data[1]} kullanıcısı için mevcut bir kilitli yada kilitsiz kasa bulunamadı. {user_unlock_folder} konumuna yeni kilitsiz bir kasa başarı ile oluşturuldu.", "info")
+        user_data = kwargs.get("user_data")
+        cpassword = user_data[2]
+        main_dir, safe_dir, user_unlock_folder, user_unlock_temp_folder, user_lock_folder = get_dir(**kwargs)
+        try:
+            if not os.path.exists(user_unlock_temp_folder):
+                subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
+                subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                subprocess.run(f'icacls "{user_lock_folder}" /remove:d Everyone', shell=True)
+                subprocess.run(f'icacls "{user_lock_folder}" /grant Everyone:(OI)(CI)F', shell=True)
+                os.rename(user_lock_folder, user_unlock_temp_folder)
+        finally:
+            if not os.path.exists(user_unlock_folder) and not os.path.exists(user_unlock_temp_folder):
+                os.makedirs(user_unlock_folder)
+                LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) için dosya kasası oluşturuldu.")
+                UC.create_frame("⚿ Yeni Dosya Kasası ☑", f"{user_data[1]} kullanıcısı için mevcut bir kilitli yada kilitsiz kasa bulunamadı. {user_unlock_folder} konumuna yeni kilitsiz bir kasa başarı ile oluşturuldu.", "info")
+            subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+            subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
+        
+        menu_items = ["Kasayı Kilitle", "Kasayı Görüntüle"]
+        if user_data[3] == 0:
+            menu_items.append("Ana Kasa Erişim Yetkisi")
+        menu_items = menu_items + ["Ana Menü"]
+        UC.cls()
+        selection = int(UC.create_frame("Kilitli Dosya Kasası", menu_items, "menu"))
+        if selection == 1:
+            lock_folder(**kwargs)
+            dosya_kasasi(**kwargs)
+        elif selection == 2:
+            unlock_folder(**kwargs)
+            dosya_kasasi(**kwargs)
+        elif selection == 3:
+            remove_per(**kwargs)
+        elif selection != 0:
+            UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
+            dosya_kasasi(**kwargs)
+
+        try:
+            if os.path.exists(user_unlock_temp_folder):
+                subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
+                subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                subprocess.run(f'icacls "{user_unlock_temp_folder}" /remove:d Everyone', shell=True)
+                subprocess.run(f'icacls "{user_unlock_temp_folder}" /grant Everyone:(OI)(CI)F', shell=True)
+                os.system(f'attrib -h -s "{user_unlock_temp_folder}"')
+                os.rename(user_unlock_temp_folder, user_lock_folder)
+                os.system(f'attrib +h +s "{user_lock_folder}"')
+                subprocess.run(f'icacls "{user_lock_folder}" /grant Everyone:(OI)(CI)F', shell=True)
+                subprocess.run(f'icacls "{user_lock_folder}" /deny Everyone:(D)', shell=True)
+        finally:
+            if access_authorization == False:
                 subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
                 subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
-                UC.go_custom_menu(0, **kwargs)
-        elif UC.selected_key(1, **kwargs):
-            lock_folder(**kwargs)
-        elif UC.selected_key(2, **kwargs):
-            unlock_folder(**kwargs)
-        elif UC.selected_key(3, **kwargs):
-            remove_per(**kwargs)
-        else:
-            del kwargs["menu_data"]
+            
         
 def lock_folder(**kwargs):
     user_data = kwargs.get("user_data")
@@ -258,12 +275,14 @@ def get_dir(**kwargs):
 def remove_per(**kwargs):
     user_data = kwargs.get("user_data")
     user_type = user_data[3]
+    global access_authorization
     if user_type == 0:
         main_dir, safe_dir, user_unlock_folder, user_unlock_temp_folder, user_lock_folder = get_dir(**kwargs)
         selecetion = UC.create_frame("⚿ Ana Kasa Erişimi ⚠", f"Devam ederseniz {safe_dir} kalsörü erişim yetkileri kısa süre için açılacaktır. Ancak bu işlem diğer kullanıcıların dosya kasalarına erişim yetkisi vermez. Bu seçeneği UltraConsole konumunu değiştirmek yada sistemden kaldırmak gibi durumlarda kullanınız.", "Devam edilsin mi? (E/H)")
         if selecetion.lower() == "e":
             subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
             subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+            access_authorization = True
             LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) ana kasa dizini erişim yetkisi kısıtlama önlemlerini devre dışı bıraktı.")
             UC.create_frame("⚿ Ana Kasa Erişimi ☑", f"{safe_dir} klasörü erişim yetki kısıtlaması tekrar kasa şifreleme yada görüntüleme işlemi yapılana kadar kaldırıldı!")
     else:
@@ -303,4 +322,5 @@ def delete_folder(folder_path):
         print(f"{folder_path} başarıyla silindi.")
     else:
         print(f"{folder_path} bulunamadı veya geçerli bir klasör değil.")
+
 
