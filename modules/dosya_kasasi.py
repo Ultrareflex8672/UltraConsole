@@ -160,6 +160,7 @@ def lock_folder(**kwargs):
         selection = int(UC.create_frame("⚿ Çift Kasa için Yapılacak İşlem ⚠", ["Kilitli Kasanın Üzerine Yaz", "Kilitli ve Kilitsiz Kasaları Aç", "Kilitli Kasayı Sil ve Yenisini Oluştur", "Geri Dön"], "menu"))
         if selection == 1:
             # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için mevcut kasayı açmadan önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+            UC.cls()
             password = UC.get_pass(1)
             if cpassword == hashlib.md5(password.encode()).hexdigest():
                 subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
@@ -179,6 +180,7 @@ def lock_folder(**kwargs):
                 UC.create_frame("⚿ Şifre Hatası ⛌", "Girdiğiniz Şifre Hatalıdır.", "info")
         elif selection == 2:
             # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için mevcut kasayı açmadan önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+            UC.cls()
             password = UC.get_pass(1)
             if cpassword == hashlib.md5(password.encode()).hexdigest():
                 subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
@@ -195,6 +197,7 @@ def lock_folder(**kwargs):
                 UC.create_frame("⚿ Şifre Hatası ⛌", "Girdiğiniz Şifre Hatalıdır.", "info")
         elif selection == 3:
             # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için kasayı silmeden önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+            UC.cls()
             password = UC.get_pass(1)
             if cpassword == hashlib.md5(password.encode()).hexdigest():
                 subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
@@ -227,6 +230,7 @@ def unlock_folder(**kwargs):
             lock_folder(**kwargs)
     elif os.path.exists(user_unlock_temp_folder) and not os.path.exists(user_unlock_folder):
         # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için kilidi açmadan önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+        UC.cls()
         password = UC.get_pass(1)
         if cpassword == hashlib.md5(password.encode()).hexdigest():
             subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
@@ -249,6 +253,7 @@ def unlock_folder(**kwargs):
         selection = int(UC.create_frame("⚿ Çift Kasa için Yapılacak İşlem ⚠", ["Kilitsiz Kasanın Üzerine Yaz", "Kilitli ve Kilitsiz Kasaları Aç", "Kilitsiz Kasayı Sil ve Yenisini Oluştur", "Geri Dön"], "menu"))
         if selection == 1:
             # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için mevcut kasayı açmadan önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+            UC.cls()
             password = UC.get_pass(1)
             if cpassword == hashlib.md5(password.encode()).hexdigest():
                 subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
@@ -267,6 +272,7 @@ def unlock_folder(**kwargs):
                 UC.create_frame("⚿ Şifre Hatası ⛌", "Girdiğiniz Şifre Hatalıdır.", "info")
         elif selection == 2:
             # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için mevcut kasayı açmadan önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+            UC.cls()
             password = UC.get_pass(1)
             if cpassword == hashlib.md5(password.encode()).hexdigest():
                 subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
@@ -283,6 +289,7 @@ def unlock_folder(**kwargs):
                 UC.create_frame("⚿ Şifre Hatası ⛌", "Girdiğiniz Şifre Hatalıdır.", "info")
         elif selection == 3:
             # UC.create_frame("⚿ Şifre Girişi ⚠", "Güvenliğiniz için kasayı silmeden önce UltraConsole hesap şifrenizi girimeniz gereklidir", "info")
+            UC.cls()
             password = UC.get_pass(1)
             if cpassword == hashlib.md5(password.encode()).hexdigest():
                 subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)

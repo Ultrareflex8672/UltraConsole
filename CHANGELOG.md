@@ -233,9 +233,13 @@
 	<ul>
 		<li>Dosya Kasası modülü kasa kurtarma seçenekleri eklendi</li>
 	</ul>
-	<li><b>18.03.2025 - V</b><b id="version">4.1.3.8</b></li>
+	<li><b>18.03.2025 - V4.1.3.8</b></li>
 	<ul>
 		<li>Dosya Kasası modülü ek güvenlik paketi</li>
+	</ul>
+	<li><b>18.03.2025 - V</b><b id="version">4.1.4.0</b></li>
+	<ul>
+		<li>Dosya Kasası modülü iyileştirmesi</li>
 	</ul>
 </ul>
 
