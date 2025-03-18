@@ -504,7 +504,10 @@ def stack_lock(**kwargs):
             subprocess.run(f'icacls "{user_unlock_temp_folder}" /remove:d Everyone', shell=True)
             subprocess.run(f'icacls "{user_unlock_temp_folder}" /grant Everyone:(OI)(CI)F', shell=True)
             os.system(f'attrib -h -s "{user_unlock_temp_folder}"')
-            os.rename(user_unlock_temp_folder, user_lock_folder)
+            try:
+                os.rename(user_unlock_temp_folder, user_lock_folder)
+            except:
+                pass
             os.system(f'attrib +h +s "{user_lock_folder}"')
             subprocess.run(f'icacls "{user_lock_folder}" /grant Everyone:(OI)(CI)F', shell=True)
             subprocess.run(f'icacls "{user_lock_folder}" /deny Everyone:(D)', shell=True)
