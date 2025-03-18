@@ -6,6 +6,8 @@ import subprocess
 import hashlib
 import uuid
 import shutil
+import win32com.client
+import random
 
 access_authorization = False
 
@@ -20,6 +22,8 @@ def dosya_kasasi(**kwargs):
                 subprocess.run(f'icacls "{user_lock_folder}" /remove:d Everyone', shell=True)
                 subprocess.run(f'icacls "{user_lock_folder}" /grant Everyone:(OI)(CI)F', shell=True)
                 os.rename(user_lock_folder, user_unlock_temp_folder)
+        except:
+            pass
         finally:
             if not os.path.exists(user_unlock_folder) and not os.path.exists(user_unlock_temp_folder):
                 os.makedirs(user_unlock_folder)
@@ -28,23 +32,52 @@ def dosya_kasasi(**kwargs):
             subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
             subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
         
-        menu_items = ["Kasayı Kilitle", "Kasayı Görüntüle"]
-        if user_data[3] == 0:
-            menu_items.append("Ana Kasa Erişim Yetkisi")
-        menu_items = menu_items + ["Ana Menü"]
-        UC.cls()
-        selection = int(UC.create_frame("Kilitli Dosya Kasası", menu_items, "menu"))
-        if selection == 1:
-            lock_folder(**kwargs)
-            dosya_kasasi(**kwargs)
-        elif selection == 2:
-            unlock_folder(**kwargs)
-            dosya_kasasi(**kwargs)
-        elif selection == 3:
-            remove_per(**kwargs)
-        elif selection != 0:
-            UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
-            dosya_kasasi(**kwargs)
+        if os.path.exists(user_unlock_folder) and not os.path.exists(user_unlock_temp_folder):
+            menu_items = ["⚿  Kasayı Kilitle", "🗀  Kasayı Görüntüle"]
+            if user_data[3] == 0:
+                menu_items.append("⚠  Kasa Yönetimi")
+            menu_items = menu_items + ["Ana Menü"]
+            UC.cls()
+            selection = int(UC.create_frame("🗁  Kasa Kilidi Açık", menu_items, "menu"))
+            if selection == 1:
+                lock_folder(**kwargs)
+            elif selection == 2:
+                unlock_folder(**kwargs)
+            elif selection == 3:
+                admin(**kwargs)
+            elif selection != 0:
+                UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
+                dosya_kasasi(**kwargs)
+        if not os.path.exists(user_unlock_folder) and os.path.exists(user_unlock_temp_folder):
+            menu_items = ["⚿  Kasa Kilidini Aç"]
+            if user_data[3] == 0:
+                menu_items.append("⚠  Kasa Yönetimi")
+            menu_items = menu_items + ["Ana Menü"]
+            UC.cls()
+            selection = int(UC.create_frame("⚿  Kasa Kilitli", menu_items, "menu"))
+            if selection == 1:
+                unlock_folder(**kwargs)
+            elif selection == 2:
+                admin(**kwargs)
+            elif selection != 0:
+                UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
+                dosya_kasasi(**kwargs)
+        if os.path.exists(user_unlock_folder) and os.path.exists(user_unlock_temp_folder):
+            menu_items = ["⚿  Kasa Kilitleme Seçenekleri", "🗀 Kasayı Görüntüleme Seçenekleri"]
+            if user_data[3] == 0:
+                menu_items.append("⚠  Kasa Yönetimi")
+            menu_items = menu_items + ["Ana Menü"]
+            UC.cls()
+            selection = int(UC.create_frame("🗁⚿  Kasa Kilidi Açık/Kilitli", menu_items, "menu"))
+            if selection == 1:
+                lock_folder(**kwargs)
+            elif selection == 2:
+                unlock_folder(**kwargs)
+            elif selection == 3:
+                admin(**kwargs)
+            elif selection != 0:
+                UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
+                dosya_kasasi(**kwargs)
 
         try:
             if os.path.exists(user_unlock_temp_folder):
@@ -79,7 +112,8 @@ def lock_folder(**kwargs):
             subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
             subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
             LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) kasasını kilitledi.")
-            UC.create_frame("⚿ Kasa Kilitlendi ☑", f"{user_unlock_folder} konumunda bulunan kasanız başarı ile kilitlendi.", "info")
+            # UC.create_frame("⚿ Kasa Kilitlendi ☑", f"{user_unlock_folder} konumunda bulunan kasanız başarı ile kilitlendi.", "info")
+            UC.create_frame("⚿  Kasa Kilitlendi ☑", "⚿  Kurtarma Anahtarınız: " + hashlib.md5(user_lock_folder.encode()).hexdigest())
     elif not os.path.exists(user_unlock_folder) and os.path.exists(user_unlock_temp_folder):
         selection = UC.create_frame("⚿ Kasa Kilitli ☑", "Kasanız zaten kilitli durumda. Kasanın kilidini açıp görüntülemek ister misiniz?", "(E/H)")
         if selection.lower() == "e":
@@ -272,6 +306,23 @@ def get_dir(**kwargs):
 
     return main_dir, safe_dir, user_unlock_folder, user_unlock_temp_folder, user_lock_folder
 
+def admin(**kwargs):
+    user_data = kwargs.get("user_data")
+    user_type = user_data[3]
+    if user_type == 0:
+        UC.cls()
+        selection = int(UC.create_frame("⚿ Kasa Yönetici Menüsü", ["⚠ Ana Dizin Erişim Yetkisi", "🖿 Kasa Kurtarma"]+["Geri Dön"], "menu"))
+        if selection == 1:
+            remove_per(**kwargs)
+        elif selection == 2:
+            recovery(**kwargs)
+        elif selection != 0:
+            UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
+            admin(**kwargs)
+    else:
+        LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) yetkisi bulunmadığı için ana kasa yönetim modülü girişi başarısız oldu.")
+        UC.create_frame("⚿ Ana Kasa Erişimi ⛌", f"Bu işlem için yetkiniz yok! Lütfen sistem yöneticinize başvurun.")
+
 def remove_per(**kwargs):
     user_data = kwargs.get("user_data")
     user_type = user_data[3]
@@ -323,4 +374,116 @@ def delete_folder(folder_path):
     else:
         print(f"{folder_path} bulunamadı veya geçerli bir klasör değil.")
 
+def recovery(**kwargs):
+    user_data = kwargs.get("user_data")
+    user_type = user_data[3]
+    main_dir, safe_dir, user_unlock_folder, user_unlock_temp_folder, user_lock_folder = get_dir(**kwargs)
+    if user_type == 0:
+        UC.cls()
+        selection = int(UC.create_frame("🖿 Kasa Kurtarma ⚠", ["Kurtarma Anahtarı ile Kurtar", "Kilidi Sıkışmış Kasaları Listele"]+["Geri Dön"], "menu"))
+        if selection == 1:
+            recovery_key = UC.create_frame("🖿 Anahtar ile Kasa Kurtarma ⚠", "Kasa Kurtarma İşlemi için Kasanız Kilitlendiğinde Ekrand Görünen Kurtarma Anahtarını Gereklidir!", "⚿ Kurtarma Anahtarınız: \n")
+            subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
+            subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+            subprocess.run(f'icacls "{user_unlock_temp_folder}" /remove:d Everyone', shell=True)
+            subprocess.run(f'icacls "{user_unlock_temp_folder}" /grant Everyone:(OI)(CI)F', shell=True)
+            os.system(f'attrib -h -s "{user_unlock_temp_folder}"')
+            os.rename(user_unlock_temp_folder, user_lock_folder)
+            os.system(f'attrib +h +s "{user_lock_folder}"')
+            subprocess.run(f'icacls "{user_lock_folder}" /grant Everyone:(OI)(CI)F', shell=True)
+            subprocess.run(f'icacls "{user_lock_folder}" /deny Everyone:(D)', shell=True)
+            shell = win32com.client.Dispatch("Shell.Application")
 
+            folders = []
+            for items in os.listdir(safe_dir):
+                full_path = os.path.join(safe_dir, items)
+                # Sadece klasörleri al
+                if os.path.isdir(full_path):
+                    folders.append(full_path)
+                    try:
+                        # Eğer CLSID içeriyorsa, gerçek adını bul
+                        shotcut = shell.Namespace(full_path)
+                        if shotcut:
+                            # folders.append(f"{full_path} ({shotcut.Title})")
+                            # folders.append(shotcut.Title)
+                            pass
+                    except:
+                        pass
+
+            success = False
+            for i in folders:
+                if recovery_key == hashlib.md5(i.encode()).hexdigest():
+                    success = True
+                    recovery_path = i
+                    rand_int = random.randint(10000, 99999)
+                    ext_path = os.path.join(main_dir, "recovered_"+str(rand_int))
+                    if recovery_path:
+                        subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
+                        subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                        subprocess.run(f'icacls "{recovery_path}" /remove:d Everyone', shell=True)
+                        subprocess.run(f'icacls "{recovery_path}" /grant Everyone:(OI)(CI)F', shell=True)
+                        os.system(f'attrib -h -s "{recovery_path}"')
+                        os.rename(recovery_path, ext_path)
+                        subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                        subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
+                        subprocess.Popen(f'explorer "{ext_path}"')
+                        LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) {recovery_path} kasasındaki verileri {ext_path} klasörüne kurtarma anahtarı kullanarak çıkardı.")
+                        UC.create_frame("🖿 Kasa Kurtarma Başarılı ☑", f"Girilen Anahtarla Kilitlenmiş olan kasa {ext_path} konumuna çıkartıldı!")
+            if success == False:
+                subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
+                LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) {recovery_key} anahtarı ile kurtarma denedi ancak kasa bulunamadı.")
+                selection = UC.create_frame("🖿 Kasa Kurtarma ⛌", "Girilen Anahtarla Kilitlenmiş Bir Kasa Bulunamadı! Tam kilitlenmemiş kasalarda arama yapmak ister misiniz?","(E/H)")
+                if selection.lower() == "e":
+                    stack_lock(**kwargs)
+        elif selection == 2:
+            stack_lock(**kwargs)
+        elif selection != 0:
+            UC.create_frame("⚿ Dosya Kasası Modülü ⚠", f"Lütfen geçerli bir seçim yapınız.", "info")
+            recovery(**kwargs)
+    else:
+        LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) yetkisi bulunmadığı için anahtar ile kasa kurtarma girişimi reddedildi.")
+        UC.create_frame("⚿ Ana Kasa Erişimi ⛌", f"Bu işlem için yetkiniz yok! Lütfen sistem yöneticinize başvurun.")
+
+def stack_lock(**kwargs):
+    user_data = kwargs.get("user_data")
+    user_type = user_data[3]
+    main_dir, safe_dir, user_unlock_folder, user_unlock_temp_folder, user_lock_folder = get_dir(**kwargs)
+    if user_type == 0:
+        folders = []
+        items_ = []
+        subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
+        subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+        for items in os.listdir(safe_dir):
+            full_path = os.path.join(safe_dir, items)
+            # Sadece klasörleri al
+            if os.path.isdir(full_path) and "Control Panel.{" not in full_path:
+                folders.append(full_path)
+                items_.append(items)
+        if folders != []:
+            UC.cls()
+            selection = int(UC.create_frame("🖿 Kilidi Sıkışmış Kasa Listesi ⚠", items_+["Geri Dön"], "menu"))
+            if selection != 0:
+                recovery_path = folders[selection-1]
+                rand_int = random.randint(10000, 99999)
+                ext_path = os.path.join(main_dir, "recovered_"+str(rand_int))
+                if recovery_path:
+                    subprocess.run(f'icacls "{safe_dir}" /remove:d Everyone', shell=True)
+                    subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                    subprocess.run(f'icacls "{recovery_path}" /remove:d Everyone', shell=True)
+                    subprocess.run(f'icacls "{recovery_path}" /grant Everyone:(OI)(CI)F', shell=True)
+                    os.system(f'attrib -h -s "{recovery_path}"')
+                    os.rename(recovery_path, ext_path)
+                    subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+                    subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
+                    subprocess.Popen(f'explorer "{ext_path}"')
+                    LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) sıkışmış olan {recovery_path} kasasındaki verileri {ext_path} klasörüne çıkardı.")
+                    UC.create_frame("🖿 Kasa Kurtarma Başarılı ☑", f"{recovery_path} kasaındaki veriler {ext_path} konumuna çıkartıldı!")
+        else:
+            subprocess.run(f'icacls "{safe_dir}" /grant Everyone:(OI)(CI)F', shell=True)
+            subprocess.run(f'icacls "{safe_dir}" /deny Everyone:(D)', shell=True)
+            LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) sıkışmış kasalarda arama yaptı ancak hiç bir kasa bulunamadı.")
+            UC.create_frame("🖿 Kasa Kurtarma ⛌", f"Kilidi sıkışmış hiç bir kasa bulunamadı!")
+    else:
+        LOG(f"{user_data[0]} ID numaralı {user_data[1]} ({user_data[4]} {user_data[5]}) yetkisi bulunmadığı için sıkışmış kasa kurtarma girişimi reddedildi.")
+        UC.create_frame("⚿ Ana Kasa Erişimi ⛌", f"Bu işlem için yetkiniz yok! Lütfen sistem yöneticinize başvurun.")

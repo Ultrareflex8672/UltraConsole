@@ -224,10 +224,14 @@
 	<ul>
 		<li>Şifreli Dosya Kasa modülü eklendi.</li>
 	</ul>
-	<li><b>18.03.2025 - V</b><b id="version">4.1.2.7</b></li>
+	<li><b>18.03.2025 - V4.1.2.7</b></li>
 	<ul>
 		<li>Dosya Kasası modülü için ek güvenlik paketi</li>
 		<li>Dosya Kasası modülü için ek iyileştirmeler</li>
+	</ul>
+	<li><b>18.03.2025 - V</b><b id="version">4.1.3.7</b></li>
+	<ul>
+		<li>Dosya Kasası modülü kasa kurtarma seçenekleri eklendi</li>
 	</ul>
 </ul>
 

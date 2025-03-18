@@ -156,6 +156,7 @@ import sys
 import psutil
 import signal
 import uuid
+import win32com.client
 
 
 # Boyut Kontrolü Yapılmamış Kütüphaneler
