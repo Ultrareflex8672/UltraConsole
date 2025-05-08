@@ -11,7 +11,7 @@
 
 ## 🚀 UltraConsole Nedir?
 
-UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak üreteceğiniz modülleri ve çeşitli işlemleri yönetmenizi sağlayan güçlü bir araçtır. Gelişmiş otomatik menü sisteminden bilgi penceresine, kullanıcı yönetiminden kişiselleştirmeye, kolay modül yönetiminden otomatik güncelleştirmelere kadar birçok işlevi destekler.
+UltraConsole, kullanıcı dostu bir modüler komut satırı arayüzü sunarak üreteceğiniz konsol uygulamalarını, modülleri ve çeşitli işlemleri yönetmenizi sağlayan güçlü bir framework aracıdır. Gelişmiş otomatik menü sisteminden bilgi penceresine, kullanıcı yönetiminden kişiselleştirmeye, kolay modül yönetiminden otomatik güncelleştirmelere kadar birçok işlevi destekler.
 
 ----------
 
