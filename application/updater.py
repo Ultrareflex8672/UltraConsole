@@ -15,14 +15,14 @@ class Updater(HTMLParser):
         super().__init__()
         self.is_target = False  # Belirtilen id'yi bulmak için bayrak
         self.data_list = []  # Bulunan verileri saklamak için liste
-        self.current_version = 4140 # Bu programın sürümü
+        self.current_version = 4200 # Bu programın sürümü
 
 
     def handle_starttag(self, tag, attrs):
         """Başlangıç etiketini işleyerek id kontrolü yap"""
         if tag == "b":  # Sadece <b> etiketlerine odaklan
             for attr, value in attrs:
-                if attr == "id" and value == "user-content-version":
+                if attr == "id" and value == "version":
                     self.is_target = True
 
     def handle_endtag(self, tag):
@@ -37,7 +37,7 @@ class Updater(HTMLParser):
 
     def version(self):
         # Web sayfasından HTML içeriğini al
-        url = "https://github.com/Ultrareflex8672/UltraConsole/blob/main/CHANGELOG.md"
+        url = "https://raw.githubusercontent.com/Ultrareflex8672/UltraConsole/refs/heads/main/CHANGELOG.md"
         with urllib.request.urlopen(url) as response:
             html_content = response.read().decode("utf-8")
 

@@ -237,9 +237,13 @@
 	<ul>
 		<li>Dosya Kasası modülü ek güvenlik paketi</li>
 	</ul>
-	<li><b>18.03.2025 - V</b><b id="version">4.1.4.0</b></li>
+	<li><b>18.03.2025 - V4.1.4.0</b></li>
 	<ul>
 		<li>Dosya Kasası modülü iyileştirmesi</li>
+	</ul>
+	<li><b>08.05.2025 - V</b><b id="version">4.2.0.0</b></li>
+	<ul>
+		<li>Başlangıçta yapılan güncelleştirme kontrolü sırasında alınan hata düzeltildi</li>
 	</ul>
 </ul>
 
